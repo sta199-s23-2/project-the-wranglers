@@ -16,19 +16,59 @@ library(tidyverse)
 
 ## Introduction and data
 
--   Identify the source of the data.
+-   The data is exported from the Centers for Medicare & Medicaid Services.
 
--   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
+-   The data was last collected in 2020 from CMS administrative data for beneficiaries enrolled in Medicaid available from the Medicaid State Drug Utilization program.
 
--   Write a brief description of the observations.
+-   The Medicaid Prescribing Opioid Rates data set provides an overview of the geographic comparisons of opioid prescribing rates by state, county, and zip code. Each observation provides information on geographical areas(country, state, county, and zip code) in the United States and their correlation with current and long-acting opioid rates and medicaid claims.
 
 ## Research question
 
 -   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
 
+    How do opioid prescription rates differ by geography and time?
+
+    How are opioid prescription rates expected to change in the future based on geography?
+
+    Is an individual's medicaid plan predictive of their geography and opioid insurance claim?
+
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
+    This research topic will explore the correlation between geography, insurance plans, and the opioid epidemic. I would expect low-socioeconomic regions to be prone to high opioid prescriptions as the majority of opioid users are low income individuals. Also, I would expect the more generous insurance plans to have high variability with opioid prescribing rates as moral hazard contributes to accepting prescriptions.
+
 -   Identify the types of variables in your research question. Categorical? Quantitative?
+
+
+    Data Year- Character
+
+    geographical level- categorical
+
+    geographical code- categorical
+
+    geographical description- categorical
+
+    plan type- categorical
+
+    opioid claims- quantitative
+
+    overall claims- quantitative
+
+    opioid prescribing rate- quantitative
+
+    five year change in opioid prescribing rate- quantitative
+
+    one year change in opioid prescribing rate- quantitative
+
+    long-acting opioid claims- quantitative
+
+    long-acting prescribing rate- quantitative
+
+    five year change in long acting opioid prescribing rate- quantitative
+
+    one year change in long-acting opioid prescribing rate- quantitative
+
+-   
+
 
 ## Literature
 
