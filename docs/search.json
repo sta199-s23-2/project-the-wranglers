@@ -18,21 +18,21 @@
     "href": "proposal.html",
     "title": "Project title",
     "section": "",
-    "text": "library(tidyverse)\n\nWarning: package 'ggplot2' was built under R version 4.2.2\n\n\nWarning: package 'tidyr' was built under R version 4.2.2\n\n\nWarning: package 'readr' was built under R version 4.2.2\n\n\nWarning: package 'purrr' was built under R version 4.2.2"
+    "text": "library(tidyverse)"
   },
   {
     "objectID": "proposal.html#introduction-and-data",
     "href": "proposal.html#introduction-and-data",
     "title": "Project title",
     "section": "Introduction and data",
-    "text": "Introduction and data\n\nIdentify the source of the data.\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\nWrite a brief description of the observations."
+    "text": "Introduction and data\n\nThe data is exported from the Centers for Medicare & Medicaid Services.\nThe data was last collected in 2020 from CMS administrative data for beneficiaries enrolled in Medicaid available from the Medicaid State Drug Utilization program.\nThe Medicaid Prescribing Opioid Rates data set provides an overview of the geographic comparisons of opioid prescribing rates by state, county, and zip code. Each observation provides information on geographical areas(country, state, county, and zip code) in the United States and their correlation with current and long-acting opioid rates and medicaid claims."
   },
   {
     "objectID": "proposal.html#research-question",
     "href": "proposal.html#research-question",
     "title": "Project title",
     "section": "Research question",
-    "text": "Research question\n\nA well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)\nA description of the research topic along with a concise statement of your hypotheses on this topic.\nIdentify the types of variables in your research question. Categorical? Quantitative?"
+    "text": "Research question\n\nA well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)\nHow do opioid prescription rates differ by geography and time?\nHow are opioid prescription rates expected to change in the future based on geography?\nIs an individual’s medicaid plan predictive of their geography and opioid insurance claim?\nA description of the research topic along with a concise statement of your hypotheses on this topic.\nThis research topic will explore the correlation between geography, insurance plans, and the opioid epidemic. I would expect low-socioeconomic regions to be prone to high opioid prescriptions as the majority of opioid users are low income individuals. Also, I would expect the more generous insurance plans to have high variability with opioid prescribing rates as moral hazard contributes to accepting prescriptions.\nIdentify the types of variables in your research question. Categorical? Quantitative?\nData Year- Character\ngeographical level- categorical\ngeographical code- categorical\ngeographical description- categorical\nplan type- categorical\nopioid claims- quantitative\noverall claims- quantitative\nopioid prescribing rate- quantitative\nfive year change in opioid prescribing rate- quantitative\none year change in opioid prescribing rate- quantitative\nlong-acting opioid claims- quantitative\nlong-acting prescribing rate- quantitative\nfive year change in long acting opioid prescribing rate- quantitative\none year change in long-acting opioid prescribing rate- quantitative"
   },
   {
     "objectID": "proposal.html#literature",
