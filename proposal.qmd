@@ -1,5 +1,5 @@
 ---
-title: "Project title"
+title: "The Wranglers Project"
 subtitle: "Proposal"
 format: html
 editor: visual
@@ -90,9 +90,9 @@ library(tidyverse)
 
 This data is from the CORGIS Dataset Project. The data was taken from the Washington Post. The Post collected the data by looking at local news reports, law enforcement websites and social media, and by monitoring independent databases such as Killed by Police and Fatal Encounters. In necessary cases, the Post did additional research.
 
-The data was put together on 9/15/2021. The Post regularly collects this data as the shootings happen.
+The data was put together on 9/15/2021. The Washington Post regularly collects this data as the shootings happen.
 
-This dataset collects data on fatal shootings in the United States by a police officer in the line of duty from Jan. 1, 2015 to Sept. 11, 2021. This data includes gender, race, mental illness, location, and date.
+This dataset collects data on fatal shootings in the United States by a police officer in the line of duty from Jan. 1, 2015 to Sept. 11, 2021. This data includes gender, race, mental illness, location, and date. Each observation represents a fatal shooting event by a police officer.
 
 ## Research question
 
@@ -140,9 +140,15 @@ glimpse(police_shootings)
 
 -   Identify the source of the data.
 
+    We obtained this dataset from the CORGIS Dataset Project.
+
 -   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
 
+    It was collected by Dr. Austin Cory Bart (currently an Assistant Professor at the University of Delaware) in October, 2016 from the Common Core of Data (CCD), an organization that aims to "provide basic information on public elementary and secondary schools" within the United States.
+
 -   Write a brief description of the observations.
+
+    -   Each observation represents a state's annual SAT score report and demographic information.
 
 ## Research question
 
