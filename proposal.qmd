@@ -90,33 +90,56 @@ library(tidyverse)
 
 ## Introduction and data
 
--   Identify the source of the data.
+This data is from the CORGIS Dataset Project. The data was taken from the Washington Post. The Post collected the data by looking at local news reports, law enforcement websites and social media, and by monitoring independent databases such as Killed by Police and Fatal Encounters. In necessary cases, the Post did additional research. 
 
--   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
+The data was put together on 9/15/2021. The Post regularly collects this data as the shootings happen. 
 
--   Write a brief description of the observations.
+
+This dataset collects data on fatal shootings in the United States by a police officer in the line of duty from Jan. 1, 2015 to Sept. 11, 2021. This data includes gender, race, mental illness, location, and date.
+
 
 ## Research question
 
--   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
+How do race, gender, and mental illness affect rates of police shootings over time across the United States?
 
--   A description of the research topic along with a concise statement of your hypotheses on this topic.
+Our dataset includes 6570 rows meaning that at least 6570 people were killed by police from 2015 to 2021. By discovering how different factors affect the number of shootings, we can begin to understand why these tragedies happen, and what we can do to stop them from happening.
 
--   Identify the types of variables in your research question. Categorical? Quantitative?
+The research topic looks at the correlation between race, gender, and mental illness and police shooting rates. We would expect that male individuals of minority communities with previous mental illnesses would be more likely to be affected. 
+
+Person.Name	- String	
+Person.Age -	Integer
+Person.Gender -	String	
+Person.Race	- String	
+Incident.Date.Month	- Integer
+Incident.Date.Day	- Integer	
+Incident.Date.Year	- Integer	
+Incident.Date.Full	- String	
+Incident.Location.City	- String
+Incident.Location.State	- String	
+Factors.Armed	- String	
+Factors.Mental-Illness	- Boolean	
+Factors.Threat-Level -	String	
+Factors.Fleeing	- String	
+Shooting.Manner	- String	
+Shooting.Body-Camera	- Boolean	
 
 ## Literature
 
--   Find one published credible article on the topic you are interested in researching.
+Link to article.
+https://www.nature.com/articles/d41586-019-02601-9 
 
--   Provide a one paragraph summary about the article.
+Police officers in the United States fatally shoot about three people per day on average, a number that is close to the yearly totals for other wealthy nations. Data on these deadly encounters has been hard to come by, but five years later, newspapers, enterprising individuals and the federal government have launched ambitious data-collection projects to fill the gaps and improve transparency and accountability over how police officers exercise their right to use deadly force. Social scientists and public-health researchers have produced more than 50 publications to address pressing questions, such as whether the police are disproportionately quick to shoot black civilians and those from other minority groups. New databases show that police officers' use of lethal force is much more common than previously thought, and varies significantly across the country. 
 
--   In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.
+We plan to track these differences which could help identify opportunities to reduce the number of shootings and deaths for both civilians and police officers.
+
 
 ## Glimpse of data
 
 ```{r}
 #| label: load-data-2
-
+library(readr)
+police_shootings <- read_csv("data/police_shootings.csv")
+glimpse(police_shootings)
 # add code here
 ```
 
