@@ -38,7 +38,6 @@ library(tidyverse)
 
 -   Identify the types of variables in your research question. Categorical? Quantitative?
 
-
     Data Year- Character
 
     geographical level- categorical
@@ -68,7 +67,6 @@ library(tidyverse)
     one year change in long-acting opioid prescribing rate- quantitative
 
 -   
-
 
 ## Literature
 
