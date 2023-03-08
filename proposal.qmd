@@ -10,6 +10,7 @@ editor: visual
 #| message: false
 
 library(tidyverse)
+opioid = read_csv("Medicaid_Opioid_Prescribing_Rates_by_Geography_2020")
 ```
 
 # Data 1
