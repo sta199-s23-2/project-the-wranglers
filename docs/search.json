@@ -16,91 +16,91 @@
   {
     "objectID": "proposal.html",
     "href": "proposal.html",
-    "title": "Project title",
+    "title": "The Wranglers Project",
     "section": "",
-    "text": "library(tidyverse)"
+    "text": "library(tidyverse)\nopioid <- read_csv(\"data/Medicaid_Opioid_2020.csv\")"
   },
   {
     "objectID": "proposal.html#introduction-and-data",
     "href": "proposal.html#introduction-and-data",
-    "title": "Project title",
+    "title": "The Wranglers Project",
     "section": "Introduction and data",
-    "text": "Introduction and data\n\nThe data is exported from the Centers for Medicare & Medicaid Services.\nThe data was last collected in 2020 from CMS administrative data for beneficiaries enrolled in Medicaid available from the Medicaid State Drug Utilization program.\nThe Medicaid Prescribing Opioid Rates data set provides an overview of the geographic comparisons of opioid prescribing rates by state, county, and zip code. Each observation provides information on geographical areas(country, state, county, and zip code) in the United States and their correlation with current and long-acting opioid rates and medicaid claims."
+    "text": "Introduction and data\n\nThe data is exported from the Centers for Medicare & Medicaid Services.\nThe data was last collected in 2020 from CMS administrative data for Medicaid beneficiaries available from the Medicaid State Drug Utilization program.\nThe Medicaid Prescribing Opioid Rates data set provides an overview of the geographic comparisons of opioid prescribing rates by state, county, and zip code. Each observation provides information on geographical areas(country, state, county, and zip code) in the United States and their correlation with current and long-acting opioid rates and medicaid claims from 2016 - 2020."
   },
   {
     "objectID": "proposal.html#research-question",
     "href": "proposal.html#research-question",
-    "title": "Project title",
+    "title": "The Wranglers Project",
     "section": "Research question",
     "text": "Research question\n\nA well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)\nHow do opioid prescription rates differ by geography and time?\nHow are opioid prescription rates expected to change in the future based on geography?\nIs an individual’s medicaid plan predictive of their geography and opioid insurance claim?\nA description of the research topic along with a concise statement of your hypotheses on this topic.\nThis research topic will explore the correlation between geography, insurance plans, and the opioid epidemic. I would expect low-socioeconomic regions to be prone to high opioid prescriptions as the majority of opioid users are low income individuals. Also, I would expect the more generous insurance plans to have high variability with opioid prescribing rates as moral hazard contributes to accepting prescriptions.\nIdentify the types of variables in your research question. Categorical? Quantitative?\nData Year- Character\ngeographical level- categorical\ngeographical code- categorical\ngeographical description- categorical\nplan type- categorical\nopioid claims- quantitative\noverall claims- quantitative\nopioid prescribing rate- quantitative\nfive year change in opioid prescribing rate- quantitative\none year change in opioid prescribing rate- quantitative\nlong-acting opioid claims- quantitative\nlong-acting prescribing rate- quantitative\nfive year change in long acting opioid prescribing rate- quantitative\none year change in long-acting opioid prescribing rate- quantitative"
   },
   {
     "objectID": "proposal.html#literature",
     "href": "proposal.html#literature",
-    "title": "Project title",
+    "title": "The Wranglers Project",
     "section": "Literature",
-    "text": "Literature\n\nFind one published credible article on the topic you are interested in researching.\nProvide a one paragraph summary about the article.\nIn 1-2 sentences, explain how your research question builds on / is different than the article you have cited."
+    "text": "Literature\n\nFind one published credible article on the topic you are interested in researching.\n“Geographic Variation in Opioid Prescribing in the US” by Douglas C. McDonald\nhttps://www.ncbi.nlm.nih.gov/pmc/articles/PMC3509148/\nProvide a one paragraph summary about the article.\n“Geographic Variation in Opioid Prescribing in the U.S.” examines the relationship between geographic locations within the United States and rates of opioid prescribing aiming to discover connections between the opioid epidemic and geographic location. The study found that poorer areas, especially Western Appalachia, have significantly higher rates of opioid prescribing. Other factors that the study considered include the availability of physicians, the general strength of healthcare resources in the area, prescription monitoring laws, characteristics of the area’s populations, and other factors. The study found that the emergence of higher demand for treatment with opioids coupled with the exhaustion of medical resources along with the weak medical consensus on the appropriate use of opioids factor into the over-prescription crisis fueling the opioid epidemic.\nIn 1-2 sentences, explain how your research question builds on / is different than the article you have cited.\nOur research question builds on the article cited by limiting the scope of patients to only Medicare beneficiaries. Because our data set only includes Medicare patients, our team can analyze how opioids are being prescribed to low-income and/or disabled individuals in the United States."
   },
   {
     "objectID": "proposal.html#glimpse-of-data",
     "href": "proposal.html#glimpse-of-data",
-    "title": "Project title",
+    "title": "The Wranglers Project",
     "section": "Glimpse of data",
-    "text": "Glimpse of data\n\n# add code here"
+    "text": "Glimpse of data\n\nglimpse(opioid)\n\nRows: 1,248\nColumns: 14\n$ Year                           <dbl> 2020, 2020, 2020, 2020, 2020, 2020, 202…\n$ Geo_Lvl                        <chr> \"National\", \"National\", \"National\", \"St…\n$ Geo_Cd                         <chr> NA, NA, NA, \"01\", \"01\", \"01\", \"02\", \"02…\n$ Geo_Desc                       <chr> \"National\", \"National\", \"National\", \"Al…\n$ Plan_Type                      <chr> \"All\", \"FFS\", \"MC\", \"All\", \"FFS\", \"MC\",…\n$ Tot_Opioid_Clms                <dbl> 20144712, 5259225, 14885487, 182840, 18…\n$ Tot_Clms                       <dbl> 626711567, 178504681, 448206886, 675017…\n$ Opioid_Prscrbng_Rate           <dbl> 3.21, 2.95, 3.32, 2.71, 2.71, NA, 4.29,…\n$ Opioid_Prscrbng_Rate_5Y_Chg    <dbl> -2.70, -2.89, -2.63, -2.92, -2.92, NA, …\n$ Opioid_Prscrbng_Rate_1Y_Chg    <dbl> -0.04, -0.24, 0.05, -0.39, -0.39, NA, -…\n$ LA_Tot_Opioid_Clms             <dbl> 3721153, 709829, 3011324, 8438, 8438, 0…\n$ LA_Opioid_Prscrbng_Rate        <dbl> 18.47, 13.50, 20.23, 4.62, 4.62, NA, 12…\n$ LA_Opioid_Prscrbng_Rate_5Y_Chg <dbl> 10.87, 4.81, 13.19, -0.16, -0.16, NA, 0…\n$ LA_Opioid_Prscrbng_Rate_1Y_Chg <dbl> 4.32, 0.09, 5.81, 0.02, 0.02, NA, 0.08,…"
   },
   {
     "objectID": "proposal.html#introduction-and-data-1",
     "href": "proposal.html#introduction-and-data-1",
-    "title": "Project title",
+    "title": "The Wranglers Project",
     "section": "Introduction and data",
-    "text": "Introduction and data\nThis data is from the CORGIS Dataset Project. The data was taken from the Washington Post. The Post collected the data by looking at local news reports, law enforcement websites and social media, and by monitoring independent databases such as Killed by Police and Fatal Encounters. In necessary cases, the Post did additional research.\nThe data was put together on 9/15/2021. The Post regularly collects this data as the shootings happen.\nThis dataset collects data on fatal shootings in the United States by a police officer in the line of duty from Jan. 1, 2015 to Sept. 11, 2021. This data includes gender, race, mental illness, location, and date."
+    "text": "Introduction and data\nThis data is from the CORGIS Dataset Project. The data was taken from the Washington Post. The Post collected the data by looking at local news reports, law enforcement websites and social media, and by monitoring independent databases such as Killed by Police and Fatal Encounters. In necessary cases, the Post did additional research.\nThe data was put together on 9/15/2021. The Washington Post regularly collects this data as the shootings happen.\nThis dataset collects data on fatal shootings in the United States by a police officer in the line of duty from Jan. 1, 2015 to Sept. 11, 2021. This data includes gender, race, mental illness, location, and date. Each observation represents a fatal shooting event by a police officer."
   },
   {
     "objectID": "proposal.html#research-question-1",
     "href": "proposal.html#research-question-1",
-    "title": "Project title",
+    "title": "The Wranglers Project",
     "section": "Research question",
     "text": "Research question\nHow do race, gender, and mental illness affect rates of police shootings over time across the United States?\nOur dataset includes 6570 rows meaning that at least 6570 people were killed by police from 2015 to 2021. By discovering how different factors affect the number of shootings, we can begin to understand why these tragedies happen, and what we can do to stop them from happening.\nThe research topic looks at the correlation between race, gender, and mental illness and police shooting rates. We would expect that male individuals of minority communities with previous mental illnesses would be more likely to be affected.\nPerson.Name - String\nPerson.Age - Integer Person.Gender - String\nPerson.Race - String\nIncident.Date.Month - Integer Incident.Date.Day - Integer\nIncident.Date.Year - Integer\nIncident.Date.Full - String\nIncident.Location.City - String Incident.Location.State - String\nFactors.Armed - String\nFactors.Mental-Illness - Boolean\nFactors.Threat-Level - String\nFactors.Fleeing - String\nShooting.Manner - String\nShooting.Body-Camera - Boolean"
   },
   {
     "objectID": "proposal.html#literature-1",
     "href": "proposal.html#literature-1",
-    "title": "Project title",
+    "title": "The Wranglers Project",
     "section": "Literature",
     "text": "Literature\nLink to article. https://www.nature.com/articles/d41586-019-02601-9\nPolice officers in the United States fatally shoot about three people per day on average, a number that is close to the yearly totals for other wealthy nations. Data on these deadly encounters has been hard to come by, but five years later, newspapers, enterprising individuals and the federal government have launched ambitious data-collection projects to fill the gaps and improve transparency and accountability over how police officers exercise their right to use deadly force. Social scientists and public-health researchers have produced more than 50 publications to address pressing questions, such as whether the police are disproportionately quick to shoot black civilians and those from other minority groups. New databases show that police officers’ use of lethal force is much more common than previously thought, and varies significantly across the country.\nWe plan to track these differences which could help identify opportunities to reduce the number of shootings and deaths for both civilians and police officers."
   },
   {
     "objectID": "proposal.html#glimpse-of-data-1",
     "href": "proposal.html#glimpse-of-data-1",
-    "title": "Project title",
+    "title": "The Wranglers Project",
     "section": "Glimpse of data",
     "text": "Glimpse of data\n\nlibrary(readr)\npolice_shootings <- read_csv(\"data/police_shootings.csv\")\n\nRows: 6569 Columns: 16\n── Column specification ────────────────────────────────────────────────────────\nDelimiter: \",\"\nchr  (9): Person.Name, Person.Gender, Person.Race, Incident.Location.City, I...\ndbl  (4): Person.Age, Incident.Date.Month, Incident.Date.Day, Incident.Date....\nlgl  (2): Factors.Mental-Illness, Shooting.Body-Camera\ndate (1): Incident.Date.Full\n\nℹ Use `spec()` to retrieve the full column specification for this data.\nℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\n\nglimpse(police_shootings)\n\nRows: 6,569\nColumns: 16\n$ Person.Name              <chr> \"Tim Elliot\", \"Lewis Lee Lembke\", \"John Paul …\n$ Person.Age               <dbl> 53, 47, 23, 32, 39, 18, 22, 35, 34, 47, 25, 3…\n$ Person.Gender            <chr> \"Male\", \"Male\", \"Male\", \"Male\", \"Male\", \"Male…\n$ Person.Race              <chr> \"Asian\", \"White\", \"Hispanic\", \"White\", \"Hispa…\n$ Incident.Date.Month      <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …\n$ Incident.Date.Day        <dbl> 2, 2, 3, 4, 4, 4, 5, 6, 6, 6, 6, 7, 7, 7, 7, …\n$ Incident.Date.Year       <dbl> 2015, 2015, 2015, 2015, 2015, 2015, 2015, 201…\n$ Incident.Date.Full       <date> 2015-01-02, 2015-01-02, 2015-01-03, 2015-01-…\n$ Incident.Location.City   <chr> \"Shelton\", \"Aloha\", \"Wichita\", \"San Francisco…\n$ Incident.Location.State  <chr> \"WA\", \"OR\", \"KS\", \"CA\", \"CO\", \"OK\", \"AZ\", \"KS…\n$ Factors.Armed            <chr> \"gun\", \"gun\", \"unarmed\", \"toy weapon\", \"nail …\n$ `Factors.Mental-Illness` <lgl> TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRU…\n$ `Factors.Threat-Level`   <chr> \"attack\", \"attack\", \"other\", \"attack\", \"attac…\n$ Factors.Fleeing          <chr> \"Not fleeing\", \"Not fleeing\", \"Not fleeing\", …\n$ Shooting.Manner          <chr> \"shot\", \"shot\", \"shot and Tasered\", \"shot\", \"…\n$ `Shooting.Body-Camera`   <lgl> TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRU…\n\n# add code here"
   },
   {
     "objectID": "proposal.html#introduction-and-data-2",
     "href": "proposal.html#introduction-and-data-2",
-    "title": "Project title",
+    "title": "The Wranglers Project",
     "section": "Introduction and data",
-    "text": "Introduction and data\n\nIdentify the source of the data.\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\nWrite a brief description of the observations."
+    "text": "Introduction and data\n\nIdentify the source of the data.\nWe obtained this dataset from the CORGIS Dataset Project.\nState when and how it was originally collected (by the original data curator, not necessarily how you found the data).\nIt was collected by Dr. Austin Cory Bart (currently an Assistant Professor at the University of Delaware) in October, 2016 from the Common Core of Data (CCD), an organization that aims to “provide basic information on public elementary and secondary schools” within the United States.\nWrite a brief description of the observations.\n\nEach observation represents a state’s annual SAT score report and demographic information."
   },
   {
     "objectID": "proposal.html#research-question-2",
     "href": "proposal.html#research-question-2",
-    "title": "Project title",
+    "title": "The Wranglers Project",
     "section": "Research question",
     "text": "Research question\n\nA well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)\nA description of the research topic along with a concise statement of your hypotheses on this topic.\nIdentify the types of variables in your research question. Categorical? Quantitative?"
   },
   {
     "objectID": "proposal.html#literature-2",
     "href": "proposal.html#literature-2",
-    "title": "Project title",
+    "title": "The Wranglers Project",
     "section": "Literature",
     "text": "Literature\n\nFind one published credible article on the topic you are interested in researching.\nProvide a one paragraph summary about the article.\nIn 1-2 sentences, explain how your research question builds on / is different than the article you have cited."
   },
   {
     "objectID": "proposal.html#glimpse-of-data-2",
     "href": "proposal.html#glimpse-of-data-2",
-    "title": "Project title",
+    "title": "The Wranglers Project",
     "section": "Glimpse of data",
     "text": "Glimpse of data\n\n# add code here"
   },
