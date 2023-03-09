@@ -10,6 +10,7 @@ editor: visual
 #| message: false
 
 library(tidyverse)
+opioid <- read_csv("data/Medicaid_Opioid_2020.csv")
 ```
 
 # Data 1 (Opioids)
@@ -18,9 +19,9 @@ library(tidyverse)
 
 -   The data is exported from the Centers for Medicare & Medicaid Services.
 
--   The data was last collected in 2020 from CMS administrative data for beneficiaries enrolled in Medicaid available from the Medicaid State Drug Utilization program.
+-   The data was last collected in 2020 from CMS administrative data for Medicaid beneficiaries available from the Medicaid State Drug Utilization program.
 
--   The Medicaid Prescribing Opioid Rates data set provides an overview of the geographic comparisons of opioid prescribing rates by state, county, and zip code. Each observation provides information on geographical areas(country, state, county, and zip code) in the United States and their correlation with current and long-acting opioid rates and medicaid claims.
+-   The Medicaid Prescribing Opioid Rates data set provides an overview of the geographic comparisons of opioid prescribing rates by state, county, and zip code. Each observation provides information on geographical areas(country, state, county, and zip code) in the United States and their correlation with current and long-acting opioid rates and medicaid claims from 2016 - 2020.
 
 ## Research question
 
@@ -72,16 +73,24 @@ library(tidyverse)
 
 -   Find one published credible article on the topic you are interested in researching.
 
+    "Geographic Variation in Opioid Prescribing in the US" by Douglas C. McDonald
+
+    https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3509148/
+
 -   Provide a one paragraph summary about the article.
 
+    "Geographic Variation in Opioid Prescribing in the U.S." examines the relationship between geographic locations within the United States and rates of opioid prescribing aiming to discover connections between the opioid epidemic and geographic location. The study found that poorer areas, especially Western Appalachia, have significantly higher rates of opioid prescribing. Other factors that the study considered include the availability of physicians, the general strength of healthcare resources in the area, prescription monitoring laws, characteristics of the area's populations, and other factors. The study found that the emergence of higher demand for treatment with opioids coupled with the exhaustion of medical resources along with the weak medical consensus on the appropriate use of opioids factor into the over-prescription crisis fueling the opioid epidemic.
+
 -   In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.
+
+    Our research question builds on the article cited by limiting the scope of patients to only Medicare beneficiaries. Because our data set only includes Medicare patients, our team can analyze how opioids are being prescribed to low-income and/or disabled individuals in the United States.
 
 ## Glimpse of data
 
 ```{r}
 #| label: load-data-1
 
-# add code here
+glimpse(opioid)
 ```
 
 # Data 2 (Police Shootings)

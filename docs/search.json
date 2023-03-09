@@ -18,14 +18,14 @@
     "href": "proposal.html",
     "title": "The Wranglers Project",
     "section": "",
-    "text": "library(tidyverse)"
+    "text": "library(tidyverse)\nopioid <- read_csv(\"data/Medicaid_Opioid_2020.csv\")"
   },
   {
     "objectID": "proposal.html#introduction-and-data",
     "href": "proposal.html#introduction-and-data",
     "title": "The Wranglers Project",
     "section": "Introduction and data",
-    "text": "Introduction and data\n\nThe data is exported from the Centers for Medicare & Medicaid Services.\nThe data was last collected in 2020 from CMS administrative data for beneficiaries enrolled in Medicaid available from the Medicaid State Drug Utilization program.\nThe Medicaid Prescribing Opioid Rates data set provides an overview of the geographic comparisons of opioid prescribing rates by state, county, and zip code. Each observation provides information on geographical areas(country, state, county, and zip code) in the United States and their correlation with current and long-acting opioid rates and medicaid claims."
+    "text": "Introduction and data\n\nThe data is exported from the Centers for Medicare & Medicaid Services.\nThe data was last collected in 2020 from CMS administrative data for Medicaid beneficiaries available from the Medicaid State Drug Utilization program.\nThe Medicaid Prescribing Opioid Rates data set provides an overview of the geographic comparisons of opioid prescribing rates by state, county, and zip code. Each observation provides information on geographical areas(country, state, county, and zip code) in the United States and their correlation with current and long-acting opioid rates and medicaid claims from 2016 - 2020."
   },
   {
     "objectID": "proposal.html#research-question",
@@ -39,14 +39,14 @@
     "href": "proposal.html#literature",
     "title": "The Wranglers Project",
     "section": "Literature",
-    "text": "Literature\n\nFind one published credible article on the topic you are interested in researching.\nProvide a one paragraph summary about the article.\nIn 1-2 sentences, explain how your research question builds on / is different than the article you have cited."
+    "text": "Literature\n\nFind one published credible article on the topic you are interested in researching.\n“Geographic Variation in Opioid Prescribing in the US” by Douglas C. McDonald\nhttps://www.ncbi.nlm.nih.gov/pmc/articles/PMC3509148/\nProvide a one paragraph summary about the article.\n“Geographic Variation in Opioid Prescribing in the U.S.” examines the relationship between geographic locations within the United States and rates of opioid prescribing aiming to discover connections between the opioid epidemic and geographic location. The study found that poorer areas, especially Western Appalachia, have significantly higher rates of opioid prescribing. Other factors that the study considered include the availability of physicians, the general strength of healthcare resources in the area, prescription monitoring laws, characteristics of the area’s populations, and other factors. The study found that the emergence of higher demand for treatment with opioids coupled with the exhaustion of medical resources along with the weak medical consensus on the appropriate use of opioids factor into the over-prescription crisis fueling the opioid epidemic.\nIn 1-2 sentences, explain how your research question builds on / is different than the article you have cited.\nOur research question builds on the article cited by limiting the scope of patients to only Medicare beneficiaries. Because our data set only includes Medicare patients, our team can analyze how opioids are being prescribed to low-income and/or disabled individuals in the United States."
   },
   {
     "objectID": "proposal.html#glimpse-of-data",
     "href": "proposal.html#glimpse-of-data",
     "title": "The Wranglers Project",
     "section": "Glimpse of data",
-    "text": "Glimpse of data\n\n# add code here"
+    "text": "Glimpse of data\n\nglimpse(opioid)\n\nRows: 1,248\nColumns: 14\n$ Year                           <dbl> 2020, 2020, 2020, 2020, 2020, 2020, 202…\n$ Geo_Lvl                        <chr> \"National\", \"National\", \"National\", \"St…\n$ Geo_Cd                         <chr> NA, NA, NA, \"01\", \"01\", \"01\", \"02\", \"02…\n$ Geo_Desc                       <chr> \"National\", \"National\", \"National\", \"Al…\n$ Plan_Type                      <chr> \"All\", \"FFS\", \"MC\", \"All\", \"FFS\", \"MC\",…\n$ Tot_Opioid_Clms                <dbl> 20144712, 5259225, 14885487, 182840, 18…\n$ Tot_Clms                       <dbl> 626711567, 178504681, 448206886, 675017…\n$ Opioid_Prscrbng_Rate           <dbl> 3.21, 2.95, 3.32, 2.71, 2.71, NA, 4.29,…\n$ Opioid_Prscrbng_Rate_5Y_Chg    <dbl> -2.70, -2.89, -2.63, -2.92, -2.92, NA, …\n$ Opioid_Prscrbng_Rate_1Y_Chg    <dbl> -0.04, -0.24, 0.05, -0.39, -0.39, NA, -…\n$ LA_Tot_Opioid_Clms             <dbl> 3721153, 709829, 3011324, 8438, 8438, 0…\n$ LA_Opioid_Prscrbng_Rate        <dbl> 18.47, 13.50, 20.23, 4.62, 4.62, NA, 12…\n$ LA_Opioid_Prscrbng_Rate_5Y_Chg <dbl> 10.87, 4.81, 13.19, -0.16, -0.16, NA, 0…\n$ LA_Opioid_Prscrbng_Rate_1Y_Chg <dbl> 4.32, 0.09, 5.81, 0.02, 0.02, NA, 0.08,…"
   },
   {
     "objectID": "proposal.html#introduction-and-data-1",

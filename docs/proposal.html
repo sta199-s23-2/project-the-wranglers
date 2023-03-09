@@ -211,7 +211,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </header>
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>opioid <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/Medicaid_Opioid_2020.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="data-1-opioids" class="level1">
 <h1>Data 1 (Opioids)</h1>
@@ -219,8 +220,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 class="anchored" data-anchor-id="introduction-and-data">Introduction and data</h2>
 <ul>
 <li><p>The data is exported from the Centers for Medicare &amp; Medicaid Services.</p></li>
-<li><p>The data was last collected in 2020 from CMS administrative data for beneficiaries enrolled in Medicaid available from the Medicaid State Drug Utilization program.</p></li>
-<li><p>The Medicaid Prescribing Opioid Rates data set provides an overview of the geographic comparisons of opioid prescribing rates by state, county, and zip code. Each observation provides information on geographical areas(country, state, county, and zip code) in the United States and their correlation with current and long-acting opioid rates and medicaid claims.</p></li>
+<li><p>The data was last collected in 2020 from CMS administrative data for Medicaid beneficiaries available from the Medicaid State Drug Utilization program.</p></li>
+<li><p>The Medicaid Prescribing Opioid Rates data set provides an overview of the geographic comparisons of opioid prescribing rates by state, county, and zip code. Each observation provides information on geographical areas(country, state, county, and zip code) in the United States and their correlation with current and long-acting opioid rates and medicaid claims from 2016 - 2020.</p></li>
 </ul>
 </section>
 <section id="research-question" class="level2">
@@ -253,15 +254,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="literature" class="level2">
 <h2 class="anchored" data-anchor-id="literature">Literature</h2>
 <ul>
-<li><p>Find one published credible article on the topic you are interested in researching.</p></li>
-<li><p>Provide a one paragraph summary about the article.</p></li>
-<li><p>In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.</p></li>
+<li><p>Find one published credible article on the topic you are interested in researching.</p>
+<p>“Geographic Variation in Opioid Prescribing in the US” by Douglas C. McDonald</p>
+<p>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3509148/</p></li>
+<li><p>Provide a one paragraph summary about the article.</p>
+<p>“Geographic Variation in Opioid Prescribing in the U.S.” examines the relationship between geographic locations within the United States and rates of opioid prescribing aiming to discover connections between the opioid epidemic and geographic location. The study found that poorer areas, especially Western Appalachia, have significantly higher rates of opioid prescribing. Other factors that the study considered include the availability of physicians, the general strength of healthcare resources in the area, prescription monitoring laws, characteristics of the area’s populations, and other factors. The study found that the emergence of higher demand for treatment with opioids coupled with the exhaustion of medical resources along with the weak medical consensus on the appropriate use of opioids factor into the over-prescription crisis fueling the opioid epidemic.</p></li>
+<li><p>In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.</p>
+<p>Our research question builds on the article cited by limiting the scope of patients to only Medicare beneficiaries. Because our data set only includes Medicare patients, our team can analyze how opioids are being prescribed to low-income and/or disabled individuals in the United States.</p></li>
 </ul>
 </section>
 <section id="glimpse-of-data" class="level2">
 <h2 class="anchored" data-anchor-id="glimpse-of-data">Glimpse of data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(opioid)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 1,248
+Columns: 14
+$ Year                           &lt;dbl&gt; 2020, 2020, 2020, 2020, 2020, 2020, 202…
+$ Geo_Lvl                        &lt;chr&gt; "National", "National", "National", "St…
+$ Geo_Cd                         &lt;chr&gt; NA, NA, NA, "01", "01", "01", "02", "02…
+$ Geo_Desc                       &lt;chr&gt; "National", "National", "National", "Al…
+$ Plan_Type                      &lt;chr&gt; "All", "FFS", "MC", "All", "FFS", "MC",…
+$ Tot_Opioid_Clms                &lt;dbl&gt; 20144712, 5259225, 14885487, 182840, 18…
+$ Tot_Clms                       &lt;dbl&gt; 626711567, 178504681, 448206886, 675017…
+$ Opioid_Prscrbng_Rate           &lt;dbl&gt; 3.21, 2.95, 3.32, 2.71, 2.71, NA, 4.29,…
+$ Opioid_Prscrbng_Rate_5Y_Chg    &lt;dbl&gt; -2.70, -2.89, -2.63, -2.92, -2.92, NA, …
+$ Opioid_Prscrbng_Rate_1Y_Chg    &lt;dbl&gt; -0.04, -0.24, 0.05, -0.39, -0.39, NA, -…
+$ LA_Tot_Opioid_Clms             &lt;dbl&gt; 3721153, 709829, 3011324, 8438, 8438, 0…
+$ LA_Opioid_Prscrbng_Rate        &lt;dbl&gt; 18.47, 13.50, 20.23, 4.62, 4.62, NA, 12…
+$ LA_Opioid_Prscrbng_Rate_5Y_Chg &lt;dbl&gt; 10.87, 4.81, 13.19, -0.16, -0.16, NA, 0…
+$ LA_Opioid_Prscrbng_Rate_1Y_Chg &lt;dbl&gt; 4.32, 0.09, 5.81, 0.02, 0.02, NA, 0.08,…</code></pre>
+</div>
 </div>
 </section>
 </section>
@@ -301,8 +324,8 @@ Shooting.Body-Camera - Boolean</p>
 <section id="glimpse-of-data-1" class="level2">
 <h2 class="anchored" data-anchor-id="glimpse-of-data-1">Glimpse of data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/police_shootings.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/police_shootings.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Rows: 6569 Columns: 16
 ── Column specification ────────────────────────────────────────────────────────
@@ -315,7 +338,7 @@ date (1): Incident.Date.Full
 ℹ Use `spec()` to retrieve the full column specification for this data.
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(police_shootings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(police_shootings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 6,569
 Columns: 16
@@ -336,7 +359,7 @@ $ Factors.Fleeing          &lt;chr&gt; "Not fleeing", "Not fleeing", "Not fleein
 $ Shooting.Manner          &lt;chr&gt; "shot", "shot", "shot and Tasered", "shot", "…
 $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRU…</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -374,7 +397,7 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 <section id="glimpse-of-data-2" class="level2">
 <h2 class="anchored" data-anchor-id="glimpse-of-data-2">Glimpse of data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add code here</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
