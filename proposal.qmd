@@ -27,47 +27,51 @@ opioid <- read_csv("data/Medicaid_Opioid_2020.csv")
 
 -   Write a brief description of the observations.
 
-    The Medicaid Prescribing Opioid Rates data set provides an overview of the geographic comparisons of opioid prescribing rates by state, county, and zip code. Each observation provides information on geographical areas(country, state, county, and zip code) in the United States and their correlation with current and long-acting opioid rates and medicaid claims from 2016 - 2020.
+    The Medicaid Prescribing Opioid Rates data set provides an overview of the geographic comparisons of opioid prescribing rates by state, county, and zip code. Each observation provides information on geographical areas(country, state, county, and zip code) in the United States and their correlation with current and long-acting opioid rates and medicaid claims from 2016 to 2020.
 
 ## Research question
 
--   A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
+-   A well formulated research question.
 
     How do opioid prescription rates differ by geography and time? How are opioid prescription rates expected to change in the future based on geography? Is an individual's medicaid plan predictive of their geography and opioid insurance claim?
+
+    These questions are important because their answers provide in depth information into the roots of the opioid epidemic and possible solutions.
 
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
     This research topic will explore the correlation between geography, insurance plans, and the opioid epidemic. I would expect low-socioeconomic regions to be prone to high opioid prescriptions as the majority of opioid users are low income individuals. Also, I would expect the more generous insurance plans to have high variability with opioid prescribing rates as moral hazard contributes to accepting prescriptions.
 
+    This date set raises ethical concerns relating to the accuracy of the prescription rate reportings. Because of the controversial topic of drugs, many hospitals and physicians may misreport opioid prescription rates. Also, this data set does not consider opioids that were illegally prescribed and bought. Therefore, this data set may not provide our team with all of the information regarding opioid use in the US.
+
 -   Identify the types of variables in your research question. Categorical? Quantitative?
 
-    Data Year- Character
+    Data Year - character
 
-    geographical level- categorical
+    geographical level - categorical
 
-    geographical code- categorical
+    geographical code - categorical
 
-    geographical description- categorical
+    geographical description - categorical
 
-    plan type- categorical
+    plan type - categorical
 
-    opioid claims- quantitative
+    opioid claims - quantitative
 
-    overall claims- quantitative
+    overall claims - quantitative
 
-    opioid prescribing rate- quantitative
+    opioid prescribing rate - quantitative
 
-    five year change in opioid prescribing rate- quantitative
+    five year change in opioid prescribing rate - quantitative
 
-    one year change in opioid prescribing rate- quantitative
+    one year change in opioid prescribing rate - quantitative
 
-    long-acting opioid claims- quantitative
+    long-acting opioid claims - quantitative
 
-    long-acting prescribing rate- quantitative
+    long-acting prescribing rate - quantitative
 
-    five year change in long acting opioid prescribing rate- quantitative
+    five year change in long acting opioid prescribing rate - quantitative
 
-    one year change in long-acting opioid prescribing rate- quantitative
+    one year change in long-acting opioid prescribing rate - quantitative
 
 ## Literature
 
@@ -79,7 +83,7 @@ opioid <- read_csv("data/Medicaid_Opioid_2020.csv")
 
 -   Provide a one paragraph summary about the article.
 
-    "Geographic Variation in Opioid Prescribing in the U.S." examines the relationship between geographic locations within the United States and rates of opioid prescribing aiming to discover connections between the opioid epidemic and geographic location. The study found that poorer areas, especially Western Appalachia, have significantly higher rates of opioid prescribing. Other factors that the study considered include the availability of physicians, the general strength of healthcare resources in the area, prescription monitoring laws, characteristics of the area's populations, and other factors. The study found that the emergence of higher demand for treatment with opioids coupled with the exhaustion of medical resources along with the weak medical consensus on the appropriate use of opioids factor into the over-prescription crisis fueling the opioid epidemic.
+    This article examines the relationship between geographic locations within the United States and rates of opioid prescribing aiming to discover connections between the opioid epidemic and geographic location. The study found that poorer areas, especially Western Appalachia, have significantly higher rates of opioid prescribing. Other factors that the study considered include the availability of physicians, the general strength of healthcare resources in the area, prescription monitoring laws, characteristics of the area's populations, and other factors. The study found that the emergence of higher demand for treatment with opioids coupled with the exhaustion of medical resources along with the weak medical consensus on the appropriate use of opioids factor into the over-prescription crisis fueling the opioid epidemic.
 
 -   In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.
 
@@ -99,14 +103,14 @@ glimpse(opioid)
 
 -   Identify the source of the data.
 
-    This data is from the CORGIS Dataset Project. The data was taken from the Washington Post. The Post collected the data by looking at local news reports, law enforcement websites and social media, and by monitoring independent databases such as Killed by Police and Fatal Encounters. In necessary cases, the Post did additional research.
+    This data is from the CORGIS Dataset Project and was created in 9/15/2021. The data was compiled from the Washington Post.
 
 ```{=html}
 <!-- -->
 ```
 -   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
 
-    The data was put together on 9/15/2021. The Washington Post regularly collects this data as the shootings happen.
+    The Washington Post regularly collects this data as police shootings happen. The Post collected the data by looking at local news reports, law enforcement websites and social media, and by monitoring independent databases such as Killed by Police and Fatal Encounters. In necessary cases, the Post did additional research.
 
 ```{=html}
 <!-- -->
@@ -129,6 +133,8 @@ glimpse(opioid)
     Our dataset includes 6570 rows meaning that at least 6570 people were killed by police from 2015 to 2021. By discovering how different factors affect the number of shootings, we can begin to understand why these tragedies happen, and what we can do to stop them from happening.
 
     The research topic looks at the correlation between race, gender, and mental illness and police shooting rates. We would expect that male individuals of minority communities with previous mental illnesses would be more likely to be affected.
+
+    One ethical concern is the possibility of misinformation in the data and a lack of accurate reporting. Another concern is consent and whether the victims families want their loved ones to have identifying information (like their name and information about their death) in a public database.
 
 ```{=html}
 <!-- -->
@@ -153,7 +159,9 @@ glimpse(opioid)
 
 -   Find one published credible article on the topic you are interested in researching.
 
-    Link to article. https://www.nature.com/articles/d41586-019-02601-9
+    "What the data say about police shootings" by Lynne Peeples
+
+    https://www.nature.com/articles/d41586-019-02601-9
 
 -   Provide a one paragraph summary about the article.
 
@@ -227,7 +235,13 @@ glimpse(police_shootings)
 
 -   Find one published credible article on the topic you are interested in researching.
 
+    "Is Income Implicit in Measures of Student Ability?" by Jason Sockin
+
+    https://budgetmodel.wharton.upenn.edu/issues/2021/9/28/is-income-implicit-in-measures-of-student-ability
+
 -   Provide a one paragraph summary about the article.
+
+    SAT and other standardized tests have become a heavily debated aspect of student education and college admissions, as many US universities have decided to opt for a test-optional admissions process. This brings attention to how possible socioeconomic factors affect student's academic record, including GPA, high school rank, and standardized test scores. According to data from the National Longitudinal Survey of Youth 1997 analyzed in this article, it was found that income had a weaker correlation with GPA and class rank than the correlation between income and SAT score. Similar correlation strengths were observed for ACT data as well. This article concludes that standardized testing reveals some abilities that are not tested in school and are impacted by environmental factors.
 
 -   In 1-2 sentences, explain how your research question builds on / is different than the article you have cited.
 
