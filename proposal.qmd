@@ -101,16 +101,14 @@ glimpse(opioid)
 
     This data is from the CORGIS Dataset Project. The data was taken from the Washington Post. The Post collected the data by looking at local news reports, law enforcement websites and social media, and by monitoring independent databases such as Killed by Police and Fatal Encounters. In necessary cases, the Post did additional research.
 
-```{=html}
 <!-- -->
-```
+
 -   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
 
     The data was put together on 9/15/2021. The Washington Post regularly collects this data as the shootings happen.
 
-```{=html}
 <!-- -->
-```
+
 -   Write a brief description of the observations.
 
     This dataset collects data on fatal shootings in the United States by a police officer in the line of duty from Jan. 1, 2015 to Sept. 11, 2021. This data includes gender, race, mental illness, location, and date. Each observation represents a fatal shooting event by a police officer.
@@ -121,18 +119,16 @@ glimpse(opioid)
 
     How do race, gender, and mental illness affect rates of police shootings over time across the United States?
 
-```{=html}
 <!-- -->
-```
+
 -   A description of the research topic along with a concise statement of your hypotheses on this topic.
 
     Our dataset includes 6570 rows meaning that at least 6570 people were killed by police from 2015 to 2021. By discovering how different factors affect the number of shootings, we can begin to understand why these tragedies happen, and what we can do to stop them from happening.
 
     The research topic looks at the correlation between race, gender, and mental illness and police shooting rates. We would expect that male individuals of minority communities with previous mental illnesses would be more likely to be affected.
 
-```{=html}
 <!-- -->
-```
+
 -   Identify the types of variables in your research question. Categorical? Quantitative?
 
     Person.Name - String\
