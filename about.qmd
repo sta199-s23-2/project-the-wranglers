@@ -4,10 +4,12 @@ format: html
 editor: visual
 ---
 
-This project was developed by **\[team name\]** For [STA 199: Introduction to Data Science](https://sta199-s23-2.github.io/) at Duke University. The team is comprised of the following team members.
+This project was developed by **The Wranglers** For [STA 199: Introduction to Data Science](https://sta199-s23-2.github.io/) at Duke University. The team is comprised of the following team members.
 
--   Team member 1: One sentence description of Team member 1 (e.g., year, major, etc.).
--   Team member 2: One sentence description of Team member 2 (e.g., year, major, etc.).
--   Team member 3: One sentence description of Team member 3 (e.g., year, major, etc.).
--   Team member 4: One sentence description of Team member 4 (e.g., year, major, etc.).
+-   Team member 1: Elise Nackley is a first-year undergraduate student with plans to major in computer science. 
+-   Team member 2: Reed Lessing is a sophomore undergraduate student majoring in neuroscience.
+-   Team member 3: Sofia Massare is a first-year undergraduate student with plans to major in public policy. 
+-   Team member 4: Connor Rooney is a first-year undergraduate student with plans to major in public policy.
+-   Team member 4: Sirena Lovato is a sophomore undergraduate student majoring in program 2.
+
 -   ...
