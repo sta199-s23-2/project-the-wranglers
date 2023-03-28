@@ -7,7 +7,6 @@ execute:
   echo: true
 ---
 
-
 ```{r}
 #| label: load-data-2
 library(tidyverse)
@@ -22,25 +21,8 @@ glimpse(police_shootings)
 
 
 ```
-**everyone in this data fram has mental illness. possible misidentification; this is a problem as it could potentially help the policemen
 
-**Methodology**
-
-Linear Regression model
-
-Dot mods (scatter plot)
-
-Location type - Geographical map
-
-Race - Bar charts
-
-urban vs. rural
-
-Male v female - box plot
-
-Mental health - ethical problem because mental health is more of a spectrum not a true v false thing
-
-probability relating arnament or not 
+\*\*everyone in this data fram has mental illness. possible misidentification; this is a problem as it could potentially help the policemen
 
 **Introduction**
 
@@ -92,5 +74,20 @@ Shooting.Manner - String\\
 
 Shooting.Body-Camera - Boolean
 
+**Methodology**
 
+Linear Regression model
 
+Dot mods (scatter plot)
+
+Location type - Geographical map
+
+Race - Bar charts
+
+urban vs. rural
+
+Male v female - box plot
+
+Mental health - ethical problem because mental health is more of a spectrum not a true v false thing
+
+probability relating arnament or not
