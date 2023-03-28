@@ -7,4 +7,18 @@ execute:
   echo: true
 ---
 
-Add project writeup here.
+**Methodology**
+
+Linear Regression model
+
+Dot mods (scatter plot)
+
+Location type - Geographical map
+
+Race - Bar charts
+
+urban vs. rural
+
+Male v female - box plot
+
+Mental health - ethical problem because mental health is more of a spectrum not a true v false thing
