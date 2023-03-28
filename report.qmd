@@ -91,3 +91,31 @@ Male v female - box plot
 Mental health - ethical problem because mental health is more of a spectrum not a true v false thing
 
 probability relating arnament or not
+
+```{r}
+#| label: summary-stats
+
+police_shootings |>
+  summarize(mean_age = mean(Person.Age),
+            median_age = median(Person.Age),
+            stdv_age = sd(Person.Age))
+```
+
+```{r}
+#| label: yearly-analysis
+
+# Shootings per year
+yearly_shootings <- police_shootings |>
+  group_by(Incident.Date.Year) |>
+  count(Incident.Date.Year) # |>
+#  mutate(days_in_year = c(365, 365, 365, 365, 365, 365, 200))
+
+yearly_shootings |>
+  ggplot(aes(x = Incident.Date.Year, y = n/days_in_year)) +
+  geom_point() +
+  geom_line() +
+  labs(
+    title = "Shootings per Year",
+    x = "Year", 
+    y = "Number of Shootings")
+```
