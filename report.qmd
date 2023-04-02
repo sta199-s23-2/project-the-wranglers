@@ -107,7 +107,7 @@ police_shootings |>
 # Shootings per year
 yearly_shootings <- police_shootings |>
   group_by(Incident.Date.Year) |>
-  count(Incident.Date.Year) # |>
+  count(Incident.Date.Year) 
 days_in_year <- c(365, 366, 365, 365, 365, 366, 253)
 
 yearly_shootings |>
@@ -119,3 +119,12 @@ yearly_shootings |>
     x = "Year", 
     y = "Number of Shootings")
 ```
+
+```{r}
+police_shootings |> 
+  ggplot(
+    aes(x = Person.Age, color = Person.Gender)) + 
+    geom_boxplot() + 
+    labs(title = "Relationship between Sex and Age", x = "Age", y = "Count", color = "Sex") 
+```
+As seen by the graph above, the medians for female and male age are roughly 34 years old for male and 35 years old for female. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of ~21 years old. 
