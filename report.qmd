@@ -108,7 +108,7 @@ police_shootings |>
 yearly_shootings <- police_shootings |>
   group_by(Incident.Date.Year) |>
   count(Incident.Date.Year) # |>
-days_in_year <- c(365, 365, 365, 365, 365, 365, 200)
+days_in_year <- c(365, 366, 365, 365, 365, 366, 253)
 
 yearly_shootings |>
   ggplot(aes(x = Incident.Date.Year, y = n/days_in_year)) +
