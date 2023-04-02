@@ -108,6 +108,7 @@ police_shootings |>
 yearly_shootings <- police_shootings |>
   group_by(Incident.Date.Year) |>
   count(Incident.Date.Year) 
+
 days_in_year <- c(365, 366, 365, 365, 365, 366, 253)
 
 yearly_shootings |>
@@ -121,10 +122,40 @@ yearly_shootings |>
 ```
 
 ```{r}
+#| label: box-plot-gender
+
 police_shootings |> 
   ggplot(
     aes(x = Person.Age, color = Person.Gender)) + 
     geom_boxplot() + 
     labs(title = "Relationship between Sex and Age", x = "Age", y = "Count", color = "Sex") 
 ```
-As seen by the graph above, the medians for female and male age are roughly 34 years old for male and 35 years old for female. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of ~21 years old. 
+
+As seen by the graph above, the medians for female and male age are roughly 34 years old for male and 35 years old for female. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of \~21 years old.
+
+```{r}
+#| label: box-plots-race
+
+police_shootings |> 
+  ggplot(
+    aes(x = Person.Age, color = Person.Race)) + 
+    geom_boxplot() + 
+    labs(title = "Relationship between Race and Age", x = "Age", y = "Count", color = "Race") 
+```
+
+```{r}
+#| label: arms-status
+
+police_shootings |>
+  filter(Factors.Armed != "unknown") |>
+  mutate(Factors.Armed.Test = if_else(Factors.Armed == "unarmed" | Factors.Armed == "toy weapon", "unarmed", "armed with weapon")) |>
+  ggplot(aes(x = Person.Gender, fill = Factors.Armed.Test)) +
+  geom_bar(position = "fill") +
+  labs(
+    title = "Arms Status of Victims by Gender",
+    y = "% of Victims",
+    x = "Sex",
+    fill = "Arms Status")
+
+# Armed with weapons include toy weapons...
+```
