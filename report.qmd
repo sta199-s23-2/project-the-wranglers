@@ -22,7 +22,7 @@ glimpse(police_shootings)
 
 ```
 
-\*\*everyone in this data fram has mental illness. possible misidentification; this is a problem as it could potentially help the policemen
+\*\*everyone in this data frame has mental illness. possible misidentification; this is a problem as it could potentially help the policemen
 
 **Introduction**
 
@@ -108,14 +108,14 @@ police_shootings |>
 yearly_shootings <- police_shootings |>
   group_by(Incident.Date.Year) |>
   count(Incident.Date.Year) # |>
-#  mutate(days_in_year = c(365, 365, 365, 365, 365, 365, 200))
+days_in_year <- c(365, 365, 365, 365, 365, 365, 200)
 
 yearly_shootings |>
   ggplot(aes(x = Incident.Date.Year, y = n/days_in_year)) +
   geom_point() +
   geom_line() +
   labs(
-    title = "Shootings per Year",
+    title = "Shootings per Day",
     x = "Year", 
     y = "Number of Shootings")
 ```

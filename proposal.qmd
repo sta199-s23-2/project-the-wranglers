@@ -105,13 +105,9 @@ glimpse(opioid)
 
     This data is from the CORGIS Dataset Project and was created in 9/15/2021. The data was compiled from the Washington Post.
 
-
-
 -   State when and how it was originally collected (by the original data curator, not necessarily how you found the data).
 
     The Washington Post regularly collects this data as police shootings happen. The Post collected the data by looking at local news reports, law enforcement websites and social media, and by monitoring independent databases such as Killed by Police and Fatal Encounters. In necessary cases, the Post did additional research.
-
-
 
 -   Write a brief description of the observations.
 
@@ -131,10 +127,7 @@ glimpse(opioid)
 
     The research topic looks at the correlation between race, gender, and mental illness and police shooting rates. We would expect that male individuals of minority communities with previous mental illnesses would be more likely to be affected.
 
-
     One ethical concern is the possibility of misinformation in the data and a lack of accurate reporting. Another concern is consent and whether the victims families want their loved ones to have identifying information (like their name and information about their death) in a public database.
-
-
 
 -   Identify the types of variables in your research question. Categorical? Quantitative?
 
