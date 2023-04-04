@@ -1,5 +1,3 @@
-
-
 ---
 title: "Project title"
 subtitle: "Report"
@@ -37,8 +35,6 @@ The Washington Post regularly collects this data as police shootings happen. The
 This data set collects data on fatal shootings in the United States by a police officer in the line of duty from Jan. 1, 2015 to Sept. 11, 2021. This data includes gender, race, mental illness, location, and date. Each observation represents a fatal shooting event by a police officer.
 
 **Research question**
-
-\- A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)
 
 How do race, gender, and whether they were armed or not affect rates of police shootings over time across the United States?
 
@@ -112,7 +108,7 @@ yearly_shootings |>
   geom_point() +
   geom_line() +
   labs(
-    title = "Shootings per Day",
+    title = "Fig. 1: Shootings per Day",
     x = "Year", 
     y = "Number of Shootings")
 ```
@@ -120,7 +116,6 @@ yearly_shootings |>
 Linear Regression model
 
 EXPLAIN ARMS STATUS METHODOLOGY
-
 
 ```{r}
 #| label: arms-status
@@ -131,14 +126,13 @@ police_shootings |>
   ggplot(aes(x = Person.Gender, fill = Factors.Armed.Test)) +
   geom_bar(position = "fill") +
   labs(
-    title = "Arms Status of Victims by Gender",
+    title = "Fig. 2: Arms Status of Victims by Gender",
     y = "% of Victims",
     x = "Sex",
     fill = "Arms Status")
 
 # Armed with weapons include toy weapons...
 ```
-
 
 We used box plots to visualize male versus female and race as it is the best way to show distributions of numeric data values between multiple groups. It made the differences in age between male and female victims and victims of different races very clear. We could compare median, range, and outliers.
 
@@ -149,7 +143,10 @@ police_shootings |>
   ggplot(
     aes(x = Person.Age, color = Person.Race)) + 
     geom_boxplot() + 
-    labs(title = "Relationship between Race and Age", x = "Age", y = "Count", color = "Race") 
+    labs(title = "Fig. 3: Relationship between Race and Age",
+         x = "Age",
+         y = "Count",
+         color = "Race") 
 ```
 
 ```{r}
@@ -159,15 +156,18 @@ police_shootings |>
   ggplot(
     aes(x = Person.Age, color = Person.Gender)) + 
     geom_boxplot() + 
-    labs(title = "Relationship between Sex and Age", x = "Age", y = "Count", color = "Sex") 
+    labs(title = "Fig. 4: Relationship between Sex and Age",
+         x = "Age",
+         y = "Count",
+         color = "Sex") 
 ```
-
 
 We decide not to make a visualization based on the mental illness variable. We believe this would pose an ethical issue because mental health is a spectrum. Having a mental illness cannot be reduced to a simple "Yes" or "No". There were many other variables that we decided would be a better focus.
 
 **Results**
 
+Based on our summary statistics for the entire data set, we observed that the mean and median age of shooting victims is 35.4 and 34.0 years, respectively. Moreover, the standard deviation of this age range if 14.9 years, demonstrating the wide spread of data points included.
+
 As seen by box-plot-gender, the medians for female and male age are roughly 34 years old for male and 35 years old for female. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of \~21 years old.
 
 EXPLAIN MORE IN RESULTS
-
