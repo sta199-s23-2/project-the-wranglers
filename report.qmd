@@ -50,17 +50,23 @@ One ethical concern is the possibility of misinformation in the data and a lack 
 
 Person.Name - String (Categorical)\\
 
-Person.Age - Integer Person.Gender - String (Categorical)\\
+Person.Age - Integer (Quantitative)\\
+
+Person.Gender - String (Categorical)\\
 
 Person.Race - String (Categorical)\\
 
-Incident.Date.Month - Integer Incident.Date.Day - Integer (Quantitative)\\
+Incident.Date.Month - Integer (Categorical)\\
+
+Incident.Date.Day - Integer (Quantitative)\\
 
 Incident.Date.Year - Integer (Quantitative)\\
 
 Incident.Date.Full - String (Categorical)\\
 
-Incident.Location.City - String Incident.Location.State - String (Categorical)\\
+Incident.Location.City - String (Categorical)\\
+
+Incident.Location.State - String (Categorical)\\
 
 Factors.Armed - String\\
 
