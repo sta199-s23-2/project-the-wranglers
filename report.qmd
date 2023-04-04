@@ -44,7 +44,7 @@ Our dataset includes 6570 rows meaning that at least 6570 people were killed by 
 
 The research topic looks at the correlation between race, gender, and age and police shooting rates. We would expect that male individuals of minority communities with previous mental illnesses would be more likely to be affected.
 
-One ethical concern is the possibility of misinformation in the data and a lack of accurate reporting. Another concern is consent and whether the victims families want their loved ones to have identifying information (like their name and information about their death) in a public database.
+One ethical concern is the possibility of misinformation in the data and a lack of accurate reporting. Not every police shooting is reported or is handled correctly. Although the Washington post collected the data from many different sources, there is no way of guaranteeing that the data set is perfect. Another concern is consent and whether the victims families want their loved ones to have identifying information (like their name and information about their death) in a public database. It is a very sensitive topic and should be treated as such.
 
 \- Identify the types of variables in your research question. Categorical? Quantitative?
 
