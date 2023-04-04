@@ -92,7 +92,7 @@ Race - Bar charts
 
 urban vs. rural
 
-Male v female - box plot
+We used box plots to visualize male versus female as it is the best way to show distributions of numeric data values between multiple groups. It made the differences in age between male and female victims very clear. We could compare median, range, and outliers.
 
 Mental health - ethical problem because mental health is more of a spectrum not a true v false thing
 
