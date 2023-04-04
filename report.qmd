@@ -1,3 +1,5 @@
+
+
 ---
 title: "Project title"
 subtitle: "Report"
@@ -82,27 +84,7 @@ Shooting.Body-Camera - Boolean (Categorical)
 
 **Methodology**
 
-Linear Regression model
-
-Dot mods (scatter plot)
-
-Location type - Geographical map
-
-Race - Bar charts
-
-urban vs. rural
-
-We used box plots to visualize male versus female as it is the best way to show distributions of numeric data values between multiple groups. It made the differences in age between male and female victims very clear. We could compare median, range, and outliers.
-
-We decide not to make a visualization based on the mental illness variable. We believe this would pose an ethical issue because mental health is a spectrum.  Having a mental illness cannot be reduced to a simple “Yes” or “No”. There were many other variables that we decided would be a better focus.
-
-probability relating arnament or not
-
-**Results**
-
-In yearly-analysis, we chose to do a line graph to best represent the progression of shooting per day over time as it effectivley reveals trends and changes in shooting per day across the years.
-
-As seen by box-plot-gender, the medians for female and male age are roughly 34 years old for male and 35 years old for female. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of \~21 years old.
+EXPLAIN SUMMARY STATISTICS
 
 ```{r}
 #| label: summary-stats
@@ -112,6 +94,8 @@ police_shootings |>
             median_age = median(Person.Age),
             stdv_age = sd(Person.Age))
 ```
+
+In yearly-analysis, we chose to do a line graph to best represent the progression of shooting per day over time as it effectively reveals trends and changes in shooting per day across the years.
 
 ```{r}
 #| label: yearly-analysis
@@ -133,25 +117,10 @@ yearly_shootings |>
     y = "Number of Shootings")
 ```
 
-```{r}
-#| label: box-plot-gender
+Linear Regression model
 
-police_shootings |> 
-  ggplot(
-    aes(x = Person.Age, color = Person.Gender)) + 
-    geom_boxplot() + 
-    labs(title = "Relationship between Sex and Age", x = "Age", y = "Count", color = "Sex") 
-```
+EXPLAIN ARMS STATUS METHODOLOGY
 
-```{r}
-#| label: box-plots-race
-
-police_shootings |> 
-  ggplot(
-    aes(x = Person.Age, color = Person.Race)) + 
-    geom_boxplot() + 
-    labs(title = "Relationship between Race and Age", x = "Age", y = "Count", color = "Race") 
-```
 
 ```{r}
 #| label: arms-status
@@ -169,3 +138,36 @@ police_shootings |>
 
 # Armed with weapons include toy weapons...
 ```
+
+
+We used box plots to visualize male versus female and race as it is the best way to show distributions of numeric data values between multiple groups. It made the differences in age between male and female victims and victims of different races very clear. We could compare median, range, and outliers.
+
+```{r}
+#| label: box-plots-race
+
+police_shootings |> 
+  ggplot(
+    aes(x = Person.Age, color = Person.Race)) + 
+    geom_boxplot() + 
+    labs(title = "Relationship between Race and Age", x = "Age", y = "Count", color = "Race") 
+```
+
+```{r}
+#| label: box-plot-gender
+
+police_shootings |> 
+  ggplot(
+    aes(x = Person.Age, color = Person.Gender)) + 
+    geom_boxplot() + 
+    labs(title = "Relationship between Sex and Age", x = "Age", y = "Count", color = "Sex") 
+```
+
+
+We decide not to make a visualization based on the mental illness variable. We believe this would pose an ethical issue because mental health is a spectrum. Having a mental illness cannot be reduced to a simple "Yes" or "No". There were many other variables that we decided would be a better focus.
+
+**Results**
+
+As seen by box-plot-gender, the medians for female and male age are roughly 34 years old for male and 35 years old for female. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of \~21 years old.
+
+EXPLAIN MORE IN RESULTS
+
