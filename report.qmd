@@ -48,31 +48,31 @@ One ethical concern is the possibility of misinformation in the data and a lack 
 
 \- Identify the types of variables in your research question. Categorical? Quantitative?
 
-Person.Name - String\\
+Person.Name - String (Categorical)\\
 
-Person.Age - Integer Person.Gender - String\\
+Person.Age - Integer Person.Gender - String (Categorical)\\
 
-Person.Race - String\\
+Person.Race - String (Categorical)\\
 
-Incident.Date.Month - Integer Incident.Date.Day - Integer\\
+Incident.Date.Month - Integer Incident.Date.Day - Integer (Quantitative)\\
 
-Incident.Date.Year - Integer\\
+Incident.Date.Year - Integer (Quantitative)\\
 
-Incident.Date.Full - String\\
+Incident.Date.Full - String (Categorical)\\
 
-Incident.Location.City - String Incident.Location.State - String\\
+Incident.Location.City - String Incident.Location.State - String (Categorical)\\
 
 Factors.Armed - String\\
 
-Factors.Mental-Illness - Boolean\\
+Factors.Mental-Illness - Boolean (Categorical)\\
 
-Factors.Threat-Level - String\\
+Factors.Threat-Level - String (Categorical)\\
 
-Factors.Fleeing - String\\
+Factors.Fleeing - String (Categorical)\\
 
-Shooting.Manner - String\\
+Shooting.Manner - String (Categorical)\\
 
-Shooting.Body-Camera - Boolean
+Shooting.Body-Camera - Boolean (Categorical)
 
 **Methodology**
 
