@@ -244,7 +244,7 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 <p>This data is from the CORGIS Dataset Project and was created in 9/15/2021. The data was compiled from the Washington Post.</p>
 <p>The Washington Post regularly collects this data as police shootings happen. The Post collected the data by looking at local news reports, law enforcement websites and social media, and by monitoring independent databases such as Killed by Police and Fatal Encounters. In necessary cases, the Post did additional research.</p>
 <p>This data set collects data on fatal shootings in the United States by a police officer in the line of duty from Jan.&nbsp;1, 2015 to Sept.&nbsp;11, 2021. This data includes gender, race, mental illness, location, and date. Each observation represents a fatal shooting event by a police officer.</p>
-<p>## Research question</p>
+<p><strong>Research question</strong></p>
 <p>- A well formulated research question. (You may include more than one research question if you want to receive feedback on different ideas for your project. However, one per data set is required.)</p>
 <p>How do race, gender, and whether they were armed or not affect rates of police shootings over time across the United States?</p>
 <p>Our dataset includes 6570 rows meaning that at least 6570 people were killed by police from 2015 to 2021. By discovering how different factors affect the number of shootings, we can begin to understand why these tragedies happen, and what we can do to stop them from happening.</p>
@@ -274,8 +274,11 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 <p>Race - Bar charts</p>
 <p>urban vs.&nbsp;rural</p>
 <p>We used box plots to visualize male versus female as it is the best way to show distributions of numeric data values between multiple groups. It made the differences in age between male and female victims very clear. We could compare median, range, and outliers.</p>
-<p>Mental health - ethical problem because mental health is more of a spectrum not a true v false thing</p>
+<p>We decide not to make a visualization based on the mental illness variable. We believe this would pose an ethical issue because mental health is a spectrum. Having a mental illness cannot be reduced to a simple “Yes” or “No”. There were many other variables that we decided would be a better focus.</p>
 <p>probability relating arnament or not</p>
+<p><strong>Results</strong></p>
+<p>In yearly-analysis, we chose to do a line graph to best represent the progression of shooting per day over time as it effectivley reveals trends and changes in shooting per day across the years.</p>
+<p>As seen by box-plot-gender, the medians for female and male age are roughly 34 years old for male and 35 years old for female. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of ~21 years old.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="sc">|&gt;</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(Person.Age),</span>
@@ -318,7 +321,6 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 <p><img src="report_files/figure-html/box-plot-gender-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>As seen by the graph above, the medians for female and male age are roughly 34 years old for male and 35 years old for female. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of ~21 years old.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="sc">|&gt;</span> </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
