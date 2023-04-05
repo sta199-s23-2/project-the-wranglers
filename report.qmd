@@ -168,11 +168,26 @@ We decide not to make a visualization based on the mental illness variable. We b
 
 Based on our summary statistics for the entire data set, we observed that the mean and median age of shooting victims is 35.4 and 34.0 years, respectively. Moreover, the standard deviation of this age range if 14.9 years, demonstrating the wide spread of data points included.
 
-As seen by Figure 4, the medians for female and male age are roughly 34 years old for male and 35 years old for female. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of \~21 years old.
 
 Figure 1 shows a slight decrease in shooting per day in 2021 though the total range of average shootings per day was from roughly 2.45 shootings to 2.8 shootings. 
 
 Figure 2 looks at the arms status of victims by gender. This figure shows that female victims were more likely to be armed than male victims. One reason for this is that male victims could have been seen as more aggressive and therefore more likely to become a victim no matter if they were armed.
 
+In Figure 3, we can see that the age distribution of victims does no vary much between races. But if we look at the number of different races in the count of total victims, we can see white victims and african american victims were most common.
+```{r}
+police_shootings |> 
+  ggplot(
+    aes(x = Person.Race, fill = Person.Race)) + 
+    geom_bar() + 
+    labs(title = "Fig. 5: Number of Victims by Race",
+         x = "Race",
+         y = "Count",
+         fill = "Race") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), 
+        legend.position = "none")
+```
 
-EXPLAIN MORE IN RESULTS
+
+As seen by Figure 4, the medians for female and male age are roughly 34 years old for male and 35 years old for female. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of \~21 years old.
+
+
