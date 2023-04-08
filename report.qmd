@@ -16,13 +16,6 @@ glimpse(police_shootings)
 
 ```
 
-```{r}
- sum(police_shootings$`Factors.Mental-Illness`)
-
-
-```
-
-\*\*everyone in this data frame has mental illness. possible misidentification; this is a problem as it could potentially help the policemen
 
 **Introduction**
 
@@ -44,7 +37,16 @@ The research topic looks at the correlation between race, gender, and age and po
 
 One ethical concern is the possibility of misinformation in the data and a lack of accurate reporting. Not every police shooting is reported or is handled correctly. Although the Washington post collected the data from many different sources, there is no way of guaranteeing that the data set is perfect. Another concern is consent and whether the victims families want their loved ones to have identifying information (like their name and information about their death) in a public database. It is a very sensitive topic and should be treated as such.
 
-\- Identify the types of variables in your research question. Categorical? Quantitative?
+
+```{r}
+ sum(police_shootings$`Factors.Mental-Illness`)
+
+
+```
+
+\*\*Also, everyone in this data frame has identified to have mental illness. We believe this could be possible misidentification as it could potentially be helped to excuse policemen. Therefore, we consider this to be a serious ethical concern relating to our dataset. 
+
+\- Identify the types of variables in your research question. 
 
 Person.Name - String (Categorical)\\
 
@@ -79,8 +81,7 @@ Shooting.Manner - String (Categorical)\\
 Shooting.Body-Camera - Boolean (Categorical)
 
 **Methodology**
-
-EXPLAIN SUMMARY STATISTICS
+The average age for a police shooting victim is 35; whereas, the median age is 34. We can conclude that the data is not central to 34-35 years of age as the standard deviation of the the victim's age is ~15 years.
 
 ```{r}
 #| label: summary-stats
@@ -115,7 +116,7 @@ yearly_shootings |>
 
 Linear Regression model
 
-EXPLAIN ARMS STATUS METHODOLOGY
+As seen by the graph below, ~10% of male victims and 13% of female victims were unarmed. 
 
 ```{r}
 #| label: arms-status
@@ -162,18 +163,6 @@ police_shootings |>
          color = "Sex") 
 ```
 
-We decide not to make a visualization based on the mental illness variable. We believe this would pose an ethical issue because mental health is a spectrum. Having a mental illness cannot be reduced to a simple "Yes" or "No". There were many other variables that we decided would be a better focus.
-
-**Results**
-
-Based on our summary statistics for the entire data set, we observed that the mean and median age of shooting victims is 35.4 and 34.0 years, respectively. Moreover, the standard deviation of this age range if 14.9 years, demonstrating the wide spread of data points included.
-
-
-Figure 1 shows a slight decrease in shooting per day in 2021 though the total range of average shootings per day was from roughly 2.45 shootings to 2.8 shootings. 
-
-Figure 2 looks at the arms status of victims by gender. This figure shows that female victims were more likely to be armed than male victims. One reason for this is that male victims could have been seen as more aggressive and therefore more likely to become a victim no matter if they were armed.
-
-In Figure 3, we can see that the age distribution of victims does no vary much between races. But if we look at the number of different races in the count of total victims, we can see white victims and african american victims were most common.
 ```{r}
 police_shootings |> 
   ggplot(
@@ -186,8 +175,40 @@ police_shootings |>
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), 
         legend.position = "none")
 ```
+```{r}
+police_shootings |>
+  filter(Factors.Armed != "unknown") |>
+  mutate(Factors.Armed.Test = if_else(Factors.Armed == "unarmed" | Factors.Armed == "toy weapon", "unarmed", "armed with weapon")) |>
+  ggplot(aes(x = Person.Race, fill = Factors.Armed.Test)) +
+  geom_bar(position = "fill") +
+  labs(
+    title = "Fig. 6: Arms Status of Victims by Race",
+    y = "Proportion of Victims",
+    x = "Race",
+    fill = "Arms Status") +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+```
 
+
+We decide not to make a visualization based on the mental illness variable. We believe this would pose an ethical issue because mental health is a spectrum. Having a mental illness cannot be reduced to a simple "Yes" or "No". There were many other variables that we decided would be a better focus.
+
+**Results**
+
+Based on our summary statistics for the entire data set, we observed that the mean and median age of shooting victims is 35.4 and 34.0 years, respectively. Moreover, the standard deviation of this age range if 14.9 years, demonstrating the wide spread of data points included.
+
+
+Figure 1 shows a slight decrease in shooting per day in 2021 though the total range of average shootings per day was from roughly 2.45 shootings to 2.8 shootings. 
+
+Figure 2 looks at the arms status of victims by gender. This figure shows that female victims were more likely to be armed than male victims. One reason for this is that male victims could have been seen as more aggressive and therefore more likely to become a victim no matter if they were armed.
+
+In Figure 3, we can see that the age distribution of victims does no vary much between races. But if we look at the number of different races in the count of total victims, we can see white victims and african american victims were most common.
 
 As seen by Figure 4, the medians for female and male age are roughly 34 years old for male and 35 years old for female. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of \~21 years old.
+
+As seen by Figure 5, the most victimized race was white and black. Close to 3000 of the victims were white; whereas, over 1500 victims were black. 
+
+As seen by Figure 6, the race with the most unarmed victims was black and the race with the least unarmed victims was Native American. This visualization can provide ample information on implicit bias and racism. 
+
+
 
 
