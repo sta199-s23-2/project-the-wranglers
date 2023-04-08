@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Project title</title>
+<title>An Analysis of Police Shootings in the United States from 2015-2021</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -169,7 +169,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Project title</h1>
+<h1 class="title">An Analysis of Police Shootings in the United States from 2015-2021</h1>
 <p class="subtitle lead">Report</p>
 </div>
 
@@ -232,13 +232,12 @@ $ Shooting.Manner          &lt;chr&gt; "shot", "shot", "shot and Tasered", "shot
 $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRU…</code></pre>
 </div>
 </div>
-<p><strong>Introduction</strong></p>
-<p># Data 2 (Police Shootings)</p>
-<p>This data is from the CORGIS Dataset Project and was created in 9/15/2021. The data was compiled from the Washington Post.</p>
+<p><strong>Introduction and Data</strong></p>
+<p>The <code>police_shootings</code> data set is from the CORGIS Dataset Project and was created in 9/15/2021. The data was compiled from the Washington Post.</p>
 <p>The Washington Post regularly collects this data as police shootings happen. The Post collected the data by looking at local news reports, law enforcement websites and social media, and by monitoring independent databases such as Killed by Police and Fatal Encounters. In necessary cases, the Post did additional research.</p>
 <p>This data set collects data on fatal shootings in the United States by a police officer in the line of duty from Jan.&nbsp;1, 2015 to Sept.&nbsp;11, 2021. This data includes gender, race, mental illness, location, and date. Each observation represents a fatal shooting event by a police officer.</p>
-<p>In “What the data say about police shootings” by Lynne Peeples, the author explains that Police officers in the United States fatally shoot about three people per day on average, a number that is close to the yearly totals for other wealthy nations. Data on these deadly encounters has been hard to come by, but five years later, newspapers, enterprising individuals and the federal government have launched ambitious data-collection projects to fill the gaps and improve transparency and accountability over how police officers exercise their right to use deadly force. Social scientists and public-health researchers have produced more than 50 publications to address pressing questions, such as whether the police are disproportionately quick to shoot black civilians and those from other minority groups. https://www.nature.com/articles/d41586-019-02601-9</p>
-<pre><code>New databases show that police officers' use of lethal force is much more common than previously thought, and varies significantly across the country. We plan to track these differences which could help identify opportunities to reduce the number of shootings and deaths for both civilians and police officers.</code></pre>
+<p>In a <a href="https://www.nature.com/articles/d41586-019-02601-9"><em>Nature</em> article</a> titled “What the data say about police shootings” by Lynne Peeples, the author explains that Police officers in the United States fatally shoot about three people per day on average, a number that is close to the yearly totals for other wealthy nations. Data on these deadly encounters has been hard to come by, but five years later, newspapers, enterprising individuals and the federal government have launched ambitious data-collection projects to fill the gaps and improve transparency and accountability over how police officers exercise their right to use deadly force. Social scientists and public-health researchers have produced more than 50 publications to address pressing questions, such as whether the police are disproportionately quick to shoot black civilians and those from other minority groups.</p>
+<pre><code>New databases show that police officers' use of lethal force is much more common than previously thought and varies significantly across the country. We plan to track these differences to help identify opportunities to reduce the number of police shootings and deaths for both civilians and police officers.</code></pre>
 <p><strong>Research question</strong></p>
 <p>How do race, gender, and whether they were armed or not affect rates of police shootings over time across the United States?</p>
 <p>Our dataset includes 6570 rows meaning that at least 6570 people were killed by police from 2015 to 2021. By discovering how different factors affect the number of shootings, we can begin to understand why these tragedies happen, and what we can do to stop them from happening.</p>
@@ -268,7 +267,8 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 <p>Factors.Fleeing - String (Categorical)\</p>
 <p>Shooting.Manner - String (Categorical)\</p>
 <p>Shooting.Body-Camera - Boolean (Categorical)</p>
-<p><strong>Methodology</strong> The average age for a police shooting victim is 35; whereas, the median age is 34. We can conclude that the data is not central to 34-35 years of age as the standard deviation of the the victim’s age is ~15 years.</p>
+<p><strong>Methodology</strong></p>
+<p>The average age for a police shooting victim is 35; whereas, the median age is 34. We can conclude that the data is not central to 34-35 years of age as the standard deviation of the the victim’s age is ~15 years.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="sc">|&gt;</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(Person.Age),</span>
@@ -378,7 +378,7 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 <p><img src="report_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>We decide not to make a visualization based on the mental illness variable. We believe this would pose an ethical issue because mental health is a spectrum. Having a mental illness cannot be reduced to a simple “Yes” or “No”. There were many other variables that we decided would be a better focus.</p>
+<p>We decide not to make a visualization based on the mental illness variable. We believe this would pose an ethical issue because mental health is a spectrum. Having a mental illness cannot be reduced to a simple “Yes” or “No.” There were many other variables that we decided would be a better focus.</p>
 <p><strong>Results</strong></p>
 <p>Based on our summary statistics for the entire data set, we observed that the mean and median age of shooting victims is 35.4 and 34.0 years, respectively. Moreover, the standard deviation of this age range if 14.9 years, demonstrating the wide spread of data points included.</p>
 <p>Figure 1 shows a slight decrease in shooting per day in 2021 though the total range of average shootings per day was from roughly 2.45 shootings to 2.8 shootings.</p>

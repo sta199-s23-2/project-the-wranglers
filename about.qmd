@@ -14,6 +14,4 @@ This project was developed by **The Wranglers** For [STA 199: Introduction to Da
 
 -   Team member 4: Connor Rooney is a first-year undergraduate student with plans to major in public policy.
 
--   Team member 4: Sirena Lovato is a sophomore undergraduate student majoring in program 2.
-
--   ...
+-   Team member 4: Sirena Lovato is a sophomore undergraduate student majoring in program II.

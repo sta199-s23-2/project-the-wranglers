@@ -1,5 +1,5 @@
 ---
-title: "Project title"
+title: "An Analysis of Police Shootings in the United States from 2015-2021"
 subtitle: "Report"
 format: html
 editor: visual
@@ -16,22 +16,17 @@ glimpse(police_shootings)
 
 ```
 
+**Introduction and Data**
 
-**Introduction**
-
-\# Data 2 (Police Shootings)
-
-This data is from the CORGIS Dataset Project and was created in 9/15/2021. The data was compiled from the Washington Post.
+The `police_shootings` data set is from the CORGIS Dataset Project and was created in 9/15/2021. The data was compiled from the Washington Post.
 
 The Washington Post regularly collects this data as police shootings happen. The Post collected the data by looking at local news reports, law enforcement websites and social media, and by monitoring independent databases such as Killed by Police and Fatal Encounters. In necessary cases, the Post did additional research.
 
 This data set collects data on fatal shootings in the United States by a police officer in the line of duty from Jan. 1, 2015 to Sept. 11, 2021. This data includes gender, race, mental illness, location, and date. Each observation represents a fatal shooting event by a police officer.
 
-  In "What the data say about police shootings" by Lynne Peeples, the author explains that Police officers in the United States fatally shoot about three people per day on average, a number that is close to the yearly totals for other wealthy nations. Data on these deadly encounters has been hard to come by, but five years later, newspapers, enterprising individuals and the federal government have launched ambitious data-collection projects to fill the gaps and improve transparency and accountability over how police officers exercise their right to use deadly force. Social scientists and public-health researchers have produced more than 50 publications to address pressing questions, such as whether the police are disproportionately quick to shoot black civilians and those from other minority groups. 
-    https://www.nature.com/articles/d41586-019-02601-9
-    
-    New databases show that police officers' use of lethal force is much more common than previously thought, and varies significantly across the country. We plan to track these differences which could help identify opportunities to reduce the number of shootings and deaths for both civilians and police officers.
+In a [*Nature* article](https://www.nature.com/articles/d41586-019-02601-9) titled "What the data say about police shootings" by Lynne Peeples, the author explains that Police officers in the United States fatally shoot about three people per day on average, a number that is close to the yearly totals for other wealthy nations. Data on these deadly encounters has been hard to come by, but five years later, newspapers, enterprising individuals and the federal government have launched ambitious data-collection projects to fill the gaps and improve transparency and accountability over how police officers exercise their right to use deadly force. Social scientists and public-health researchers have produced more than 50 publications to address pressing questions, such as whether the police are disproportionately quick to shoot black civilians and those from other minority groups.
 
+    New databases show that police officers' use of lethal force is much more common than previously thought and varies significantly across the country. We plan to track these differences to help identify opportunities to reduce the number of police shootings and deaths for both civilians and police officers.
 
 **Research question**
 
@@ -43,16 +38,13 @@ The research topic looks at the correlation between race, gender, and age and po
 
 One ethical concern is the possibility of misinformation in the data and a lack of accurate reporting. Not every police shooting is reported or is handled correctly. Although the Washington post collected the data from many different sources, there is no way of guaranteeing that the data set is perfect. Another concern is consent and whether the victims families want their loved ones to have identifying information (like their name and information about their death) in a public database. It is a very sensitive topic and should be treated as such.
 
-
 ```{r}
  sum(police_shootings$`Factors.Mental-Illness`)
-
-
 ```
 
-\*\*Also, everyone in this data frame has identified to have mental illness. We believe this could be possible misidentification as it could potentially be helped to excuse policemen. Therefore, we consider this to be a serious ethical concern relating to our dataset. 
+\*\*Also, everyone in this data frame has identified to have mental illness. We believe this could be possible misidentification as it could potentially be helped to excuse policemen. Therefore, we consider this to be a serious ethical concern relating to our dataset.
 
-\- Identify the types of variables in your research question. 
+\- Identify the types of variables in your research question.
 
 Person.Name - String (Categorical)\\
 
@@ -87,7 +79,8 @@ Shooting.Manner - String (Categorical)\\
 Shooting.Body-Camera - Boolean (Categorical)
 
 **Methodology**
-The average age for a police shooting victim is 35; whereas, the median age is 34. We can conclude that the data is not central to 34-35 years of age as the standard deviation of the the victim's age is ~15 years.
+
+The average age for a police shooting victim is 35; whereas, the median age is 34. We can conclude that the data is not central to 34-35 years of age as the standard deviation of the the victim's age is \~15 years.
 
 ```{r}
 #| label: summary-stats
@@ -122,7 +115,7 @@ yearly_shootings |>
 
 Linear Regression model
 
-As seen by the graph below, ~10% of male victims and 13% of female victims were unarmed. 
+As seen by the graph below, \~10% of male victims and 13% of female victims were unarmed.
 
 ```{r}
 #| label: arms-status
@@ -181,6 +174,7 @@ police_shootings |>
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), 
         legend.position = "none")
 ```
+
 ```{r}
 police_shootings |>
   filter(Factors.Armed != "unknown") |>
@@ -195,15 +189,13 @@ police_shootings |>
     theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 ```
 
-
-We decide not to make a visualization based on the mental illness variable. We believe this would pose an ethical issue because mental health is a spectrum. Having a mental illness cannot be reduced to a simple "Yes" or "No". There were many other variables that we decided would be a better focus.
+We decide not to make a visualization based on the mental illness variable. We believe this would pose an ethical issue because mental health is a spectrum. Having a mental illness cannot be reduced to a simple "Yes" or "No." There were many other variables that we decided would be a better focus.
 
 **Results**
 
 Based on our summary statistics for the entire data set, we observed that the mean and median age of shooting victims is 35.4 and 34.0 years, respectively. Moreover, the standard deviation of this age range if 14.9 years, demonstrating the wide spread of data points included.
 
-
-Figure 1 shows a slight decrease in shooting per day in 2021 though the total range of average shootings per day was from roughly 2.45 shootings to 2.8 shootings. 
+Figure 1 shows a slight decrease in shooting per day in 2021 though the total range of average shootings per day was from roughly 2.45 shootings to 2.8 shootings.
 
 Figure 2 looks at the arms status of victims by gender. This figure shows that female victims were more likely to be armed than male victims. One reason for this is that male victims could have been seen as more aggressive and therefore more likely to become a victim no matter if they were armed.
 
@@ -211,10 +203,6 @@ In Figure 3, we can see that the age distribution of victims does no vary much b
 
 As seen by Figure 4, the medians for female and male age are roughly 34 years old for male and 35 years old for female. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of \~21 years old.
 
-As seen by Figure 5, the most victimized race was white and black. Close to 3000 of the victims were white; whereas, over 1500 victims were black. 
+As seen by Figure 5, the most victimized race was white and black. Close to 3000 of the victims were white; whereas, over 1500 victims were black.
 
-As seen by Figure 6, the race with the most unarmed victims was black and the race with the least unarmed victims was Native American. This visualization can provide ample information on implicit bias and racism. 
-
-
-
-
+As seen by Figure 6, the race with the most unarmed victims was black and the race with the least unarmed victims was Native American. This visualization can provide ample information on implicit bias and racism.
