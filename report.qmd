@@ -21,7 +21,7 @@ Created on September 15, 2021, the `police_shootings` data set is sourced from t
 
 This data set describes fatal shootings in the United States by a police officer in the line of duty from January 1, 2015, to September 11, 2021. Each observation represents a fatal shooting event by a police officer. This data includes information on the victim's gender, race, mental illness, location, and date of the event.
 
-In a [*Nature* article](https://www.nature.com/articles/d41586-019-02601-9) titled "What the data say about police shootings, " Lynne Peeples explains that police officers in the United States fatally shoot about three people per day on average, a number that rivals the yearly totals of other wealthy nations. Data on these deadly encounters had been hard to come by, but five years later, newspapers, enterprising individuals, and the federal government have launched ambitious data-collection projects to fill the gaps and improve transparency and accountability over how police officers exercise their right to use deadly force. Social scientists and public health researchers have produced more than 50 publications to address pressing questions, such as whether the police are disproportionately quick to shoot black civilians and those from other minority groups.
+In a [*Nature* article](https://www.nature.com/articles/d41586-019-02601-9) titled "What the data say about police shootings," Lynne Peeples explains that police officers in the United States fatally shoot about three people per day on average, a number that rivals the yearly totals of other wealthy nations. Data on these deadly encounters had been hard to come by, but five years later, newspapers, enterprising individuals, and the federal government have launched ambitious data-collection projects to fill the gaps and improve transparency and accountability over how police officers exercise their right to use deadly force. Social scientists and public health researchers have produced more than 50 publications to address pressing questions, such as whether the police are disproportionately quick to shoot black civilians and those from other minority groups.
 
     New databases show that police officers' use of lethal force is much more common than previously thought and varies significantly across the country. We plan to track these differences to help identify opportunities to reduce the number of police shootings and deaths for both civilians and police officers.
 
@@ -33,7 +33,7 @@ How do race, gender, and whether a civilian was armed or not affect rates of pol
 
 Our data set includes 6569 rows, indicating that at least 6569 people were killed by police from 2015 to 2021. By discovering how different factors affect the number of shootings, we can begin to understand why these tragedies happen and what we can do to stop them from happening.
 
-Our research topic examines police shooting history on the basis of race, gender, and age. We expect that male individuals of minority communities with previous histories of mental illnesses are most likely to consist of the largest victim population.
+Our research topic examines police shooting history on the basis of race, gender, and age. We hypothesize that male individuals of minority communities are most likely to consist of the largest victim population.
 
 **Ethical Concerns**
 
@@ -144,8 +144,8 @@ police_shootings |>
     geom_boxplot() + 
     labs(title = "Fig. 3: Relationship between Race and Age",
          x = "Age",
-         y = "Count",
-         color = "Race") 
+         y = "Race",
+         color = "Race")
 ```
 
 ```{r}
@@ -157,16 +157,15 @@ police_shootings |>
     geom_boxplot() + 
     labs(title = "Fig. 4: Relationship between Sex and Age",
          x = "Age",
-         y = "Count",
-         color = "Sex") 
+         y = "Sex",
+         color = "Sex")
 ```
 
 ```{r}
 #| label: bar-graph-race
 
 police_shootings |> 
-  ggplot(
-    aes(x = Person.Race, fill = Person.Race)) + 
+  ggplot(aes(x = Person.Race, fill = Person.Race)) + 
     geom_bar() + 
     labs(title = "Fig. 5: Number of Victims by Race",
          x = "Race",
@@ -206,4 +205,4 @@ As seen in Figure 4, the median age is roughly 34 years old for males and 35 yea
 
 As seen in Figure 5, the most victimized race was white and black. Close to 3000 of the victims were white; whereas, over 1500 victims were black.
 
-As seen in Figure 6, the race with the most unarmed victims was black and the race with the least unarmed victims was Native American. This visualization can provide ample information on implicit bias and how race impacts policemen's approaches to interactions with different races.
+As seen in Figure 6, the race with the most unarmed victims was black and the race with the least unarmed victims was Native American. This visualization can provide ample information on implicit bias and how race impacts the police's approaches to interactions with different races.
