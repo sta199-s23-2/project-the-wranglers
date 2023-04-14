@@ -113,7 +113,8 @@ yearly_shootings |>
   labs(
     title = "Fig. 1: Shootings per Day",
     x = "Year", 
-    y = "Number of Shootings")
+    y = "Number of Shootings") +
+  geom_smooth(method = "lm", se = F)
 ```
 
 As seen by the graph below, \~10% of male victims and 13% of female victims were unarmed.
