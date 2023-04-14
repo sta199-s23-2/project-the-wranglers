@@ -94,6 +94,26 @@ police_shootings |>
             stdv_age = sd(Person.Age))
 ```
 
+
+```{r}
+police_shootings |>
+  mutate(state = Incident.Location.State)
+```
+
+```{r}
+#install.packages("usmap")
+#library(usmap) #import the package
+#library(ggplot2) #use ggplot2 to add layer for visualization
+
+#plot_usmap(data = police_shootings, values = "state", regions = "states", color = "red") + 
+  #scale_fill_continuous(low = "white", high = "red", name = "Frequency of Police Shootings")
+  #labs(title = "U.S. States",
+      # subtitle = "This is a blank map of the United States.") 
+
+
+```
+
+
 In yearly-analysis, we chose to do a line graph to represent the progression of shooting per day over time as it effectively reveals trends and changes in shooting per day across the years.
 
 ```{r}
@@ -113,8 +133,7 @@ yearly_shootings |>
   labs(
     title = "Fig. 1: Shootings per Day",
     x = "Year", 
-    y = "Number of Shootings") +
-  geom_smooth(method = "lm", se = F)
+    y = "Number of Shootings")
 ```
 
 As seen by the graph below, \~10% of male victims and 13% of female victims were unarmed.
