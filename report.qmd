@@ -210,10 +210,11 @@ police_shootings |>
     theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 ```
 
-We will now investigate if the proportion of unarmed people who were shot by police equal for victims of color in comparison to white victims. We hypothesize that the proportion of unarmed people of color shot is significantly greater than the proportion of unarmed white people.
+We will now investigate if the proportion of unarmed people who were shot by police equal for victims of color in comparison to white victims. We hypothesize that the proportion of unarmed people of color shot is significantly greater than the proportion of unarmed white people. (Note: in the context of this question, we will consider someone as a "POC" if they do not identify as "White")
 
-Null Hypothesis:
-Alternative Hypothesis: 
+$\pi_{POC}$ = the proportion of unarmed people out of those shot who identify as a POC. $\pi_{White}$ = the proportion of unarmed people out of those shot who identify as a White
+
+Null Hypothesis: $\pi_{POC}$ = $\pi_{White}$ The proportion of unarmed people out of those shot who identify as a POC is equal to the proportion of unarmed people out of those shot who identify as a White. Alternative Hypothesis: $\pi_{POC}$ \> $\pi_{White}$ The proportion of unarmed people out of those shot who identify as a POC is greater than the proportion of unarmed people out of those shot who identify as a White.
 
 ```{r}
 #| label: hypothesis-race
