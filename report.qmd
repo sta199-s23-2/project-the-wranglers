@@ -11,6 +11,7 @@ execute:
 #| label: load-data-2
 library(tidyverse)
 library(readr)
+library(infer)
 police_shootings <- read_csv("data/police_shootings.csv")
 glimpse(police_shootings)
 ```
@@ -94,7 +95,6 @@ police_shootings |>
             stdv_age = sd(Person.Age))
 ```
 
-
 ```{r}
 police_shootings |>
   mutate(state = Incident.Location.State)
@@ -112,7 +112,6 @@ police_shootings |>
 
 
 ```
-
 
 In yearly-analysis, we chose to do a line graph to represent the progression of shooting per day over time as it effectively reveals trends and changes in shooting per day across the years.
 
@@ -209,6 +208,45 @@ police_shootings |>
     x = "Race",
     fill = "Arms Status") +
     theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+```
+
+We will now investigate if the proportion of unarmed people who were shot by police equal for victims of color in comparison to white victims. We hypothesize that the proportion of unarmed people of color shot is significantly greater than the proportion of unarmed white people.
+
+Null Hypothesis:
+Alternative Hypothesis: 
+
+```{r}
+#| label: hypothesis-race
+
+hypo_data <- police_shootings |>
+  filter(Factors.Armed != "unknown", Person.Race != "Unknown") |>
+  mutate(Factors.Armed.Test = if_else(Factors.Armed == "unarmed" | 
+                                        Factors.Armed == "toy weapon", "unarmed"
+                                      , "armed with weapon"),
+         race = if_else(Person.Race != "White", "POC", "White")) 
+set.seed(69)
+null_dist <- hypo_data |>
+  specify(response = Factors.Armed.Test, explanatory = race , success = "unarmed") |>
+  hypothesize(null = "independence") |>
+  generate(reps = 1000, type = "permute") |>
+  calculate(stat = "diff in props" , order = c("POC", "White"))
+```
+
+```{r}
+#| label: hypothesis-race-pvalues
+hypo_data |>
+  group_by(race, Factors.Armed.Test) |>
+  summarize(props = n())
+p_hat_POC <- 318/(318+2456)
+p_hat_white <- 299/(299+2568)
+obs_diff_phat <- p_hat_POC - p_hat_white
+
+visualize(null_dist) +
+ shade_p_value(obs_stat = obs_diff_phat, direction = "greater") 
+
+null_dist |>
+  get_p_value(obs_stat = obs_diff_phat, direction = "greater")
+
 ```
 
 **Results**
