@@ -142,7 +142,9 @@ As seen by the graph below, \~10% of male victims and 13% of female victims were
 
 police_shootings |>
   filter(Factors.Armed != "unknown") |>
-  mutate(Factors.Armed.Test = if_else(Factors.Armed == "unarmed" | Factors.Armed == "toy weapon", "unarmed", "armed with weapon")) |>
+  mutate(Factors.Armed.Test = if_else(
+    Factors.Armed == "unarmed" | Factors.Armed == "toy weapon", "unarmed", 
+    "armed with weapon")) |>
   ggplot(aes(x = Person.Gender, fill = Factors.Armed.Test)) +
   geom_bar(position = "fill") +
   labs(
@@ -199,7 +201,9 @@ police_shootings |>
 
 police_shootings |>
   filter(Factors.Armed != "unknown") |>
-  mutate(Factors.Armed.Test = if_else(Factors.Armed == "unarmed" | Factors.Armed == "toy weapon", "unarmed", "armed with weapon")) |>
+  mutate(Factors.Armed.Test = if_else(
+    Factors.Armed == "unarmed" | Factors.Armed == "toy weapon", "unarmed", 
+    "armed with weapon")) |>
   ggplot(aes(x = Person.Race, fill = Factors.Armed.Test)) +
   geom_bar(position = "fill") +
   labs(
@@ -210,11 +214,21 @@ police_shootings |>
     theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 ```
 
-We will now investigate if the proportion of unarmed people who were shot by police equal for victims of color in comparison to white victims. We hypothesize that the proportion of unarmed people of color shot is significantly greater than the proportion of unarmed white people. (Note: in the context of this question, we will consider someone as a "POC" if they do not identify as "White")
+We will now investigate if the proportion of unarmed people who were shot by police equal for victims of color in comparison to white victims. We hypothesize that the proportion of unarmed people of color shot is significantly greater than the proportion of unarmed white people. In order to investigate this hypothesis, we will perform a hypothesis test using a significance level of $\alpha = 0.05$.
 
-$\pi_{POC}$ = the proportion of unarmed people out of those shot who identify as a POC. $\pi_{White}$ = the proportion of unarmed people out of those shot who identify as a White
+(Note: in the context of this question, we will consider someone as a "POC" if they do not identify as "White")
 
-Null Hypothesis: $\pi_{POC}$ = $\pi_{White}$ The proportion of unarmed people out of those shot who identify as a POC is equal to the proportion of unarmed people out of those shot who identify as a White. Alternative Hypothesis: $\pi_{POC}$ \> $\pi_{White}$ The proportion of unarmed people out of those shot who identify as a POC is greater than the proportion of unarmed people out of those shot who identify as a White.
+$\pi_{POC}$ = the proportion of unarmed people out of those shot who identify as a POC.
+
+$\pi_{White}$ = the proportion of unarmed people out of those shot who identify as a White
+
+$H_o$: $\pi_{POC}$ = $\pi_{White}$
+
+The proportion of unarmed people out of those shot who identify as a POC is equal to the proportion of unarmed people out of those shot who identify as white.
+
+$H_A$: $\pi_{POC}$ \> $\pi_{White}$
+
+The proportion of unarmed people out of those shot who identify as a POC is greater than the proportion of unarmed people out of those shot who identify as white.
 
 ```{r}
 #| label: hypothesis-race
@@ -227,7 +241,8 @@ hypo_data <- police_shootings |>
          race = if_else(Person.Race != "White", "POC", "White")) 
 set.seed(69)
 null_dist <- hypo_data |>
-  specify(response = Factors.Armed.Test, explanatory = race , success = "unarmed") |>
+  specify(response = Factors.Armed.Test, 
+          explanatory = race , success = "unarmed") |>
   hypothesize(null = "independence") |>
   generate(reps = 1000, type = "permute") |>
   calculate(stat = "diff in props" , order = c("POC", "White"))
@@ -238,12 +253,14 @@ null_dist <- hypo_data |>
 hypo_data |>
   group_by(race, Factors.Armed.Test) |>
   summarize(props = n())
+
 p_hat_POC <- 318/(318+2456)
 p_hat_white <- 299/(299+2568)
 obs_diff_phat <- p_hat_POC - p_hat_white
 
 visualize(null_dist) +
- shade_p_value(obs_stat = obs_diff_phat, direction = "greater") 
+ shade_p_value(obs_stat = obs_diff_phat, direction = "greater") +
+  labs(title = "Fig. 7 Simulated Null Distribution")
 
 null_dist |>
   get_p_value(obs_stat = obs_diff_phat, direction = "greater")
@@ -258,10 +275,12 @@ Figure 1 shows a slight decrease in shooting per day in 2021 though the total ra
 
 Figure 2 looks at the arms status of victims by gender. This figure shows that female victims were more likely to be armed than male victims. One reason for this is that male victims could have been seen as more aggressive and therefore more likely to become a victim no matter if they were armed.
 
-In Figure 3, we can see that the age distribution of victims does not vary much between races. But if we look at the number of different races in the count of total victims, we can see white victims and african american victims were most common.
+In Figure 3, we can see that the age distribution of victims does not vary much between races. But if we look at the number of different races in the count of total victims, we can see white victims and African American victims were most common.
 
 As seen in Figure 4, the median age is roughly 34 years old for males and 35 years old for females. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of \~21 years old.
 
 As seen in Figure 5, the most victimized race was white and black. Close to 3000 of the victims were white; whereas, over 1500 victims were black.
 
 As seen in Figure 6, the race with the most unarmed victims was black and the race with the least unarmed victims was Native American. This visualization can provide ample information on implicit bias and how race impacts the police's approaches to interactions with different races.
+
+In Figure 7, we performed a hypothesis test, and got a p-value of 0.107. Utilizing a significance level of 0.05, we fail to reject the null hypothesis that the proportion of unarmed people out of those shot who identify as a POC is equal to the proportion of unarmed people out of those shot who identify as white, as 0.107 is greater than 0.05. Therefore, we have weak evidence to support the alternative hypothesis that the proportion of unarmed people out of those shot who identify as a POC is greater than the proportion of unarmed people out of those shot who identify as white.
