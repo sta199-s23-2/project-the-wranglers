@@ -122,6 +122,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 }</script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -344,14 +345,16 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="sc">|&gt;</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Factors.Armed <span class="sc">!=</span> <span class="st">"unknown"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Factors.Armed.Test =</span> <span class="fu">if_else</span>(Factors.Armed <span class="sc">==</span> <span class="st">"unarmed"</span> <span class="sc">|</span> Factors.Armed <span class="sc">==</span> <span class="st">"toy weapon"</span>, <span class="st">"unarmed"</span>, <span class="st">"armed with weapon"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Person.Gender, <span class="at">fill =</span> Factors.Armed.Test)) <span class="sc">+</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Fig. 2: Arms Status of Victims by Gender"</span>,</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"% of Victims"</span>,</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Sex"</span>,</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Arms Status"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Factors.Armed.Test =</span> <span class="fu">if_else</span>(</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    Factors.Armed <span class="sc">==</span> <span class="st">"unarmed"</span> <span class="sc">|</span> Factors.Armed <span class="sc">==</span> <span class="st">"toy weapon"</span>, <span class="st">"unarmed"</span>, </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"armed with weapon"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Person.Gender, <span class="at">fill =</span> Factors.Armed.Test)) <span class="sc">+</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Fig. 2: Arms Status of Victims by Gender"</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"% of Victims"</span>,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Sex"</span>,</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Arms Status"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="report_files/figure-html/arms-status-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -400,21 +403,29 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="sc">|&gt;</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Factors.Armed <span class="sc">!=</span> <span class="st">"unknown"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Factors.Armed.Test =</span> <span class="fu">if_else</span>(Factors.Armed <span class="sc">==</span> <span class="st">"unarmed"</span> <span class="sc">|</span> Factors.Armed <span class="sc">==</span> <span class="st">"toy weapon"</span>, <span class="st">"unarmed"</span>, <span class="st">"armed with weapon"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Person.Race, <span class="at">fill =</span> Factors.Armed.Test)) <span class="sc">+</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Fig. 6: Arms Status of Victims by Race"</span>,</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proportion of Victims"</span>,</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Race"</span>,</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Arms Status"</span>) <span class="sc">+</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Factors.Armed.Test =</span> <span class="fu">if_else</span>(</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    Factors.Armed <span class="sc">==</span> <span class="st">"unarmed"</span> <span class="sc">|</span> Factors.Armed <span class="sc">==</span> <span class="st">"toy weapon"</span>, <span class="st">"unarmed"</span>, </span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"armed with weapon"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Person.Race, <span class="at">fill =</span> Factors.Armed.Test)) <span class="sc">+</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Fig. 6: Arms Status of Victims by Race"</span>,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proportion of Victims"</span>,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Race"</span>,</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Arms Status"</span>) <span class="sc">+</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="report_files/figure-html/bar-graph-arms-status-race-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>We will now investigate if the proportion of unarmed people who were shot by police equal for victims of color in comparison to white victims. We hypothesize that the proportion of unarmed people of color shot is significantly greater than the proportion of unarmed white people.</p>
-<p>Null Hypothesis: Alternative Hypothesis:</p>
+<p>We will now investigate if the proportion of unarmed people who were shot by police equal for victims of color in comparison to white victims. We hypothesize that the proportion of unarmed people of color shot is significantly greater than the proportion of unarmed white people. In order to investigate this hypothesis, we will perform a hypothesis test using a significance level of <span class="math inline">\(\alpha = 0.05\)</span>.</p>
+<p>(Note: in the context of this question, we will consider someone as a “POC” if they do not identify as “White”)</p>
+<p><span class="math inline">\(\pi_{POC}\)</span> = the proportion of unarmed people out of those shot who identify as a POC.</p>
+<p><span class="math inline">\(\pi_{White}\)</span> = the proportion of unarmed people out of those shot who identify as a White</p>
+<p><span class="math inline">\(H_o\)</span>: <span class="math inline">\(\pi_{POC}\)</span> = <span class="math inline">\(\pi_{White}\)</span></p>
+<p>The proportion of unarmed people out of those shot who identify as a POC is equal to the proportion of unarmed people out of those shot who identify as white.</p>
+<p><span class="math inline">\(H_A\)</span>: <span class="math inline">\(\pi_{POC}\)</span> &gt; <span class="math inline">\(\pi_{White}\)</span></p>
+<p>The proportion of unarmed people out of those shot who identify as a POC is greater than the proportion of unarmed people out of those shot who identify as white.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>hypo_data <span class="ot">&lt;-</span> police_shootings <span class="sc">|&gt;</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Factors.Armed <span class="sc">!=</span> <span class="st">"unknown"</span>, Person.Race <span class="sc">!=</span> <span class="st">"Unknown"</span>) <span class="sc">|&gt;</span></span>
@@ -424,10 +435,11 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">race =</span> <span class="fu">if_else</span>(Person.Race <span class="sc">!=</span> <span class="st">"White"</span>, <span class="st">"POC"</span>, <span class="st">"White"</span>)) </span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">69</span>)</span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>null_dist <span class="ot">&lt;-</span> hypo_data <span class="sc">|&gt;</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="at">response =</span> Factors.Armed.Test, <span class="at">explanatory =</span> race , <span class="at">success =</span> <span class="st">"unarmed"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in props"</span> , <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"POC"</span>, <span class="st">"White"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="at">response =</span> Factors.Armed.Test, </span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">explanatory =</span> race , <span class="at">success =</span> <span class="st">"unarmed"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in props"</span> , <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"POC"</span>, <span class="st">"White"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>hypo_data <span class="sc">|&gt;</span></span>
@@ -452,7 +464,8 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>obs_diff_phat <span class="ot">&lt;-</span> p_hat_POC <span class="sc">-</span> p_hat_white</span>
 <span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize</span>(null_dist) <span class="sc">+</span></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">shade_p_value</span>(<span class="at">obs_stat =</span> obs_diff_phat, <span class="at">direction =</span> <span class="st">"greater"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">shade_p_value</span>(<span class="at">obs_stat =</span> obs_diff_phat, <span class="at">direction =</span> <span class="st">"greater"</span>) <span class="sc">+</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Fig. 7 Simulated Null Distribution"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="report_files/figure-html/hypothesis-race-pvalues-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -469,10 +482,11 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 <p>Based on our summary statistics for the entire data set, we observed that the mean and median age of shooting victims is 35.4 and 34.0 years, respectively. Moreover, the standard deviation of this age range is 14.9 years, demonstrating the wide spread of data points included.</p>
 <p>Figure 1 shows a slight decrease in shooting per day in 2021 though the total range of average shootings per day was from roughly 2.45 shootings to 2.8 shootings.</p>
 <p>Figure 2 looks at the arms status of victims by gender. This figure shows that female victims were more likely to be armed than male victims. One reason for this is that male victims could have been seen as more aggressive and therefore more likely to become a victim no matter if they were armed.</p>
-<p>In Figure 3, we can see that the age distribution of victims does not vary much between races. But if we look at the number of different races in the count of total victims, we can see white victims and african american victims were most common.</p>
+<p>In Figure 3, we can see that the age distribution of victims does not vary much between races. But if we look at the number of different races in the count of total victims, we can see white victims and African American victims were most common.</p>
 <p>As seen in Figure 4, the median age is roughly 34 years old for males and 35 years old for females. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of ~21 years old.</p>
 <p>As seen in Figure 5, the most victimized race was white and black. Close to 3000 of the victims were white; whereas, over 1500 victims were black.</p>
 <p>As seen in Figure 6, the race with the most unarmed victims was black and the race with the least unarmed victims was Native American. This visualization can provide ample information on implicit bias and how race impacts the police’s approaches to interactions with different races.</p>
+<p>In Figure 7, we performed a hypothesis test, and got a p-value of 0.107. Utilizing a significance level of 0.05, we fail to reject the null hypothesis that the proportion of unarmed people out of those shot who identify as a POC is equal to the proportion of unarmed people out of those shot who identify as white, as 0.107 is greater than 0.05. Therefore, we have weak evidence to support the alternative hypothesis that the proportion of unarmed people out of those shot who identify as a POC is greater than the proportion of unarmed people out of those shot who identify as white.</p>
 
 
 
