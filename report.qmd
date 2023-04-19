@@ -51,6 +51,8 @@ sum(police_shootings$`Factors.Mental-Illness`)
 
 Finally, a third concern is consent and whether the victims families want their loved ones to have identifying information (like name and information about their death) in a public database. This is a highly sensitive topic and should be treated as such.
 
+The following data was collected randomly and the observations are independent.
+
 We have identified several key variables that will advance our research question: Person.Name - String (Categorical)
 
 `Person.Age` - Integer (Quantitative)
@@ -234,7 +236,7 @@ logistic_reg() |>
 
 ```
 
-After fitting the logistic model and computing backwards elimination, we found the best model for our response variable(Factors.Threat.Level) to be an additive model between our four explanatory variables: gender, race, armed status, and age. Therefore, whether or not a victim was seen as a threat was explained with an additive interaction between gender, race, armed status, and age.
+After fitting the logistic model and computing backwards elimination, we found the best model for our response variable(Factors.Threat.Level) to be an additive model between our four explanatory variables: gender, race, armed status, and age. During backwards elimination, we fit several additive and interactive models between the four variables and determined the lowest AIC value. Therefore, whether or not a victim was seen as a threat was explained with an additive interaction between gender, race, armed status, and age.
 
 We will now investigate if the proportion of unarmed people who were shot by police equal for victims of color in comparison to white victims. We hypothesize that the proportion of unarmed people of color shot is significantly greater than the proportion of unarmed white people. In order to investigate this hypothesis, we will perform a hypothesis test using a significance level of $\alpha = 0.05$.
 

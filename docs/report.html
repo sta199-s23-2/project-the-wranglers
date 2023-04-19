@@ -213,7 +213,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ✖ dplyr::lag()      masks stats::lag()
 ✖ yardstick::spec() masks readr::spec()
 ✖ recipes::step()   masks stats::step()
-• Dig deeper into tidy modeling with R at https://www.tmwr.org</code></pre>
+• Learn how to get started at https://www.tidymodels.org/start/</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(infer)</span>
@@ -261,7 +261,7 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 <p>How do race, gender, age, and whether a civilian was armed or not affect rates of police shootings across the United States from 2015 to 2021?</p>
 <p><strong>Data</strong></p>
 <p>Our data set includes 6569 rows, indicating that at least 6569 people were killed by police from 2015 to 2021. By discovering how different factors affect the number of shootings, we can begin to understand why these tragedies happen and what we can do to stop them from happening.</p>
-<p>Our research topic examines police shooting history on the basis of race, gender, and age. We hypothesize that male individuals of minority communities are most likely to consist of the largest victim population.</p>
+<p>Our research topic examines police shooting history on the basis of race, gender, and age. We hypothesize that male individuals who identify as a POC are most likely to consist of the largest victim population.</p>
 <p><strong>Ethical Concerns</strong></p>
 <p>One ethical concern is the possibility of misinformation in the data and a lack of accurate reporting. Not every police shooting is reported or handled correctly. Although <em>The Washington Post</em> collected the data from many different sources, there is no way of guaranteeing that the data set is fully comprehensive.</p>
 <p>Second, as demonstrated below, all 6,569 victims identified in this data set have been characterized as having a mental illness. As a result, we decide not to make a visualization based on the mental illness variable. We believe this would pose an ethical issue because mental health is a spectrum with varying characteristics and severity of impact. Having a mental illness cannot be reduced to a simple “TRUE” or “FALSE.” Instead, we decided that other variables would be a better focus.</p>
@@ -272,6 +272,7 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 </div>
 </div>
 <p>Finally, a third concern is consent and whether the victims families want their loved ones to have identifying information (like name and information about their death) in a public database. This is a highly sensitive topic and should be treated as such.</p>
+<p>The following data was collected randomly and the observations are independent.</p>
 <p>We have identified several key variables that will advance our research question: Person.Name - String (Categorical)</p>
 <p><code>Person.Age</code> - Integer (Quantitative)</p>
 <p><code>Person.Gender</code> - String (Categorical)</p>
@@ -381,7 +382,7 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="sc">|&gt;</span> </span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> Person.Age, <span class="at">color =</span> Person.Race)) <span class="sc">+</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> Person.Age, <span class="at">y =</span> Person.Race)) <span class="sc">+</span> </span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
 <span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Fig. 3: Relationship between Race and Age"</span>,</span>
 <span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Age"</span>,</span>
@@ -394,7 +395,7 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="sc">|&gt;</span> </span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> Person.Age, <span class="at">color =</span> Person.Gender)) <span class="sc">+</span> </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> Person.Age, <span class="at">y =</span> Person.Gender)) <span class="sc">+</span> </span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Fig. 4: Relationship between Sex and Age"</span>,</span>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Age"</span>,</span>
@@ -454,7 +455,7 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 <pre><code>[1] 8485.761</code></pre>
 </div>
 </div>
-<p>After fitting the logistic model and computing backwards elimination, we found the best model for our response variable(Factors.Threat.Level) to be an additive model between our four explanatory varibales: gender, race, armed status, and age. Therefore, whether or not a victim was seen as a threat was explaned with an additive interaction between gender, race, armed status, and age.</p>
+<p>After fitting the logistic model and computing backwards elimination, we found the best model for our response variable(Factors.Threat.Level) to be an additive model between our four explanatory variables: gender, race, armed status, and age. During backwards elimination, we fit several additive and interactive models between the four variables and determined the lowest AIC value. Therefore, whether or not a victim was seen as a threat was explained with an additive interaction between gender, race, armed status, and age.</p>
 <p>We will now investigate if the proportion of unarmed people who were shot by police equal for victims of color in comparison to white victims. We hypothesize that the proportion of unarmed people of color shot is significantly greater than the proportion of unarmed white people. In order to investigate this hypothesis, we will perform a hypothesis test using a significance level of <span class="math inline">\(\alpha = 0.05\)</span>.</p>
 <p>(Note: in the context of this question, we will consider someone as a “POC” if they do not identify as “White”)</p>
 <p><span class="math inline">\(\pi_{POC}\)</span> = the proportion of unarmed people out of those shot who identify as a POC.</p>
@@ -516,17 +517,7 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 </div>
 </div>
 <p><strong>Results</strong></p>
-<<<<<<< HEAD
-<p>Based on our summary statistics for the entire data set, we observed that the mean and median age of shooting victims is 35.4 and 34.0 years, respectively. Moreover, the standard deviation of this age range is 14.9 years, demonstrating the wide spread of data points included.</p>
-<p>Figure 1 shows a slight decrease in shooting per day in 2021 though the total range of average shootings per day was from roughly 2.45 shootings to 2.8 shootings.</p>
-<p>Figure 2 looks at the arms status of victims by gender. This figure shows that female victims were more likely to be armed than male victims. One reason for this is that male victims could have been seen as more aggressive and therefore more likely to become a victim no matter if they were armed.</p>
-<p>In Figure 3, we can see that the age distribution of victims does not vary much between races. But if we look at the number of different races in the count of total victims, we can see white victims and African American victims were most common.</p>
-<p>As seen in Figure 4, the median age is roughly 34 years old for males and 35 years old for females. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of ~21 years old.</p>
-<p>As seen in Figure 5, the most victimized race was white and black. Close to 3000 of the victims were white; whereas, over 1500 victims were black.</p>
-<p>As seen in Figure 6, the race with the most unarmed victims was black and the race with the least unarmed victims was Native American. This visualization can provide ample information on implicit bias and how race impacts the police’s approaches to interactions with different races.</p>
-<p>In Figure 7, we performed a hypothesis test, and got a p-value of 0.107. Utilizing a significance level of 0.05, we fail to reject the null hypothesis that the proportion of unarmed people out of those shot who identify as a POC is equal to the proportion of unarmed people out of those shot who identify as white, as 0.107 is greater than 0.05. Therefore, we have weak evidence to support the alternative hypothesis that the proportion of unarmed people out of those shot who identify as a POC is greater than the proportion of unarmed people out of those shot who identify as white.</p>
-=======
-<p>Based on our summary statistics for the entire data set, we observed that the mean and median age of shooting victims is 35.4 and 34.0 years, respectively. Moreover, the standard deviation of this age range is 14.9 years, demonstrating the wide spread of data points included. We noticed a slight decrease in shooting per day in 2021 though the total range of average shootings per day was small and somewhat insignificant (from roughly 2.45 shootings to 2.8 shootings). When looking at the arms status of victims by gender, female victims were more likely to be armed than male victims. One reason for this is that male victims could have been seen as more aggressive and therefore more likely to become a victim no matter if they were armed. The age distribution of victims does not vary much between races. When we look at the different races in the count of total victims, we can see white victims and african american victims were most common. Close to 2962 of the victims were white; whereas, 1552 victims were black. If race had no impact on probability of being a victim, the proportions of victims by race would be similar as the US population by race. White Americans represent 0.578 of the population. African americans make up 0.121 of the population.</p>
+<p>Based on our summary statistics for the entire data set, we observed that the mean and median age of shooting victims is 35.4 and 34.0 years, respectively. Moreover, the standard deviation of this age range is 14.9 years, demonstrating the wide spread of data points included. We noticed a slight decrease in shooting per day in 2021 though the total range of average shootings per day was small and somewhat insignificant (from roughly 2.45 shootings to 2.8 shootings). When looking at the arms status of victims by gender, female victims were more likely to be armed than male victims. One reason for this is that male victims could have been seen as more aggressive and therefore more likely to become a victim no matter if they were armed. The age distribution of victims does not vary much between races. When we look at the different races in the count of total victims, we can see white victims and African American victims were most common. Close to 2962 of the victims were white; whereas, 1552 victims were black. If race had no impact on probability of being a victim, the proportions of victims by race would be similar as the US population by race. White Americans represent 0.578 of the population. African Americans make up 0.121 of the population.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="sc">|&gt;</span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Person.Race)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -553,9 +544,8 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 <pre><code>[1] 0.2362612</code></pre>
 </div>
 </div>
-<p>White americans represent 0.578 of the US population while they only represent 0.45 of the victims. African americans make up 0.121 of the population while they present 0.236 of the victims.Therefore we can see that african american were targeted at a higher rate than white americans.</p>
+<p>White Americans represent 0.578 of the US population while they only represent 0.45 of the victims. African Americans make up 0.121 of the population while they present 0.236 of the victims.Therefore we can see that African American were targeted at a higher rate than white Americans.</p>
 <p>The race with the most unarmed victims was black and the race with the least unarmed victims was Native American. Visualization can provide ample information on implicit bias and how race impacts the police’s approaches to interactions with different races. We also found the median age is roughly 34 years old for males and 35 years old for females. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of ~21 years old. We performed a hypothesis test proportion of unarmed people out of those shot who identify as a POC is equal to the proportion of unarmed people out of those shot who identify as white, and got a p-value of 0.107. Utilizing a significance level of 0.05, we fail to reject the null hypothesis that the proportion of unarmed people out of those shot who identify as a POC is equal to the proportion of unarmed people out of those shot who identify as white, as 0.107 is greater than 0.05. Therefore, we have weak evidence to support the alternative hypothesis that the proportion of unarmed people out of those shot who identify as a POC is greater than the proportion of unarmed people out of those shot who identify as white.</p>
->>>>>>> 391033015f6228c5020bdb2d445d4871dcd9bb2b
 
 
 
