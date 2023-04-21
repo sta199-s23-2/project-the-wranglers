@@ -213,7 +213,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ✖ dplyr::lag()      masks stats::lag()
 ✖ yardstick::spec() masks readr::spec()
 ✖ recipes::step()   masks stats::step()
-• Learn how to get started at https://www.tidymodels.org/start/</code></pre>
+• Use suppressPackageStartupMessages() to eliminate package startup messages</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(infer)</span>
@@ -330,133 +330,155 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("usmap")</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#library(usmap) #import the package</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#library(ggplot2) #use ggplot2 to add layer for visualization</span></span>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("usmap")</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(usmap) <span class="co">#import the package</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co">#use ggplot2 to add layer for visualization</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#plot_usmap(data = police_shootings, values = "state", regions = "states", color = "red") + </span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#scale_fill_continuous(low = "white", high = "red", name = "Frequency of Police Shootings")</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#labs(title = "U.S. States",</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>      <span class="co"># subtitle = "This is a blank map of the United States.") </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>data2 <span class="ot">&lt;-</span> police_shootings <span class="sc">|&gt;</span> </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">state =</span> Incident.Location.State) <span class="sc">|&gt;</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(state) <span class="sc">|&gt;</span> </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>() </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># data3 &lt;- data2 |&gt; mutate(n = as.numeric(n))  </span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_usmap</span>(<span class="at">data =</span> data2, <span class="at">values =</span> <span class="st">"n"</span>, <span class="at">regions =</span> <span class="st">"states"</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span> </span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_continuous</span>(<span class="at">low =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"red"</span>, <span class="at">name =</span> <span class="st">"Frequency of Police Shootings"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="report_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"U.S. States"</span>,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"This is a blank map of the United States."</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$title
+[1] "U.S. States"
+
+$subtitle
+[1] "This is a blank map of the United States."
+
+attr(,"class")
+[1] "labels"</code></pre>
+</div>
+</div>
+<p>As seen by the map, the majority of our data was collected in California. This could be a limitation to our data as it demonstartes biases.</p>
 <p>In yearly-analysis, we chose to do a line graph to represent the progression of shooting per day over time as it effectively reveals trends and changes in shooting per day across the years.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Shootings per year</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>yearly_shootings <span class="ot">&lt;-</span> police_shootings <span class="sc">|&gt;</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Incident.Date.Year) <span class="sc">|&gt;</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Incident.Date.Year) </span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>days_in_year <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">365</span>, <span class="dv">366</span>, <span class="dv">365</span>, <span class="dv">365</span>, <span class="dv">365</span>, <span class="dv">366</span>, <span class="dv">253</span>)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>yearly_shootings <span class="sc">|&gt;</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Incident.Date.Year, <span class="at">y =</span> n<span class="sc">/</span>days_in_year)) <span class="sc">+</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Fig. 1: Shootings per Day"</span>,</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>, </span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Shootings"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Shootings per year</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>yearly_shootings <span class="ot">&lt;-</span> police_shootings <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Incident.Date.Year) <span class="sc">|&gt;</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Incident.Date.Year) </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>days_in_year <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">365</span>, <span class="dv">366</span>, <span class="dv">365</span>, <span class="dv">365</span>, <span class="dv">365</span>, <span class="dv">366</span>, <span class="dv">253</span>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>yearly_shootings <span class="sc">|&gt;</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Incident.Date.Year, <span class="at">y =</span> n<span class="sc">/</span>days_in_year)) <span class="sc">+</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Fig. 1: Shootings per Day"</span>,</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>, </span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of Shootings"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="report_files/figure-html/yearly-analysis-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>As seen by the graph below, ~10% of male victims and 13% of female victims were unarmed.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="sc">|&gt;</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Factors.Armed <span class="sc">!=</span> <span class="st">"unknown"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Factors.Armed.Test =</span> <span class="fu">if_else</span>(</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    Factors.Armed <span class="sc">==</span> <span class="st">"unarmed"</span> <span class="sc">|</span> Factors.Armed <span class="sc">==</span> <span class="st">"toy weapon"</span>, <span class="st">"unarmed"</span>, </span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"armed with weapon"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Person.Gender, <span class="at">fill =</span> Factors.Armed.Test)) <span class="sc">+</span></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Fig. 2: Arms Status of Victims by Gender"</span>,</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"% of Victims"</span>,</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Sex"</span>,</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Arms Status"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Factors.Armed <span class="sc">!=</span> <span class="st">"unknown"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Factors.Armed.Test =</span> <span class="fu">if_else</span>(</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    Factors.Armed <span class="sc">==</span> <span class="st">"unarmed"</span> <span class="sc">|</span> Factors.Armed <span class="sc">==</span> <span class="st">"toy weapon"</span>, <span class="st">"unarmed"</span>, </span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"armed with weapon"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Person.Gender, <span class="at">fill =</span> Factors.Armed.Test)) <span class="sc">+</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Fig. 2: Arms Status of Victims by Gender"</span>,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"% of Victims"</span>,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Sex"</span>,</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Arms Status"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="report_files/figure-html/arms-status-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>We used box plots to visualize male versus female and race as it is the best way to show distributions of numeric data values between multiple groups. It made the differences in age between male and female victims and victims of different races very clear. We could compare the median, range, and outliers.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="sc">|&gt;</span> </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> Person.Age, <span class="at">y =</span> Person.Race)) <span class="sc">+</span> </span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Fig. 3: Relationship between Race and Age"</span>,</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Age"</span>,</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Race"</span>,</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> <span class="st">"Race"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> Person.Age, <span class="at">y =</span> Person.Race)) <span class="sc">+</span> </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Fig. 3: Relationship between Race and Age"</span>,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Age"</span>,</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Race"</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> <span class="st">"Race"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="report_files/figure-html/box-plots-race-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="sc">|&gt;</span> </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> Person.Age, <span class="at">y =</span> Person.Gender)) <span class="sc">+</span> </span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Fig. 4: Relationship between Sex and Age"</span>,</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Age"</span>,</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Sex"</span>,</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> <span class="st">"Sex"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="sc">|&gt;</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> Person.Age, <span class="at">y =</span> Person.Gender)) <span class="sc">+</span> </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Fig. 4: Relationship between Sex and Age"</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Age"</span>,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Sex"</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> <span class="st">"Sex"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="report_files/figure-html/box-plot-gender-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="sc">|&gt;</span> </span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Person.Race, <span class="at">fill =</span> Person.Race)) <span class="sc">+</span> </span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span> </span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Fig. 5: Number of Victims by Race"</span>,</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Race"</span>,</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Count"</span>,</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill =</span> <span class="st">"Race"</span>) <span class="sc">+</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>), </span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="sc">|&gt;</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Person.Race, <span class="at">fill =</span> Person.Race)) <span class="sc">+</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span> </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Fig. 5: Number of Victims by Race"</span>,</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Race"</span>,</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Count"</span>,</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill =</span> <span class="st">"Race"</span>) <span class="sc">+</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>), </span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="report_files/figure-html/bar-graph-race-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="sc">|&gt;</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Factors.Armed <span class="sc">!=</span> <span class="st">"unknown"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Factors.Armed.Test =</span> <span class="fu">if_else</span>(</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    Factors.Armed <span class="sc">==</span> <span class="st">"unarmed"</span> <span class="sc">|</span> Factors.Armed <span class="sc">==</span> <span class="st">"toy weapon"</span>, <span class="st">"unarmed"</span>, </span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"armed with weapon"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Person.Race, <span class="at">fill =</span> Factors.Armed.Test)) <span class="sc">+</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Fig. 6: Arms Status of Victims by Race"</span>,</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proportion of Victims"</span>,</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Race"</span>,</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Arms Status"</span>) <span class="sc">+</span></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Factors.Armed <span class="sc">!=</span> <span class="st">"unknown"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Factors.Armed.Test =</span> <span class="fu">if_else</span>(</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    Factors.Armed <span class="sc">==</span> <span class="st">"unarmed"</span> <span class="sc">|</span> Factors.Armed <span class="sc">==</span> <span class="st">"toy weapon"</span>, <span class="st">"unarmed"</span>, </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"armed with weapon"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Person.Race, <span class="at">fill =</span> Factors.Armed.Test)) <span class="sc">+</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Fig. 6: Arms Status of Victims by Race"</span>,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proportion of Victims"</span>,</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Race"</span>,</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Arms Status"</span>) <span class="sc">+</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="report_files/figure-html/bar-graph-arms-status-race-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>police_shootings_fit <span class="ot">&lt;-</span> police_shootings <span class="sc">|&gt;</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">mutate</span>(<span class="at">Factors.Armed.Test =</span> <span class="fu">if_else</span>(Factors.Armed <span class="sc">==</span> <span class="st">"unarmed"</span> <span class="sc">|</span> </span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                                        Factors.Armed <span class="sc">==</span> <span class="st">"toy weapon"</span>, <span class="st">"unarmed"</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                                      , <span class="st">"armed with weapon"</span>),</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">race =</span> <span class="fu">if_else</span>(Person.Race <span class="sc">!=</span> <span class="st">"White"</span>, <span class="st">"POC"</span>, <span class="st">"White"</span>), </span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">Factors.Threat-Level</span><span class="st">`</span><span class="ot">=</span> <span class="fu">as.factor</span>(<span class="st">`</span><span class="at">Factors.Threat-Level</span><span class="st">`</span>)) </span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">logistic_reg</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(<span class="st">`</span><span class="at">Factors.Threat-Level</span><span class="st">`</span> <span class="sc">~</span> race <span class="sc">+</span> Person.Gender <span class="sc">+</span> Factors.Armed.Test <span class="sc">+</span> Person.Age, </span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> police_shootings_fit, <span class="at">family =</span> <span class="st">"binomial"</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glance</span>() <span class="sc">|&gt;</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(AIC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>police_shootings_fit <span class="ot">&lt;-</span> police_shootings <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">mutate</span>(<span class="at">Factors.Armed.Test =</span> <span class="fu">if_else</span>(Factors.Armed <span class="sc">==</span> <span class="st">"unarmed"</span> <span class="sc">|</span> </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                                        Factors.Armed <span class="sc">==</span> <span class="st">"toy weapon"</span>, <span class="st">"unarmed"</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                                      , <span class="st">"armed with weapon"</span>),</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">race =</span> <span class="fu">if_else</span>(Person.Race <span class="sc">!=</span> <span class="st">"White"</span>, <span class="st">"POC"</span>, <span class="st">"White"</span>), </span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">`</span><span class="at">Factors.Threat-Level</span><span class="st">`</span><span class="ot">=</span> <span class="fu">as.factor</span>(<span class="st">`</span><span class="at">Factors.Threat-Level</span><span class="st">`</span>)) </span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">logistic_reg</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set_engine</span>(<span class="st">"glm"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(<span class="st">`</span><span class="at">Factors.Threat-Level</span><span class="st">`</span> <span class="sc">~</span> race <span class="sc">+</span> Person.Gender <span class="sc">+</span> Factors.Armed.Test <span class="sc">+</span> Person.Age, </span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> police_shootings_fit, <span class="at">family =</span> <span class="st">"binomial"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glance</span>() <span class="sc">|&gt;</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(AIC)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8485.761</code></pre>
 </div>
 </div>
-<p>After fitting the logistic model and computing backwards elimination, we found the best model for our response variable(Factors.Threat.Level) to be an additive model between our four explanatory variables: gender, race, armed status, and age. During backwards elimination, we fit several additive and interactive models between the four variables and determined the lowest AIC value. Therefore, whether or not a victim was seen as a threat was explained with an additive interaction between gender, race, armed status, and age.</p>
-<p>We will now investigate if the proportion of unarmed people who were shot by police equal for victims of color in comparison to white victims. We hypothesize that the proportion of unarmed people of color shot is significantly greater than the proportion of unarmed white people. In order to investigate this hypothesis, we will perform a hypothesis test using a significance level of <span class="math inline">\(\alpha = 0.05\)</span>.</p>
+<p>After fitting the logistic model and computing backwards elimination, we found the best model for our response variable (Factors.Threat.Level) to be an additive model between our four explanatory variables: gender, race, armed status, and age. During backwards elimination, we fit several additive and interactive models between the four variables and determined the lowest AIC value. Therefore, whether or not a victim was seen as a threat was explained with an additive interaction between gender, race, armed status, and age.</p>
+<p>We will now investigate if the proportion of unarmed people who were shot by police equal for victims of color in comparison to white victims. We hypothesize that the proportion of unarmed people of color shot is significantly greater than the proportion of unarmed white people. In order to investigate this hypothesis, we will perform a hypothesis test using a significance level of <span class="math inline">\(\alpha = 0.05\)</span>. For the hypothesis testing purposes, we will assume independence within our data set’s observations.</p>
 <p>(Note: in the context of this question, we will consider someone as a “POC” if they do not identify as “White”)</p>
 <p><span class="math inline">\(\pi_{POC}\)</span> = the proportion of unarmed people out of those shot who identify as a POC.</p>
 <p><span class="math inline">\(\pi_{White}\)</span> = the proportion of unarmed people out of those shot who identify as a White</p>
@@ -465,24 +487,24 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 <p><span class="math inline">\(H_A\)</span>: <span class="math inline">\(\pi_{POC}\)</span> &gt; <span class="math inline">\(\pi_{White}\)</span></p>
 <p>The proportion of unarmed people out of those shot who identify as a POC is greater than the proportion of unarmed people out of those shot who identify as white.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>hypo_data <span class="ot">&lt;-</span> police_shootings <span class="sc">|&gt;</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Factors.Armed <span class="sc">!=</span> <span class="st">"unknown"</span>, Person.Race <span class="sc">!=</span> <span class="st">"Unknown"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Factors.Armed.Test =</span> <span class="fu">if_else</span>(Factors.Armed <span class="sc">==</span> <span class="st">"unarmed"</span> <span class="sc">|</span> </span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                                        Factors.Armed <span class="sc">==</span> <span class="st">"toy weapon"</span>, <span class="st">"unarmed"</span></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                                      , <span class="st">"armed with weapon"</span>),</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">race =</span> <span class="fu">if_else</span>(Person.Race <span class="sc">!=</span> <span class="st">"White"</span>, <span class="st">"POC"</span>, <span class="st">"White"</span>)) </span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">69</span>)</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>null_dist <span class="ot">&lt;-</span> hypo_data <span class="sc">|&gt;</span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="at">response =</span> Factors.Armed.Test, </span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">explanatory =</span> race , <span class="at">success =</span> <span class="st">"unarmed"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in props"</span> , <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"POC"</span>, <span class="st">"White"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>hypo_data <span class="ot">&lt;-</span> police_shootings <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Factors.Armed <span class="sc">!=</span> <span class="st">"unknown"</span>, Person.Race <span class="sc">!=</span> <span class="st">"Unknown"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Factors.Armed.Test =</span> <span class="fu">if_else</span>(Factors.Armed <span class="sc">==</span> <span class="st">"unarmed"</span> <span class="sc">|</span> </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>                                        Factors.Armed <span class="sc">==</span> <span class="st">"toy weapon"</span>, <span class="st">"unarmed"</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                                      , <span class="st">"armed with weapon"</span>),</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">race =</span> <span class="fu">if_else</span>(Person.Race <span class="sc">!=</span> <span class="st">"White"</span>, <span class="st">"POC"</span>, <span class="st">"White"</span>)) </span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">69</span>)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>null_dist <span class="ot">&lt;-</span> hypo_data <span class="sc">|&gt;</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">specify</span>(<span class="at">response =</span> Factors.Armed.Test, </span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>          <span class="at">explanatory =</span> race , <span class="at">success =</span> <span class="st">"unarmed"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">hypothesize</span>(<span class="at">null =</span> <span class="st">"independence"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">generate</span>(<span class="at">reps =</span> <span class="dv">1000</span>, <span class="at">type =</span> <span class="st">"permute"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">calculate</span>(<span class="at">stat =</span> <span class="st">"diff in props"</span> , <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"POC"</span>, <span class="st">"White"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>hypo_data <span class="sc">|&gt;</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(race, Factors.Armed.Test) <span class="sc">|&gt;</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">props =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>hypo_data <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(race, Factors.Armed.Test) <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">props =</span> <span class="fu">n</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>`summarise()` has grouped output by 'race'. You can override using the
 `.groups` argument.</code></pre>
@@ -497,18 +519,18 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 3 White armed with weapon   2568
 4 White unarmed              299</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>p_hat_POC <span class="ot">&lt;-</span> <span class="dv">318</span><span class="sc">/</span>(<span class="dv">318</span><span class="sc">+</span><span class="dv">2456</span>)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>p_hat_white <span class="ot">&lt;-</span> <span class="dv">299</span><span class="sc">/</span>(<span class="dv">299</span><span class="sc">+</span><span class="dv">2568</span>)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>obs_diff_phat <span class="ot">&lt;-</span> p_hat_POC <span class="sc">-</span> p_hat_white</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize</span>(null_dist) <span class="sc">+</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">shade_p_value</span>(<span class="at">obs_stat =</span> obs_diff_phat, <span class="at">direction =</span> <span class="st">"greater"</span>) <span class="sc">+</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Fig. 7 Simulated Null Distribution"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>p_hat_POC <span class="ot">&lt;-</span> <span class="dv">318</span><span class="sc">/</span>(<span class="dv">318</span><span class="sc">+</span><span class="dv">2456</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>p_hat_white <span class="ot">&lt;-</span> <span class="dv">299</span><span class="sc">/</span>(<span class="dv">299</span><span class="sc">+</span><span class="dv">2568</span>)</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>obs_diff_phat <span class="ot">&lt;-</span> p_hat_POC <span class="sc">-</span> p_hat_white</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="fu">visualize</span>(null_dist) <span class="sc">+</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">shade_p_value</span>(<span class="at">obs_stat =</span> obs_diff_phat, <span class="at">direction =</span> <span class="st">"greater"</span>) <span class="sc">+</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Fig. 7 Simulated Null Distribution"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="report_files/figure-html/hypothesis-race-pvalues-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>null_dist <span class="sc">|&gt;</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_p_value</span>(<span class="at">obs_stat =</span> obs_diff_phat, <span class="at">direction =</span> <span class="st">"greater"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>null_dist <span class="sc">|&gt;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_p_value</span>(<span class="at">obs_stat =</span> obs_diff_phat, <span class="at">direction =</span> <span class="st">"greater"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 1
   p_value
@@ -519,8 +541,8 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 <p><strong>Results</strong></p>
 <p>Based on our summary statistics for the entire data set, we observed that the mean and median age of shooting victims is 35.4 and 34.0 years, respectively. Moreover, the standard deviation of this age range is 14.9 years, demonstrating the wide spread of data points included. We noticed a slight decrease in shooting per day in 2021 though the total range of average shootings per day was small and somewhat insignificant (from roughly 2.45 shootings to 2.8 shootings). When looking at the arms status of victims by gender, female victims were more likely to be armed than male victims. One reason for this is that male victims could have been seen as more aggressive and therefore more likely to become a victim no matter if they were armed. The age distribution of victims does not vary much between races. When we look at the different races in the count of total victims, we can see white victims and African American victims were most common. Close to 2962 of the victims were white; whereas, 1552 victims were black. If race had no impact on probability of being a victim, the proportions of victims by race would be similar as the US population by race. White Americans represent 0.578 of the population. African Americans make up 0.121 of the population.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="sc">|&gt;</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Person.Race)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>police_shootings <span class="sc">|&gt;</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Person.Race)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 2
   Person.Race          n
@@ -533,19 +555,20 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 6 Unknown            730
 7 White             2962</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>white_american_prop <span class="ot">&lt;-</span> <span class="dv">2962</span><span class="sc">/</span><span class="dv">6569</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>white_american_prop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>white_american_prop <span class="ot">&lt;-</span> <span class="dv">2962</span><span class="sc">/</span><span class="dv">6569</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>white_american_prop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.4509058</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>african_american_prop <span class="ot">&lt;-</span> <span class="dv">1552</span><span class="sc">/</span><span class="dv">6569</span>  </span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>african_american_prop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>african_american_prop <span class="ot">&lt;-</span> <span class="dv">1552</span><span class="sc">/</span><span class="dv">6569</span>  </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>african_american_prop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.2362612</code></pre>
 </div>
 </div>
 <p>White Americans represent 0.578 of the US population while they only represent 0.45 of the victims. African Americans make up 0.121 of the population while they present 0.236 of the victims.Therefore we can see that African American were targeted at a higher rate than white Americans.</p>
 <p>The race with the most unarmed victims was black and the race with the least unarmed victims was Native American. Visualization can provide ample information on implicit bias and how race impacts the police’s approaches to interactions with different races. We also found the median age is roughly 34 years old for males and 35 years old for females. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of ~21 years old. We performed a hypothesis test proportion of unarmed people out of those shot who identify as a POC is equal to the proportion of unarmed people out of those shot who identify as white, and got a p-value of 0.107. Utilizing a significance level of 0.05, we fail to reject the null hypothesis that the proportion of unarmed people out of those shot who identify as a POC is equal to the proportion of unarmed people out of those shot who identify as white, as 0.107 is greater than 0.05. Therefore, we have weak evidence to support the alternative hypothesis that the proportion of unarmed people out of those shot who identify as a POC is greater than the proportion of unarmed people out of those shot who identify as white.</p>
+<p><strong>Discussion and Limitations</strong></p>
 
 
 

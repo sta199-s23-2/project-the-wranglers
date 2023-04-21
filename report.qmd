@@ -104,17 +104,26 @@ police_shootings |>
 ```
 
 ```{r}
-#install.packages("usmap")
-#library(usmap) #import the package
-#library(ggplot2) #use ggplot2 to add layer for visualization
+# install.packages("usmap")
+library(usmap) #import the package
+library(ggplot2) #use ggplot2 to add layer for visualization
 
-#plot_usmap(data = police_shootings, values = "state", regions = "states", color = "red") + 
-  #scale_fill_continuous(low = "white", high = "red", name = "Frequency of Police Shootings")
-  #labs(title = "U.S. States",
-      # subtitle = "This is a blank map of the United States.") 
+data2 <- police_shootings |> 
+  mutate(state = Incident.Location.State) |>
+  group_by(state) |> 
+  count() 
+
+# data3 <- data2 |> mutate(n = as.numeric(n))  
+ 
+
+plot_usmap(data = data2, values = "n", regions = "states", color = "red") + 
+  scale_fill_continuous(low = "white", high = "red", name = "Frequency of Police Shootings")
+  labs(title = "U.S. States",
+    subtitle = "This is a blank map of the United States.") 
 
 
 ```
+As seen by the map, the majority of our data was collected in California. This could be a limitation to our data as it demonstartes biases.
 
 In yearly-analysis, we chose to do a line graph to represent the progression of shooting per day over time as it effectively reveals trends and changes in shooting per day across the years.
 
