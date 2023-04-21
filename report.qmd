@@ -104,17 +104,14 @@ police_shootings |>
 ```
 
 ```{r}
-# install.packages("usmap")
-library(usmap) #import the package
-library(ggplot2) #use ggplot2 to add layer for visualization
+#| label: usmap-shootings
+library(usmap) 
+library(ggplot2) 
 
 data2 <- police_shootings |> 
   mutate(state = Incident.Location.State) |>
   group_by(state) |> 
   count() 
-
-# data3 <- data2 |> mutate(n = as.numeric(n))  
- 
 
 plot_usmap(data = data2, values = "n", regions = "states", color = "red") + 
   scale_fill_continuous(low = "white", high = "red", name = "Frequency of Police Shootings")
@@ -131,7 +128,6 @@ In yearly-analysis, we chose to do a line graph to represent the progression of 
 ```{r}
 #| label: yearly-analysis
 
-# Shootings per year
 yearly_shootings <- police_shootings |>
   group_by(Incident.Date.Year) |>
   count(Incident.Date.Year) 
@@ -331,4 +327,4 @@ The race with the most unarmed victims was black and the race with the least una
 
 **Discussion and Limitations**
 
-As seen in the map plotting the state location of incidents
+As seen in the map plotting the state location of incidents, the majority of the shootings were centered around California. However, this creates concern for our project as the data appears to be very biased and unethical. 
