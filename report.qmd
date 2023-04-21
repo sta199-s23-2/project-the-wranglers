@@ -123,6 +123,7 @@ plot_usmap(data = data2, values = "n", regions = "states", color = "red") +
 
 
 ```
+
 As seen by the map, the majority of our data was collected in California. This could be a limitation to our data as it demonstartes biases.
 
 In yearly-analysis, we chose to do a line graph to represent the progression of shooting per day over time as it effectively reveals trends and changes in shooting per day across the years.
@@ -230,24 +231,35 @@ police_shootings |>
 #| label: fit-model 
 
 police_shootings_fit <- police_shootings |>
+ filter(`Factors.Threat-Level` != "unknown") |>
  mutate(Factors.Armed.Test = if_else(Factors.Armed == "unarmed" | 
                                         Factors.Armed == "toy weapon", "unarmed"
                                       , "armed with weapon"),
          race = if_else(Person.Race != "White", "POC", "White"), 
+        `Factors.Threat-Level`= if_else(`Factors.Threat-Level` == "attack", 
+                                        "attack", "not specified as attack"),
         `Factors.Threat-Level`= as.factor(`Factors.Threat-Level`)) 
 
-logistic_reg() |> 
+best_logreg_model <- logistic_reg() |> 
   set_engine("glm") |>
   fit(`Factors.Threat-Level` ~ race + Person.Gender + Factors.Armed.Test + Person.Age, 
-      data = police_shootings_fit, family = "binomial") |> 
+      data = police_shootings_fit, family = "binomial") 
+
+best_logreg_model |> 
   glance() |>
   pull(AIC)
+best_logreg_model |>
+  tidy()
 
 ```
 
+$\log{\frac{p}{1-p}}$ = -0.229153274 -0.114483595 \* ($race\_white$) - 0.244889178 \* ($Person.Gender\_Male$) + 1.038480834 \* ($Person.Gender\_Unknown$) + 0.652516293 \* ($Factors.Armed.Test\_unarmed$) - 0.004189227 * ($Person.Age$)
+
+Where $p$ is the probability of a person being a perceived threat by the police, stating the incident as an "attack."
+
 After fitting the logistic model and computing backwards elimination, we found the best model for our response variable (Factors.Threat.Level) to be an additive model between our four explanatory variables: gender, race, armed status, and age. During backwards elimination, we fit several additive and interactive models between the four variables and determined the lowest AIC value. Therefore, whether or not a victim was seen as a threat was explained with an additive interaction between gender, race, armed status, and age.
 
-We will now investigate if the proportion of unarmed people who were shot by police equal for victims of color in comparison to white victims. We hypothesize that the proportion of unarmed people of color shot is significantly greater than the proportion of unarmed white people. In order to investigate this hypothesis, we will perform a hypothesis test using a significance level of $\alpha = 0.05$. For the hypothesis testing purposes, we will assume independence within our data set's observations.
+We will now investigate if the proportion of unarmed people who were shot by police is equal for victims of color in comparison to white victims. We hypothesize that the proportion of unarmed people of color shot is significantly greater than the proportion of unarmed white people. In order to investigate this hypothesis, we will perform a hypothesis test using a significance level of $\alpha = 0.05$. For the hypothesis testing purposes, we will assume independence within our data set's observations.
 
 (Note: in the context of this question, we will consider someone as a "POC" if they do not identify as "White")
 
@@ -318,3 +330,5 @@ White Americans represent 0.578 of the US population while they only represent 0
 The race with the most unarmed victims was black and the race with the least unarmed victims was Native American. Visualization can provide ample information on implicit bias and how race impacts the police's approaches to interactions with different races. We also found the median age is roughly 34 years old for males and 35 years old for females. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of \~21 years old. We performed a hypothesis test proportion of unarmed people out of those shot who identify as a POC is equal to the proportion of unarmed people out of those shot who identify as white, and got a p-value of 0.107. Utilizing a significance level of 0.05, we fail to reject the null hypothesis that the proportion of unarmed people out of those shot who identify as a POC is equal to the proportion of unarmed people out of those shot who identify as white, as 0.107 is greater than 0.05. Therefore, we have weak evidence to support the alternative hypothesis that the proportion of unarmed people out of those shot who identify as a POC is greater than the proportion of unarmed people out of those shot who identify as white.
 
 **Discussion and Limitations**
+
+As seen in the map plotting the state location of incidents
