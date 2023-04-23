@@ -137,6 +137,7 @@ days_in_year <- c(365, 366, 365, 365, 365, 366, 253)
 yearly_shootings |>
   ggplot(aes(x = Incident.Date.Year, y = n/days_in_year)) +
   geom_point() +
+  geom_smooth(method = lm, se = FALSE) + 
   geom_line() +
   labs(
     title = "Fig. 1: Shootings per Day",
@@ -182,6 +183,7 @@ police_shootings |>
 #| label: box-plot-gender
 
 police_shootings |> 
+  filter(Person.Gender != "Unknown") |>
   ggplot(
     aes(x = Person.Age, y = Person.Gender)) + 
     geom_boxplot() + 
@@ -193,16 +195,23 @@ police_shootings |>
 
 ```{r}
 #| label: bar-graph-race
+total <- police_shootings |> 
+  summarize(total = n()) |>
+  pull(total)
 
-police_shootings |> 
-  ggplot(aes(x = Person.Race, fill = Person.Race)) + 
-    geom_bar() + 
-    labs(title = "Fig. 5: Number of Victims by Race",
-         x = "Race",
-         y = "Count",
-         fill = "Race") +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), 
-        legend.position = "none")
+race_prop <- police_shootings |> 
+  group_by(Person.Race) |>
+  summarize(prop = n()/total)
+  
+#race_prop |>
+  #ggplot(aes(y = prop, x = Person.Race, stat = "count")) + 
+  #  geom_bar() + 
+  #  labs(title = "Fig. 5: Number of Victims by Race",
+   #      x = "Race",
+    #     y = "Count",
+    #     fill = "Race") +
+ # theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), 
+        #legend.position = "none")
 ```
 
 ```{r}
