@@ -271,37 +271,37 @@ Where $p$ is the probability of a person being a perceived threat by the police,
 
 After fitting the logistic model and computing backwards elimination, we found the best model for our response variable (Factors.Threat.Level) to be an additive model between our four explanatory variables: gender, race, armed status, and age. During backwards elimination, we fit several additive and interactive models between the four variables and determined the lowest AIC value. Therefore, whether or not a victim was seen as a threat was explained with an additive interaction between gender, race, armed status, and age.
 
-We will now investigate if the proportion of unarmed people who were shot by police is equal for victims of color in comparison to white victims. We hypothesize that the proportion of unarmed people of color shot is significantly greater than the proportion of unarmed white people. In order to investigate this hypothesis, we will perform a hypothesis test using a significance level of $\alpha = 0.05$. For the hypothesis testing purposes, we will assume independence within our data set's observations.
+We also investigated whether the proportion of people perceived as an “attack” threat level was different for victims of color versus white victims. We hypothesized that the proportion of POC who were perceived as an "attack" by police is significantly greater than the proportion of white victims perceived in the same threat level category. To investigate this hypothesis, we performed a hypothesis test using a significance level of $\alpha = 0.05$. For testing purposes, we assumed independence within our data set's observations.
 
 (Note: In the context of this question, we will consider someone as a "POC" if they do not identify as "White.")
 
-$\pi_{POC}$ = the proportion of unarmed people out of those shot who identify as a POC.
+$\pi_{POC}$ = the proportion of people who were perceived as an "attack" by the police out of those shot who identify as a POC.
 
-$\pi_{White}$ = the proportion of unarmed people out of those shot who identify as a White
+$\pi_{White}$ = the proportion of people who were perceived as an "attack" by the police out of those shot who identify as White. 
 
 $H_0: \pi_{POC} = \pi_{White}$
 
-The proportion of unarmed people out of those shot who identify as a POC is equal to the proportion of unarmed people out of those shot who identify as white.
+The proportion of people who were perceived as an "attack" by the police of those shot who identify as a POC is equal to the proportion of people who were perceived as an "attack" by the police of those shot who identify as white.
 
 $H_A: \pi_{POC} > \pi_{White}$
 
-The proportion of unarmed people out of those shot who identify as a POC is greater than the proportion of unarmed people out of those shot who identify as white.
+The proportion of people who were perceived as an "attack" by the police of those shot who identify as a POC is greater than the proportion of people who were perceived as an "attack" by the police of those shot who identify as white.
 
 ```{r}
 #| label: hypothesis-race
 
 hypo_data <- police_shootings |>
   filter(Factors.Armed != "unknown", Person.Race != "Unknown") |>
-  mutate(Factors.Armed.Test = if_else(Factors.Armed == "unarmed" | 
-                                        Factors.Armed == "toy weapon", "unarmed",
-                                        "armed with weapon"),
+  mutate(`Factors.Threat-Level`= if_else(`Factors.Threat-Level` == "attack", 
+                                      "attack", "not specified as attack"),
+        `Factors.Threat-Level`= as.factor(`Factors.Threat-Level`),
          race = if_else(Person.Race != "White", "POC", "White")) 
 
 set.seed(69)
 
 null_dist <- hypo_data |>
-  specify(response = Factors.Armed.Test, 
-          explanatory = race, success = "unarmed") |>
+  specify(response = `Factors.Threat-Level`, 
+          explanatory = race, success = "attack") |>
   hypothesize(null = "independence") |>
   generate(reps = 1000, type = "permute") |>
   calculate(stat = "diff in props" , order = c("POC", "White"))
@@ -310,11 +310,11 @@ null_dist <- hypo_data |>
 ```{r}
 #| label: hypothesis-race-pvalues
 hypo_data |>
-  group_by(race, Factors.Armed.Test) |>
+  group_by(race, `Factors.Threat-Level`) |>
   summarize(props = n())
 
-p_hat_POC <- 318/(318+2456)
-p_hat_white <- 299/(299+2568)
+p_hat_POC <- 1764/(1764+1010)
+p_hat_white <- 1912/(1912+955)
 obs_diff_phat <- p_hat_POC - p_hat_white
 
 visualize(null_dist) +
@@ -344,7 +344,11 @@ african_american_prop
 
 White Americans represent 0.578 of the US population while they only represent 0.45 of the victims. African Americans make up 0.121 of the population while they present 0.236 of the victims.Therefore we can see that African American were targeted at a higher rate than white Americans.
 
-The race with the most unarmed victims was black and the race with the least unarmed victims was Native American. Visualization can provide ample information on implicit bias and how race impacts the police's approaches to interactions with different races. We also found the median age is roughly 34 years old for males and 35 years old for females. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of \~21 years old. We performed a hypothesis test proportion of unarmed people out of those shot who identify as a POC is equal to the proportion of unarmed people out of those shot who identify as white, and got a p-value of 0.107. Utilizing a significance level of 0.05, we fail to reject the null hypothesis that the proportion of unarmed people out of those shot who identify as a POC is equal to the proportion of unarmed people out of those shot who identify as white, as 0.107 is greater than 0.05. Therefore, we have weak evidence to support the alternative hypothesis that the proportion of unarmed people out of those shot who identify as a POC is greater than the proportion of unarmed people out of those shot who identify as white.
+The race with the most unarmed victims was black and the race with the least unarmed victims was Native American. Visualization can provide ample information on implicit bias and how race impacts the police's approaches to interactions with different races. We also found the median age is roughly 34 years old for males and 35 years old for females. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of \~21 years old. 
+
+
+We performed a hypothesis test to determine whether the proportion of people perceived as an “attack” threat level was different for victims of color versus white victims. Our hypothesis test yields a p-value of 0.995. Utilizing a significance level of 0.05, we fail to reject the null hypothesis that the proportion of people who were perceived as an "attack" by the police of those shot who identify as a POC is equal to the proportion of people who were perceived as an "attack" by the police of those shot who identify as white. As a p-value of 0.995 is greater than 0.05, we have weak evidence to support the alternative hypothesis that the proportion of people who were perceived as an "attack" by the police of those shot who identify as a POC is greater than the proportion of people who were perceived as an "attack" by the police of those shot who identify as white.
+
 
 **Discussion and Limitations**
 
