@@ -119,8 +119,8 @@ plot_usmap(data = data2, values = "n", regions = "states", color = "red") +
                                 \nPolice Shootings") +
   theme(legend.position = c(0.9, 0.3),
         legend.key.size = unit(.25, "cm")) +
-  labs(title = "U.S. States",
-    subtitle = "This is a blank map of the United States.") 
+  labs(title = "Location of Fatal Police Shootings by State",
+    subtitle = "2015-2017") 
 
 
 ```
