@@ -120,9 +120,7 @@ plot_usmap(data = data2, values = "n", regions = "states", color = "red") +
   theme(legend.position = c(0.9, 0.3),
         legend.key.size = unit(.25, "cm")) +
   labs(title = "Location of Fatal Police Shootings by State",
-    subtitle = "2015-2017") 
-
-
+      subtitle = "2015-2017")
 ```
 
 As seen by the map, the majority of our data was collected in California. This could be a limitation to our data as it demonstartes biases.
@@ -144,9 +142,10 @@ yearly_shootings |>
   geom_smooth(method = lm, se = FALSE) + 
   geom_line() +
   labs(
-    title = "Fig. 1: Shootings per Day",
+    title = "Fig. 1: Shootings per Day from 2015 to 2021",
     x = "Year", 
-    y = "Number of Shootings")
+    y = "Number of Shootings per Day") +
+  theme_minimal()
 ```
 
 As seen by the graph below, \~10% of male victims and 13% of female victims were unarmed.
@@ -157,15 +156,16 @@ As seen by the graph below, \~10% of male victims and 13% of female victims were
 police_shootings |>
   filter(Factors.Armed != "unknown") |>
   mutate(Factors.Armed.Test = if_else(
-    Factors.Armed == "unarmed" | Factors.Armed == "toy weapon", "unarmed", 
-    "armed with weapon")) |>
+    Factors.Armed == "unarmed" | Factors.Armed == "toy weapon", "Unarmed", 
+    "Armed with weapon")) |>
   ggplot(aes(x = Person.Gender, fill = Factors.Armed.Test)) +
   geom_bar(position = "fill") +
   labs(
     title = "Fig. 2: Arms Status of Victims by Gender",
-    y = "% of Victims",
+    y = "Percentage of Victims",
     x = "Sex",
-    fill = "Arms Status")
+    fill = "Arms Status") +
+  theme_minimal()
 ```
 
 We used box plots to visualize male versus female and race as it is the best way to show distributions of numeric data values between multiple groups. It made the differences in age between male and female victims and victims of different races very clear. We could compare the median, range, and outliers.
@@ -177,10 +177,11 @@ police_shootings |>
   ggplot(
     aes(x = Person.Age, y = Person.Race)) + 
     geom_boxplot() + 
-    labs(title = "Fig. 3: Relationship between Race and Age",
-         x = "Age",
+    labs(title = "Fig. 3: Race and Age of Victims",
+         x = "Age (years)",
          y = "Race",
-         color = "Race")
+         color = "Race") +
+  theme_minimal()
 ```
 
 ```{r}
@@ -191,14 +192,16 @@ police_shootings |>
   ggplot(
     aes(x = Person.Age, y = Person.Gender)) + 
     geom_boxplot() + 
-    labs(title = "Fig. 4: Relationship between Sex and Age",
-         x = "Age",
+    labs(title = "Fig. 4: Sex and Age of Victims",
+         x = "Age (years)",
          y = "Sex",
-         color = "Sex")
+         color = "Sex") +
+  theme_minimal()
 ```
 
 ```{r}
 #| label: bar-graph-race
+
 total <- police_shootings |> 
   summarize(total = n()) |>
   pull(total)
@@ -224,8 +227,8 @@ race_prop <- police_shootings |>
 police_shootings |>
   filter(Factors.Armed != "unknown") |>
   mutate(Factors.Armed.Test = if_else(
-    Factors.Armed == "unarmed" | Factors.Armed == "toy weapon", "unarmed", 
-    "armed with weapon")) |>
+    Factors.Armed == "unarmed" | Factors.Armed == "toy weapon", "Unarmed", 
+    "Armed with weapon")) |>
   ggplot(aes(x = Person.Race, fill = Factors.Armed.Test)) +
   geom_bar(position = "fill") +
   labs(
@@ -240,13 +243,13 @@ police_shootings |>
 #| label: fit-model 
 
 police_shootings_fit <- police_shootings |>
- filter(`Factors.Threat-Level` != "unknown") |>
- mutate(Factors.Armed.Test = if_else(Factors.Armed == "unarmed" | 
-                                        Factors.Armed == "toy weapon", "unarmed"
-                                      , "armed with weapon"),
+  filter(`Factors.Threat-Level` != "unknown") |>
+  mutate(Factors.Armed.Test = if_else(Factors.Armed == "unarmed" | 
+                                      Factors.Armed == "toy weapon", "unarmed",
+                                      "armed with weapon"),
          race = if_else(Person.Race != "White", "POC", "White"), 
         `Factors.Threat-Level`= if_else(`Factors.Threat-Level` == "attack", 
-                                        "attack", "not specified as attack"),
+                                      "attack", "not specified as attack"),
         `Factors.Threat-Level`= as.factor(`Factors.Threat-Level`)) 
 
 best_logreg_model <- logistic_reg() |> 
@@ -257,12 +260,12 @@ best_logreg_model <- logistic_reg() |>
 best_logreg_model |> 
   glance() |>
   pull(AIC)
+
 best_logreg_model |>
   tidy()
-
 ```
 
-$\log{\frac{p}{1-p}}$ = -0.229153274 -0.114483595 \* ($race\_white$) - 0.244889178 \* ($Person.Gender\_Male$) + 1.038480834 \* ($Person.Gender\_Unknown$) + 0.652516293 \* ($Factors.Armed.Test\_unarmed$) - 0.004189227 * ($Person.Age$)
+$\log{\frac{p}{1-p}}$ = -0.229153274 -0.114483595 \* ($race\_white$) - 0.244889178 \* ($Person.Gender\_Male$) + 1.038480834 \* ($Person.Gender\_Unknown$) + 0.652516293 \* ($Factors.Armed.Test\_unarmed$) - 0.004189227 \* ($Person.Age$)
 
 Where $p$ is the probability of a person being a perceived threat by the police, stating the incident as an "attack."
 
@@ -270,17 +273,17 @@ After fitting the logistic model and computing backwards elimination, we found t
 
 We will now investigate if the proportion of unarmed people who were shot by police is equal for victims of color in comparison to white victims. We hypothesize that the proportion of unarmed people of color shot is significantly greater than the proportion of unarmed white people. In order to investigate this hypothesis, we will perform a hypothesis test using a significance level of $\alpha = 0.05$. For the hypothesis testing purposes, we will assume independence within our data set's observations.
 
-(Note: in the context of this question, we will consider someone as a "POC" if they do not identify as "White")
+(Note: In the context of this question, we will consider someone as a "POC" if they do not identify as "White.")
 
 $\pi_{POC}$ = the proportion of unarmed people out of those shot who identify as a POC.
 
 $\pi_{White}$ = the proportion of unarmed people out of those shot who identify as a White
 
-$H_o$: $\pi_{POC}$ = $\pi_{White}$
+$H_0: \pi_{POC} = \pi_{White}$
 
 The proportion of unarmed people out of those shot who identify as a POC is equal to the proportion of unarmed people out of those shot who identify as white.
 
-$H_A$: $\pi_{POC}$ \> $\pi_{White}$
+$H_A: \pi_{POC} > \pi_{White}$
 
 The proportion of unarmed people out of those shot who identify as a POC is greater than the proportion of unarmed people out of those shot who identify as white.
 
@@ -290,13 +293,15 @@ The proportion of unarmed people out of those shot who identify as a POC is grea
 hypo_data <- police_shootings |>
   filter(Factors.Armed != "unknown", Person.Race != "Unknown") |>
   mutate(Factors.Armed.Test = if_else(Factors.Armed == "unarmed" | 
-                                        Factors.Armed == "toy weapon", "unarmed"
-                                      , "armed with weapon"),
+                                        Factors.Armed == "toy weapon", "unarmed",
+                                        "armed with weapon"),
          race = if_else(Person.Race != "White", "POC", "White")) 
+
 set.seed(69)
+
 null_dist <- hypo_data |>
   specify(response = Factors.Armed.Test, 
-          explanatory = race , success = "unarmed") |>
+          explanatory = race, success = "unarmed") |>
   hypothesize(null = "independence") |>
   generate(reps = 1000, type = "permute") |>
   calculate(stat = "diff in props" , order = c("POC", "White"))
@@ -314,7 +319,10 @@ obs_diff_phat <- p_hat_POC - p_hat_white
 
 visualize(null_dist) +
  shade_p_value(obs_stat = obs_diff_phat, direction = "greater") +
-  labs(title = "Fig. 7 Simulated Null Distribution")
+  labs(title = "Fig. 7: Simulated Null Distribution",
+       x = "Difference in Proportions",
+       y = "Count") +
+  theme_minimal()
 
 null_dist |>
   get_p_value(obs_stat = obs_diff_phat, direction = "greater")
@@ -340,4 +348,4 @@ The race with the most unarmed victims was black and the race with the least una
 
 **Discussion and Limitations**
 
-As seen in the map plotting the state location of incidents, the majority of the shootings were centered around California. However, this creates concern for our project as the data appears to be very biased and unethical. 
+As seen in the map plotting the state location of incidents, the majority of the shootings were centered around California. However, this creates concern for our project as the data appears to be very biased and unethical.
