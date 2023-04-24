@@ -114,7 +114,11 @@ data2 <- police_shootings |>
   count() 
 
 plot_usmap(data = data2, values = "n", regions = "states", color = "red") + 
-  scale_fill_continuous(low = "white", high = "red", name = "Frequency of Police Shootings")
+  scale_fill_continuous(low = "white", high = "red", 
+                        name = "Frequency of 
+                                \nPolice Shootings") +
+  theme(legend.position = c(0.9, 0.3),
+        legend.key.size = unit(.25, "cm")) +
   labs(title = "U.S. States",
     subtitle = "This is a blank map of the United States.") 
 
