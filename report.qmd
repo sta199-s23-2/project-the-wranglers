@@ -19,21 +19,19 @@ glimpse(police_shootings)
 
 **Introduction**
 
-Created on September 15, 2021, the `police_shootings` data set is sourced from the CORGIS Dataset Project and was compiled from findings by *The Washington Post*. *The Washington Post* regularly collects this data as police shootings happen by monitoring local news reports, law enforcement websites, social media, and independent databases such as Killed by Police and Fatal Encounters. When necessary, *The Post* did additional research to investigate each individual case.
+Created on September 15, 2021, the `police_shootings` data set is sourced from the CORGIS Dataset Project and was compiled from findings by *The Washington Post*. *The Washington Post* regularly collects this data as police shootings happen by monitoring local news reports, law enforcement websites, social media, and other independent databases such as Killed by Police and Fatal Encounters. When necessary, *The Post* also did additional research to investigate each individual case.
 
-This data set describes fatal shootings in the United States by a police officer in the line of duty from January 1, 2015, to September 11, 2021. Each observation represents a fatal shooting event by a police officer. This data includes information on the victim's gender, race, mental illness, location, and date of the event.
+This data set describes fatal shootings by a police officer in the line of duty in the United States from January 1, 2015, to September 11, 2021. Each observation represents a single fatal shooting event by a police officer. This data includes information on the victim's gender, race, mental illness, location, and date of the event.
 
-In a [*Nature* article](https://www.nature.com/articles/d41586-019-02601-9) titled "What the data say about police shootings," Lynne Peeples explains that police officers in the United States fatally shoot about three people per day on average, a number that rivals the yearly totals of other wealthy nations. Data on these deadly encounters had been hard to come by, but five years later, newspapers, enterprising individuals, and the federal government have launched ambitious data-collection projects to fill the gaps and improve transparency and accountability over how police officers exercise their right to use deadly force. Social scientists and public health researchers have produced more than 50 publications to address pressing questions, such as whether the police are disproportionately quick to shoot black civilians and those from other minority groups. This topic is extremely important to investigate because it brings awareness to the implicit biases that the US police force may hold. 
+In a [*Nature* article](https://www.nature.com/articles/d41586-019-02601-9) titled "What the data say about police shootings," Lynne Peeples explains that police officers in the United States fatally shoot roughly three people per day --- a statistic that rivals the yearly totals of other comparable nations. Data on these tragic encounters is often limited, but in recent years newspapers, enterprising individuals, and the federal government have launched ambitious data-collection projects to fill the gaps and improve transparency and accountability over how police officers exercise their right to use deadly force. Researchers have posed many pressing questions, including whether the police are disproportionately quick to shoot Black and other minority civilians. That said, further exploration and analysis is desperately needed to brings awareness to implicit biases entrenched in the US police force and may suggest ways to build a better future for all citizens.
 
 **Research question**
 
-How do race, gender, age, and whether a civilian was armed or not affect rates of police shootings across the United States from 2015 to 2021?
+How do race, gender, age, and whether a civilian was armed or not affect the perceived threat level of a victim in fatal police shootings across the United States from 2015 to 2021?
 
 **Data**
 
-Our data set includes 6569 rows, indicating that at least 6569 people were killed by police from 2015 to 2021. By discovering how different factors affect the number of shootings, we can begin to understand why these tragedies happen and what we can do to stop them from happening.
-
-Our research topic examines police shooting history on the basis of race, gender, and age. We hypothesize that male individuals who identify as a POC are perceived as an increase threat during fatal police shootings.
+Our data set includes 6569 rows (observations), indicating that at least 6569 known people were killed by police from 2015 to 2021. By investigating how different factors affect the number of shootings across demographic groups, we can begin to understand why these tragedies happen and what we can do to stop them from happening going forward. Specifically, our research topic examines police shooting history on the basis of race, gender, and age. We hypothesize that male individuals who identify as a POC are more likely to be perceived as a threat by police during fatal shootings.
 
 **Ethical Concerns**
 
@@ -51,7 +49,7 @@ Finally, a third concern is consent and whether the victims families want their 
 
 For the purposes of this project, we will assume that the following data was collected randomly and that observations are independent.
 
-We have identified several key variables that will advance our research question: 
+We have identified several key variables that will advance our research question:
 
 `Person.Age` - An integer value of the victim's age
 
@@ -59,12 +57,11 @@ We have identified several key variables that will advance our research question
 
 `Person.Race` - The victim's identified race
 
-`Incident.Location.State` - The state in which the shooting incident happened 
+`Incident.Location.State` - The state in which the shooting incident happened
 
 `Factors.Armed` - Indicates whether the victim was armed
 
 `Factors.Threat-Level` - The level of threat that the victim was perceived by the police (laveled as "attack", "undetermined", "other", or "unknown")
-
 
 **Methodology**
 
@@ -332,10 +329,4 @@ We performed a hypothesis test to determine whether the proportion of people per
 
 **Discussion and Limitations**
 
-  Our project allowed us to investigate how race, gender, age, and a civilian’s armed status affected perceived threat level in fatal police shootings across the US from 2015-2021. We hypothesized that male individuals who identify as a POC are perceived as an increased threat during fatal police shootings. Our statistical results do not support this hypothesis. After analyzing our data and results, we believe that our data is heavily impacted by bias and misconceptions, leading to unreliability in our results. Close to 2962 of the victims were white; whereas, 1552 victims were black. If race had no impact on probability of being a victim, the proportions of victims by race would be similar as the US population by race. White Americans represent 0.578 of the population. African Americans make up 0.121 of the population. White Americans represent 0.578 of the US population while they only represent 0.45 of the victims. African Americans make up 0.121 of the population while they present 0.236 of the victims.Therefore we can see that African American were targeted at a higher rate than white Americans. As seen by the map of fatal police shootings by state, the vast majority of shootings occurred in California. Therefore, the data is obviously includes location bias. This could affect our results as demographics change by state. Also, we believe that much of our data could be heavily impacted by bias, leading to unreliability. For example, every victim was labeled as mentally ill. This assumption created some concern for our team as we believed it was unlikely that every victim was mentally ill. Therefore, our results can support our specific data set but we do not believe that our results cannot be generalized upon a broader population beyond our sample. 
-  Further exploration can allow us to analyze the relationship between each state’s victims and demographics. By computing statistical analysis for each individual state and analyzing the perceived threat level, we can further our results and conclude how each state relates to our hypothesis. 
-Also, with more data, we can analyze how socioeconomic levels relate to perceived threat level. This extra demographic will allow us to further our conclusion and visualize patterns between an individual's socioeconomic level and their race, gender, age, and armed status. 
-  To better our analysis, we believe that more reliable and broad data would be beneficial to our results and validity. Because our data was collected by the Corgis database through the Washington Post, our data could be very biased and invalid. By collecting data directly through the US or state governments, we believe our analysis will be more thorough and valid. 
-
-
-
+Our project allowed us to investigate how race, gender, age, and a civilian's armed status affected perceived threat level in fatal police shootings across the US from 2015-2021. We hypothesized that male individuals who identify as a POC are perceived as an increased threat during fatal police shootings. Our statistical results do not support this hypothesis. After analyzing our data and results, we believe that our data is heavily impacted by bias and misconceptions, leading to unreliability in our results. Close to 2962 of the victims were white; whereas, 1552 victims were black. If race had no impact on probability of being a victim, the proportions of victims by race would be similar as the US population by race. White Americans represent 0.578 of the population. African Americans make up 0.121 of the population. White Americans represent 0.578 of the US population while they only represent 0.45 of the victims. African Americans make up 0.121 of the population while they present 0.236 of the victims.Therefore we can see that African American were targeted at a higher rate than white Americans. As seen by the map of fatal police shootings by state, the vast majority of shootings occurred in California. Therefore, the data is obviously includes location bias. This could affect our results as demographics change by state. Also, we believe that much of our data could be heavily impacted by bias, leading to unreliability. For example, every victim was labeled as mentally ill. This assumption created some concern for our team as we believed it was unlikely that every victim was mentally ill. Therefore, our results can support our specific data set but we do not believe that our results cannot be generalized upon a broader population beyond our sample. Further exploration can allow us to analyze the relationship between each state's victims and demographics. By computing statistical analysis for each individual state and analyzing the perceived threat level, we can further our results and conclude how each state relates to our hypothesis. Also, with more data, we can analyze how socioeconomic levels relate to perceived threat level. This extra demographic will allow us to further our conclusion and visualize patterns between an individual's socioeconomic level and their race, gender, age, and armed status. To better our analysis, we believe that more reliable and broad data would be beneficial to our results and validity. Because our data was collected by the Corgis database through the Washington Post, our data could be very biased and invalid. By collecting data directly through the US or state governments, we believe our analysis will be more thorough and valid.
