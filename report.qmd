@@ -271,13 +271,13 @@ Where $p$ is the probability of a person being a perceived threat by the police,
 
 After fitting the logistic model and computing backwards elimination, we found the best model for our response variable (Factors.Threat.Level) to be an additive model between our four explanatory variables: gender, race, armed status, and age. During backwards elimination, we fit several additive and interactive models between the four variables and determined the lowest AIC value. Therefore, whether or not a victim was seen as a threat was explained with an additive interaction between gender, race, armed status, and age.
 
-We also investigated whether the proportion of people perceived as an “attack” threat level was different for victims of color versus white victims. We hypothesized that the proportion of POC who were perceived as an "attack" by police is significantly greater than the proportion of white victims perceived in the same threat level category. To investigate this hypothesis, we performed a hypothesis test using a significance level of $\alpha = 0.05$. For testing purposes, we assumed independence within our data set's observations.
+We also investigated whether the proportion of people perceived as an "attack" threat level was different for victims of color versus white victims. We hypothesized that the proportion of POC who were perceived as an "attack" by police is significantly greater than the proportion of white victims perceived in the same threat level category. To investigate this hypothesis, we performed a hypothesis test using a significance level of $\alpha = 0.05$. For testing purposes, we assumed independence within our data set's observations.
 
 (Note: In the context of this question, we will consider someone as a "POC" if they do not identify as "White.")
 
 $\pi_{POC}$ = the proportion of people who were perceived as an "attack" by the police out of those shot who identify as a POC.
 
-$\pi_{White}$ = the proportion of people who were perceived as an "attack" by the police out of those shot who identify as White. 
+$\pi_{White}$ = the proportion of people who were perceived as an "attack" by the police out of those shot who identify as White.
 
 $H_0: \pi_{POC} = \pi_{White}$
 
@@ -344,11 +344,9 @@ african_american_prop
 
 White Americans represent 0.578 of the US population while they only represent 0.45 of the victims. African Americans make up 0.121 of the population while they present 0.236 of the victims.Therefore we can see that African American were targeted at a higher rate than white Americans.
 
-The race with the most unarmed victims was black and the race with the least unarmed victims was Native American. Visualization can provide ample information on implicit bias and how race impacts the police's approaches to interactions with different races. We also found the median age is roughly 34 years old for males and 35 years old for females. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of \~21 years old. 
+The race with the most unarmed victims was black and the race with the least unarmed victims was Native American. Visualization can provide ample information on implicit bias and how race impacts the police's approaches to interactions with different races. We also found the median age is roughly 34 years old for males and 35 years old for females. Male victims differ by their outliers, as many male victims are over the age of 75. The unknown victims appear to be significantly younger as seen by the median of \~21 years old.
 
-
-We performed a hypothesis test to determine whether the proportion of people perceived as an “attack” threat level was different for victims of color versus white victims. Our hypothesis test yields a p-value of 0.995. Utilizing a significance level of 0.05, we fail to reject the null hypothesis that the proportion of people who were perceived as an "attack" by the police of those shot who identify as a POC is equal to the proportion of people who were perceived as an "attack" by the police of those shot who identify as white. As a p-value of 0.995 is greater than 0.05, we have weak evidence to support the alternative hypothesis that the proportion of people who were perceived as an "attack" by the police of those shot who identify as a POC is greater than the proportion of people who were perceived as an "attack" by the police of those shot who identify as white.
-
+We performed a hypothesis test to determine whether the proportion of people perceived as an "attack" threat level was different for victims of color versus white victims. Our hypothesis test yields a p-value of 0.995. Utilizing a significance level of 0.05, we fail to reject the null hypothesis that the proportion of people who were perceived as an "attack" by the police of those shot who identify as a POC is equal to the proportion of people who were perceived as an "attack" by the police of those shot who identify as white. As a p-value of 0.995 is greater than 0.05, we have weak evidence to support the alternative hypothesis that the proportion of people who were perceived as an "attack" by the police of those shot who identify as a POC is greater than the proportion of people who were perceived as an "attack" by the police of those shot who identify as white.
 
 **Discussion and Limitations**
 
