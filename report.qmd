@@ -8,13 +8,15 @@ execute:
 ---
 
 ```{r}
-#| label: load-data-2
+#| label: load-data
+#| message: false
+
 library(tidyverse)
 library(tidymodels)
 library(readr)
 library(infer)
+
 police_shootings <- read_csv("data/police_shootings.csv")
-glimpse(police_shootings)
 ```
 
 **Introduction**
@@ -33,11 +35,17 @@ How do race, gender, age, and whether a civilian was armed or not affect the per
 
 Our data set includes 6569 rows (observations), indicating that at least 6569 known people were killed by police from 2015 to 2021. By investigating how different factors affect the number of shootings across demographic groups, we can begin to understand why these tragedies happen and what we can do to stop them from happening going forward. Specifically, our research topic examines police shooting history on the basis of race, gender, and age. We hypothesize that male individuals who identify as a POC are more likely to be perceived as a threat by police during fatal shootings.
 
+```{r}
+#| label: glimpse-data
+
+glimpse(police_shootings)
+```
+
 **Ethical Concerns**
 
-One ethical concern is the possibility of misinformation in the data and a lack of accurate reporting. Not every police shooting is reported or handled correctly. Although *The Washington Post* collected the data from many different sources, there is no way of guaranteeing that the data set is fully comprehensive.
+One ethical concern is the possibility of misinformation in the data and a lack of accurate reporting. Not every police shooting is reported or handled correctly. Although *The Washington Post* compiled the data from many different sources, this report has no way of verify that the data set is fully comprehensive of every fatal police shooting in the United States.
 
-Second, as demonstrated below, all 6,569 victims identified in this data set have been characterized as having a mental illness. As a result, we decide not to make a visualization based on the mental illness variable. We believe this would pose an ethical issue because mental health is a spectrum with varying characteristics and severity of impact. Having a mental illness cannot be reduced to a simple "TRUE" or "FALSE." Instead, we decided that other variables would be a better focus.
+Second, as demonstrated below, all 6569 victims identified in this data set have been labeled as having a mental illness. As a result, we decide not to make a visualization based on the mental illness variable. Our team believes that mental health is a spectrum with varying characteristics and severity of impact and that reducing mental illness to a simple "TRUE" or "FALSE" characterization would be unethical. Instead, we will focus our report on other variables.
 
 ```{r}
 #| label: mental-illness
@@ -45,7 +53,7 @@ Second, as demonstrated below, all 6,569 victims identified in this data set hav
 sum(police_shootings$`Factors.Mental-Illness`)
 ```
 
-Finally, a third concern is consent and whether the victims families want their loved ones to have identifying information (like name and information about their death) in a public database. This is a highly sensitive topic and should be treated as such.
+Finally, a third ethical concern is consent and whether the victims' families want their loved ones to have identifying information (like name and details about their death) in a public database. This is a highly sensitive topic and our team seeks to treat it as such.
 
 For the purposes of this project, we will assume that the following data was collected randomly and that observations are independent.
 
@@ -61,11 +69,11 @@ We have identified several key variables that will advance our research question
 
 `Factors.Armed` - Indicates whether the victim was armed
 
-`Factors.Threat-Level` - The level of threat that the victim was perceived by the police (laveled as "attack", "undetermined", "other", or "unknown")
+`Factors.Threat-Level` - The preceived level of threat of the victim according to police (classified as either "attack", "undetermined", "other", or "unknown")
 
 **Methodology**
 
-The average age for a police shooting victim is 35; whereas, the median age is 34. We can conclude that the data is not central to 34-35 years of age as the standard deviation of the the victim's age is \~15 years.
+First, our research team conducted exploratory data analyses based on summary statistics. We found that the average age and media age for a police shooting victim in this data set are 35 years old and 34 years old, respectively. Moreover, the standard deviation of the victim's age is roughly 15 years, indicating that this data set represents a broad sampling of fatal police shootings across age groups.
 
 ```{r}
 #| label: summary-stats
@@ -74,11 +82,6 @@ police_shootings |>
   summarize(mean_age = mean(Person.Age),
             median_age = median(Person.Age),
             stdv_age = sd(Person.Age))
-```
-
-```{r}
-police_shootings |>
-  mutate(state = Incident.Location.State)
 ```
 
 ```{r}
@@ -93,17 +96,17 @@ data2 <- police_shootings |>
 
 plot_usmap(data = data2, values = "n", regions = "states", color = "red") + 
   scale_fill_continuous(low = "white", high = "red", 
-                        name = "Frequency of 
-                                \nPolice Shootings") +
+                        name = "Number of 
+                                \nShootings") +
   theme(legend.position = c(0.9, 0.3),
         legend.key.size = unit(.25, "cm")) +
-  labs(title = "Location of Fatal Police Shootings by State",
+  labs(title = "Frequency of Fatal Police Shootings by State Location",
       subtitle = "2015-2021")
 ```
 
-As seen by the map, the majority of our data was collected in California. This could be a limitation to our data as it demonstartes biases.
+As evidenced by the map above, the majority of our data was collected in California. This fact could limit our ability to generalize conclusions from our analysis, as California may be overrepresented.
 
-In yearly-analysis, we chose to do a line graph to represent the progression of shooting per day over time as it effectively reveals trends and changes in shooting per day across the years.
+Next, we visualized the number of fatal police shootings per day across the seven years in our data set. We created a new variable `days_in_year` to that included the number of days in each year studied, accounting for leap years and the end of data collection in September 2021. Next, we chose to generate a line graph to represent the progression of shootings per day over time, as it effectively reveals trends and changes across the years. Overall, the daily shooting rates fluctuate between 2.45 and 2.8 shootings per day, with a slight dip in 2021 that may caused by the COVID-19 pandemic.
 
 ```{r}
 #| label: yearly-analysis
@@ -305,12 +308,11 @@ visualize(null_dist) +
 
 null_dist |>
   get_p_value(obs_stat = obs_diff_phat, direction = "greater")
-
 ```
 
 **Results**
 
-Based on our summary statistics for the entire data set, we observed that the mean and median age of shooting victims is 35.4 and 34.0 years, respectively. Moreover, the standard deviation of this age range is 14.9 years, demonstrating the wide spread of data points included. We noticed a slight decrease in shooting per day in 2021 though the total range of average shootings per day was small and somewhat insignificant (from roughly 2.45 shootings to 2.8 shootings). When looking at the arms status of victims by gender, female victims were more likely to be armed than male victims. One reason for this is that male victims could have been seen as more aggressive and therefore more likely to become a victim no matter if they were armed. The age distribution of victims does not vary much between races. When we look at the different races in the count of total victims, we can see white victims and African American victims were most common. Close to 2962 of the victims were white; whereas, 1552 victims were black. If race had no impact on probability of being a victim, the proportions of victims by race would be similar as the US population by race. White Americans represent 0.578 of the population. African Americans make up 0.121 of the population.
+Based on our summary statistics for the entire data set, we observed that the mean and median age of shooting victims are 35.4 and 34.0 years, respectively. Moreover, the standard deviation of this age range is 14.9 years, demonstrating the wide spread of data points included. We noticed a slight decrease in shootings per day in 2021 though the total range of average shootings per day was small and somewhat insignificant (from roughly 2.45 shootings to 2.8 shootings). When looking at the arms status of victims by gender, female victims were more likely to be armed than male victims. One reason for this is that male victims could have been seen as more aggressive and therefore more likely to become a victim no matter if they were armed. The age distribution of victims does not vary much between races. When we look at the different races in the count of total victims, we can see white victims and African American victims were most common. Close to 2962 of the victims were white; whereas, 1552 victims were black. If race had no impact on probability of being a victim, the proportions of victims by race would be similar as the US population by race. White Americans represent 0.578 of the population. African Americans make up 0.121 of the population.
 
 ```{r}
 police_shootings |>
@@ -329,4 +331,4 @@ We performed a hypothesis test to determine whether the proportion of people per
 
 **Discussion and Limitations**
 
-Our project allowed us to investigate how race, gender, age, and a civilian's armed status affected perceived threat level in fatal police shootings across the US from 2015-2021. We hypothesized that male individuals who identify as a POC are perceived as an increased threat during fatal police shootings. Our statistical results do not support this hypothesis. After analyzing our data and results, we believe that our data is heavily impacted by bias and misconceptions, leading to unreliability in our results. Close to 2962 of the victims were white; whereas, 1552 victims were black. If race had no impact on probability of being a victim, the proportions of victims by race would be similar as the US population by race. White Americans represent 0.578 of the population. African Americans make up 0.121 of the population. White Americans represent 0.578 of the US population while they only represent 0.45 of the victims. African Americans make up 0.121 of the population while they present 0.236 of the victims.Therefore we can see that African American were targeted at a higher rate than white Americans. As seen by the map of fatal police shootings by state, the vast majority of shootings occurred in California. Therefore, the data is obviously includes location bias. This could affect our results as demographics change by state. Also, we believe that much of our data could be heavily impacted by bias, leading to unreliability. For example, every victim was labeled as mentally ill. This assumption created some concern for our team as we believed it was unlikely that every victim was mentally ill. Therefore, our results can support our specific data set but we do not believe that our results cannot be generalized upon a broader population beyond our sample. Further exploration can allow us to analyze the relationship between each state's victims and demographics. By computing statistical analysis for each individual state and analyzing the perceived threat level, we can further our results and conclude how each state relates to our hypothesis. Also, with more data, we can analyze how socioeconomic levels relate to perceived threat level. This extra demographic will allow us to further our conclusion and visualize patterns between an individual's socioeconomic level and their race, gender, age, and armed status. To better our analysis, we believe that more reliable and broad data would be beneficial to our results and validity. Because our data was collected by the Corgis database through the Washington Post, our data could be very biased and invalid. By collecting data directly through the US or state governments, we believe our analysis will be more thorough and valid.
+Our project allowed us to investigate how race, gender, age, and a civilian's armed status affected perceived threat level in fatal police shootings across the US from 2015-2021. We hypothesized that male individuals who identify as a POC are perceived as an increased threat during fatal police shootings. Our statistical results do not support this hypothesis. After analyzing our data and results, we believe that our data is heavily impacted by bias and misconceptions, leading to unreliability in our results. Close to 2962 of the victims were white; whereas, 1552 victims were black. If race had no impact on probability of being a victim, the proportions of victims by race would be similar as the US population by race. White Americans represent 0.578 of the population. African Americans make up 0.121 of the population. White Americans represent 0.578 of the US population while they only represent 0.45 of the victims. African Americans make up 0.121 of the population while they present 0.236 of the victims.Therefore we can see that African American were targeted at a higher rate than white Americans. As seen by the map of fatal police shootings by state, the vast majority of shootings occurred in California. Therefore, the data is obviously includes location bias. This could affect our results as demographics change by state. Also, we believe that much of our data could be heavily impacted by bias, leading to unreliability. For example, every victim was labeled as mentally ill. This assumption created some concern for our team as we believed it was unlikely that every victim was mentally ill. Therefore, our results can support our specific data set but we do not believe that our results cannot be generalized upon a broader population beyond our sample. Further exploration can allow us to analyze the relationship between each state's victims and demographics. By computing statistical analysis for each individual state and analyzing the perceived threat level, we can further our results and conclude how each state relates to our hypothesis. Also, with more data, we can analyze how socioeconomic levels relate to perceived threat level. This extra demographic will allow us to further our conclusion and visualize patterns between an individual's socioeconomic level and their race, gender, age, and armed status. To better our analysis, we believe that more reliable and broad data would be beneficial to our results and validity. Because our data was collected by the CORGIS database through *The Washington Post*, our data could be very biased and invalid. By collecting data directly through the US or state governments, we believe our analysis will be more thorough and valid.
