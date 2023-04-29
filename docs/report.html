@@ -188,7 +188,7 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 </div>
 </div>
 <p>As evidenced by the map above, the majority of our data was collected in California. This fact could limit our ability to generalize conclusions from our analysis, as California may be overrepresented.</p>
-<p>Next, we visualized the number of fatal police shootings per day across the seven years in our data set. We created a new variable <code>days_in_year</code> to that included the number of days in each year studied, accounting for leap years and the end of data collection in September 2021. Next, we chose to generate a line graph to represent the progression of shootings per day over time, as it effectively reveals trends and changes across the years. Overall, the daily shooting rates fluctuate between 2.45 and 2.8 shootings per day, with a slight dip in 2021 that may caused by the COVID-19 pandemic.</p>
+<p>Next, we visualized the number of fatal police shootings per day across the seven years in our data set. We created a new variable <code>days_in_year</code> to that included the number of days in each year studied, accounting for leap years and the end of data collection in September 2021. Next, we chose to generate a line graph to represent the progression of shootings per day over time, as it effectively reveals trends and changes across the years. Overall, the daily shooting rates fluctuate between 2.45 and 2.8 shootings per day, with a slight dip in 2021 that may have been caused by the COVID-19 pandemic.</p>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
@@ -203,7 +203,7 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 <p><img src="report_files/figure-html/arms-status-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>We used box plots to visualize male versus female and race as it is the best way to show distributions of numeric data values between multiple groups. It made the differences in age between male and female victims and victims of different races very clear. We could compare the median, range, and outliers.</p>
+<p>Next, we used box plots to visualize the age of the victims based on race (Fig. 3) and sex (Fig.4). We chose this method of visualize to clearly compare the median, range, and outliers across demographic groups.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="report_files/figure-html/box-plots-race-1.png" class="img-fluid" width="672"></p>
@@ -214,14 +214,19 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 <p><img src="report_files/figure-html/box-plot-gender-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Furthermore, we created a pie chart to visualize the racial composition of the victims represented in our data set. Based on the graphic below, we observed that the three most represented racial groups in this data set are people identified as white, African American, or unknown (to the data collectors).</p>
 <div class="cell">
-
+<div class="cell-output-display">
+<p><img src="report_files/figure-html/bar-graph-race-1.png" class="img-fluid" width="672"></p>
 </div>
+</div>
+<p>In addition, we visualized the the proportion of victims that carried weapons or not based on race using a bar graph.</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="report_files/figure-html/bar-graph-arms-status-race-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Finally, we fit a <strong>logistic regression model</strong> to explore which variables best predicted the likelihood of a victim being perceived as a threat by police.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 8485.761</code></pre>
@@ -239,16 +244,16 @@ $ `Shooting.Body-Camera`   &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE,
 </div>
 </div>
 <p><span class="math inline">\(\log{\frac{p}{1-p}}\)</span> = -0.229153274 -0.114483595 * (<span class="math inline">\(race\_white\)</span>) - 0.244889178 * (<span class="math inline">\(Person.Gender\_Male\)</span>) + 1.038480834 * (<span class="math inline">\(Person.Gender\_Unknown\)</span>) + 0.652516293 * (<span class="math inline">\(Factors.Armed.Test\_unarmed\)</span>) - 0.004189227 * (<span class="math inline">\(Person.Age\)</span>)</p>
-<p>Where <span class="math inline">\(p\)</span> is the probability of a person being a perceived threat by the police, stating the incident as an “attack.”</p>
-<p>After fitting the logistic model and computing backwards elimination, we found the best model for our response variable (Factors.Threat.Level) to be an additive model between our four explanatory variables: gender, race, armed status, and age. During backwards elimination, we fit several additive and interactive models between the four variables and determined the lowest AIC value. Therefore, whether or not a victim was seen as a threat was explained with an additive interaction between gender, race, armed status, and age.</p>
-<p>We also investigated whether the proportion of people perceived as an “attack” threat level was different for victims of color versus white victims. We hypothesized that the proportion of POC who were perceived as an “attack” by police is significantly greater than the proportion of white victims perceived in the same threat level category. To investigate this hypothesis, we performed a hypothesis test using a significance level of <span class="math inline">\(\alpha = 0.05\)</span>. For testing purposes, we assumed independence within our data set’s observations.</p>
-<p>(Note: In the context of this question, we will consider someone as a “POC” if they do not identify as “White.”)</p>
+<p>where <span class="math inline">\(p\)</span> is the probability of a person being a perceived threat by the police, stating the incident as an “attack”</p>
+<p>After fitting the logistic model and computing backwards elimination, we found the best model for our response variable <code>Factors.Threat.Level</code> to be an additive model between four explanatory variables: gender, race, armed status, and age. During backwards elimination, we fit several additive and interactive models using combinations of the four variables and determined which regression yielded the lowest AIC value. Therefore, whether or not a victim was perceived as a threat by police was best explained with an additive interaction between gender, race, armed status, and age.</p>
+<p>We also investigated whether the proportion of people perceived as an “attack” threat level was different for victims of color versus white victims. We hypothesized that the proportion of POC who were perceived as an “attack” by police is significantly greater than the proportion of white victims perceived in the same threat level category. To investigate this hypothesis, we performed a <strong>hypothesis test</strong> using a significance level of <span class="math inline">\(\alpha = 0.05\)</span>.</p>
+<p>(Note: For testing purposes, we assumed independence within our data set’s observations. In the context of this question, we will consider someone as a “POC” if they do not identify as “White.”)</p>
 <p><span class="math inline">\(\pi_{POC}\)</span> = the proportion of people who were perceived as an “attack” by the police out of those shot who identify as a POC.</p>
 <p><span class="math inline">\(\pi_{White}\)</span> = the proportion of people who were perceived as an “attack” by the police out of those shot who identify as White.</p>
 <p><span class="math inline">\(H_0: \pi_{POC} = \pi_{White}\)</span></p>
-<p>The proportion of people who were perceived as an “attack” by the police of those shot who identify as a POC is equal to the proportion of people who were perceived as an “attack” by the police of those shot who identify as white.</p>
+<p>Null hypothesis: The proportion of people who were perceived as an “attack” by the police of those shot who identify as a POC is equal to the proportion of people who were perceived as an “attack” by the police of those shot who identify as white.</p>
 <p><span class="math inline">\(H_A: \pi_{POC} &gt; \pi_{White}\)</span></p>
-<p>The proportion of people who were perceived as an “attack” by the police of those shot who identify as a POC is greater than the proportion of people who were perceived as an “attack” by the police of those shot who identify as white.</p>
+<p>Alternative hypothesis: The proportion of people who were perceived as an “attack” by the police of those shot who identify as a POC is greater than the proportion of people who were perceived as an “attack” by the police of those shot who identify as white.</p>
 <div class="cell">
 
 </div>

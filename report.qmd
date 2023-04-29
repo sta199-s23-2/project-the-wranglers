@@ -106,7 +106,7 @@ plot_usmap(data = data2, values = "n", regions = "states", color = "red") +
 
 As evidenced by the map above, the majority of our data was collected in California. This fact could limit our ability to generalize conclusions from our analysis, as California may be overrepresented.
 
-Next, we visualized the number of fatal police shootings per day across the seven years in our data set. We created a new variable `days_in_year` to that included the number of days in each year studied, accounting for leap years and the end of data collection in September 2021. Next, we chose to generate a line graph to represent the progression of shootings per day over time, as it effectively reveals trends and changes across the years. Overall, the daily shooting rates fluctuate between 2.45 and 2.8 shootings per day, with a slight dip in 2021 that may caused by the COVID-19 pandemic.
+Next, we visualized the number of fatal police shootings per day across the seven years in our data set. We created a new variable `days_in_year` to that included the number of days in each year studied, accounting for leap years and the end of data collection in September 2021. Next, we chose to generate a line graph to represent the progression of shootings per day over time, as it effectively reveals trends and changes across the years. Overall, the daily shooting rates fluctuate between 2.45 and 2.8 shootings per day, with a slight dip in 2021 that may have been caused by the COVID-19 pandemic.
 
 ```{r}
 #| label: yearly-analysis
@@ -149,7 +149,7 @@ police_shootings |>
   theme_minimal()
 ```
 
-We used box plots to visualize male versus female and race as it is the best way to show distributions of numeric data values between multiple groups. It made the differences in age between male and female victims and victims of different races very clear. We could compare the median, range, and outliers.
+Next, we used box plots to visualize the age of the victims based on race (Fig. 3) and sex (Fig.4). We chose this method of visualize to clearly compare the median, range, and outliers across demographic groups.
 
 ```{r}
 #| label: box-plots-race
@@ -181,6 +181,8 @@ police_shootings |>
   theme_minimal()
 ```
 
+Furthermore, we created a pie chart to visualize the racial composition of the victims represented in our data set. Based on the graphic below, we observed that the three most represented racial groups in this data set are people identified as white, African American, or unknown (to the data collectors).
+
 ```{r}
 #| label: bar-graph-race
 
@@ -190,18 +192,18 @@ total <- police_shootings |>
 
 race_prop <- police_shootings |> 
   group_by(Person.Race) |>
-  summarize(prop = n()/total)
-  
-#race_prop |>
-  #ggplot(aes(y = prop, x = Person.Race, stat = "count")) + 
-  #  geom_bar() + 
-  #  labs(title = "Fig. 5: Number of Victims by Race",
-   #      x = "Race",
-    #     y = "Count",
-    #     fill = "Race") +
- # theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), 
-        #legend.position = "none")
+  summarize(prop = n()/total * 100)
+
+race_prop |>
+  ggplot(aes(x = "", y = prop, fill = Person.Race)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar("y", start = 0) +
+  theme_void() +
+  labs(title = "Fig. 5: Racial Composition of Victims in Data Set",
+       fill = "Reported Race")
 ```
+
+In addition, we visualized the the proportion of victims that carried weapons or not based on race using a bar graph.
 
 ```{r}
 #| label: bar-graph-arms-status-race
@@ -220,6 +222,8 @@ police_shootings |>
     fill = "Arms Status") +
     theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 ```
+
+Finally, we fit a **logistic regression model** to explore which variables best predicted the likelihood of a victim being perceived as a threat by police.
 
 ```{r}
 #| label: fit-model 
@@ -249,13 +253,13 @@ best_logreg_model |>
 
 $\log{\frac{p}{1-p}}$ = -0.229153274 -0.114483595 \* ($race\_white$) - 0.244889178 \* ($Person.Gender\_Male$) + 1.038480834 \* ($Person.Gender\_Unknown$) + 0.652516293 \* ($Factors.Armed.Test\_unarmed$) - 0.004189227 \* ($Person.Age$)
 
-Where $p$ is the probability of a person being a perceived threat by the police, stating the incident as an "attack."
+where $p$ is the probability of a person being a perceived threat by the police, stating the incident as an "attack"
 
-After fitting the logistic model and computing backwards elimination, we found the best model for our response variable (Factors.Threat.Level) to be an additive model between our four explanatory variables: gender, race, armed status, and age. During backwards elimination, we fit several additive and interactive models between the four variables and determined the lowest AIC value. Therefore, whether or not a victim was seen as a threat was explained with an additive interaction between gender, race, armed status, and age.
+After fitting the logistic model and computing backwards elimination, we found the best model for our response variable `Factors.Threat.Level` to be an additive model between four explanatory variables: gender, race, armed status, and age. During backwards elimination, we fit several additive and interactive models using combinations of the four variables and determined which regression yielded the lowest AIC value. Therefore, whether or not a victim was perceived as a threat by police was best explained with an additive interaction between gender, race, armed status, and age.
 
-We also investigated whether the proportion of people perceived as an "attack" threat level was different for victims of color versus white victims. We hypothesized that the proportion of POC who were perceived as an "attack" by police is significantly greater than the proportion of white victims perceived in the same threat level category. To investigate this hypothesis, we performed a hypothesis test using a significance level of $\alpha = 0.05$. For testing purposes, we assumed independence within our data set's observations.
+We also investigated whether the proportion of people perceived as an "attack" threat level was different for victims of color versus white victims. We hypothesized that the proportion of POC who were perceived as an "attack" by police is significantly greater than the proportion of white victims perceived in the same threat level category. To investigate this hypothesis, we performed a **hypothesis test** using a significance level of $\alpha = 0.05$.
 
-(Note: In the context of this question, we will consider someone as a "POC" if they do not identify as "White.")
+(Note: For testing purposes, we assumed independence within our data set's observations. In the context of this question, we will consider someone as a "POC" if they do not identify as "White.")
 
 $\pi_{POC}$ = the proportion of people who were perceived as an "attack" by the police out of those shot who identify as a POC.
 
@@ -263,11 +267,11 @@ $\pi_{White}$ = the proportion of people who were perceived as an "attack" by th
 
 $H_0: \pi_{POC} = \pi_{White}$
 
-The proportion of people who were perceived as an "attack" by the police of those shot who identify as a POC is equal to the proportion of people who were perceived as an "attack" by the police of those shot who identify as white.
+Null hypothesis: The proportion of people who were perceived as an "attack" by the police of those shot who identify as a POC is equal to the proportion of people who were perceived as an "attack" by the police of those shot who identify as white.
 
 $H_A: \pi_{POC} > \pi_{White}$
 
-The proportion of people who were perceived as an "attack" by the police of those shot who identify as a POC is greater than the proportion of people who were perceived as an "attack" by the police of those shot who identify as white.
+Alternative hypothesis: The proportion of people who were perceived as an "attack" by the police of those shot who identify as a POC is greater than the proportion of people who were perceived as an "attack" by the police of those shot who identify as white.
 
 ```{r}
 #| label: hypothesis-race
@@ -291,6 +295,7 @@ null_dist <- hypo_data |>
 
 ```{r}
 #| label: hypothesis-race-pvalues
+
 hypo_data |>
   group_by(race, `Factors.Threat-Level`) |>
   summarize(props = n())
@@ -329,6 +334,6 @@ The race with the most unarmed victims was black and the race with the least una
 
 We performed a hypothesis test to determine whether the proportion of people perceived as an "attack" threat level was different for victims of color versus white victims. Our hypothesis test yields a p-value of 0.995. Utilizing a significance level of 0.05, we fail to reject the null hypothesis that the proportion of people who were perceived as an "attack" by the police of those shot who identify as a POC is equal to the proportion of people who were perceived as an "attack" by the police of those shot who identify as white. As a p-value of 0.995 is greater than 0.05, we have weak evidence to support the alternative hypothesis that the proportion of people who were perceived as an "attack" by the police of those shot who identify as a POC is greater than the proportion of people who were perceived as an "attack" by the police of those shot who identify as white.
 
-**Discussion and Limitations**
+**Discussion, Limitations, and Future Directions**
 
 Our project allowed us to investigate how race, gender, age, and a civilian's armed status affected perceived threat level in fatal police shootings across the US from 2015-2021. We hypothesized that male individuals who identify as a POC are perceived as an increased threat during fatal police shootings. Our statistical results do not support this hypothesis. After analyzing our data and results, we believe that our data is heavily impacted by bias and misconceptions, leading to unreliability in our results. Close to 2962 of the victims were white; whereas, 1552 victims were black. If race had no impact on probability of being a victim, the proportions of victims by race would be similar as the US population by race. White Americans represent 0.578 of the population. African Americans make up 0.121 of the population. White Americans represent 0.578 of the US population while they only represent 0.45 of the victims. African Americans make up 0.121 of the population while they present 0.236 of the victims.Therefore we can see that African American were targeted at a higher rate than white Americans. As seen by the map of fatal police shootings by state, the vast majority of shootings occurred in California. Therefore, the data is obviously includes location bias. This could affect our results as demographics change by state. Also, we believe that much of our data could be heavily impacted by bias, leading to unreliability. For example, every victim was labeled as mentally ill. This assumption created some concern for our team as we believed it was unlikely that every victim was mentally ill. Therefore, our results can support our specific data set but we do not believe that our results cannot be generalized upon a broader population beyond our sample. Further exploration can allow us to analyze the relationship between each state's victims and demographics. By computing statistical analysis for each individual state and analyzing the perceived threat level, we can further our results and conclude how each state relates to our hypothesis. Also, with more data, we can analyze how socioeconomic levels relate to perceived threat level. This extra demographic will allow us to further our conclusion and visualize patterns between an individual's socioeconomic level and their race, gender, age, and armed status. To better our analysis, we believe that more reliable and broad data would be beneficial to our results and validity. Because our data was collected by the CORGIS database through *The Washington Post*, our data could be very biased and invalid. By collecting data directly through the US or state governments, we believe our analysis will be more thorough and valid.
